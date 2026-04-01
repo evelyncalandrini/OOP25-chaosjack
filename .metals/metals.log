@@ -1,0 +1,605 @@
+2026.04.01 14:40:12 INFO  Started: Metals version 1.6.6 in folders '/Users/elenalungu/Documents/OOP-chaosjack' for client Visual Studio Code 1.98.0.
+2026.04.01 14:40:12 INFO  Memory monitor started
+2026.04.01 14:40:12 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.04.01 14:40:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+Apr 01, 2026 2:40:14 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1
+Apr 01, 2026 2:40:14 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 6
+Apr 01, 2026 2:40:14 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2
+2026.04.01 14:41:44 INFO  running '/Users/elenalungu/Documents/OOP-chaosjack/gradlew --stacktrace --console=plain --init-script /var/folders/5l/x34f1z6120q_f_l0n5rln5s40000gn/T/metals16883456423204550838/init-script.gradle bloopInstall'
+2026.04.01 14:41:45 INFO  
+2026.04.01 14:41:45 INFO  Welcome to Gradle 9.4.0!
+2026.04.01 14:41:45 INFO  
+2026.04.01 14:41:45 INFO  Here are the highlights of this release:
+2026.04.01 14:41:45 INFO   - Java 26 support
+2026.04.01 14:41:45 INFO   - Non-class-based JVM tests
+2026.04.01 14:41:45 INFO   - Enhanced console progress bar
+2026.04.01 14:41:45 INFO  
+2026.04.01 14:41:45 INFO  For more details see https://docs.gradle.org/9.4.0/release-notes.html
+2026.04.01 14:41:45 INFO  
+2026.04.01 14:41:45 INFO  Starting a Gradle Daemon, 1 incompatible and 1 stopped Daemons could not be reused, use --status for details
+2026.04.01 14:41:58 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:41:58 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:41:58 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:42:28 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Configuration.java. Using fallback presentation compiler.
+2026.04.01 14:42:32 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:42:32 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:42:32 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:44:34 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:44:34 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:44:34 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:44:35 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:44:35 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:44:35 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:44:36 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:44:37 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:44:43 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:07 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:07 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:14 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:14 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:18 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:18 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:23 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:23 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:23 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:23 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:25 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:25 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:25 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:25 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:25 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:25 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:25 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:25 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:25 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:26 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:26 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:26 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:26 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:27 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:27 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:29 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:45:29 INFO  Created report: Optional[file:///Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java]
+2026.04.01 14:45:29 WARN  Running javac-semanticdb failed for file:///Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Output:
+
+2026.04.01 14:45:29 INFO  QDox parse error in file:///Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java (full report at: "/Users/elenalungu/Documents/OOP-chaosjack/.metals/.reports/metals-full/2026-04-01/r_qdox-error_14-45-29-171.md")
+2026.04.01 14:45:29 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:29 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:29 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:30 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:30 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:30 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:30 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:30 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:31 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:31 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:32 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:45:32 INFO  QDox parse error in file:///Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java (full report at: "/Users/elenalungu/Documents/OOP-chaosjack/.metals/.reports/metals-full/2026-04-01/r_qdox-error_14-45-29-171.md")
+2026.04.01 14:45:32 WARN  Running javac-semanticdb failed for file:///Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Output:
+
+2026.04.01 14:45:32 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:33 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:33 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:34 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:45:35 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:49 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:49 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:49 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:50 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:50 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:51 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:51 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:52 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:52 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:52 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:52 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:52 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:52 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:53 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:53 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:53 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:55 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:45:55 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:55 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:55 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:55 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:56 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:45:56 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:56 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:56 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:56 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:56 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:57 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:57 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:57 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:57 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:57 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:57 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:58 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:58 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:58 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:58 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:58 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:58 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:45:58 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:00 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:00 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:01 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:46:05 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:05 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:05 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:06 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:46:06 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:07 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:07 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:07 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:09 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:09 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:11 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:11 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:12 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:12 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:46:13 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:46:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:14 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:14 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:14 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:14 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:16 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:16 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:16 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:16 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:16 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:16 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:16 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:17 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:17 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:17 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:17 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:17 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:17 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:18 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:18 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:18 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:18 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:19 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:19 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:19 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:19 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:19 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:19 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:20 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:20 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:20 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:20 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:20 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:22 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:22 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:22 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:22 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:23 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:23 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:23 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:23 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:23 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:23 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:24 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:24 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:24 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:24 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:25 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:25 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:25 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:27 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:27 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:46:27 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:27 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:27 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:27 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:27 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:28 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:28 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:28 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:28 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:28 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:28 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:29 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:29 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:29 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:29 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:29 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:30 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:30 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:30 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:30 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:30 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:30 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:31 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:31 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:31 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:32 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:46:32 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:32 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:32 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:32 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:32 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:32 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:32 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:33 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:33 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:33 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:33 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:33 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:33 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:35 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:35 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:35 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:35 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:35 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:35 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:36 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:36 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:36 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:36 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:36 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:37 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:37 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:37 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:37 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:37 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:37 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:38 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:38 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:38 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:38 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:39 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:46:40 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:47:02 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:02 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:03 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java
+2026.04.01 14:47:03 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:06 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:06 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:06 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:06 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:07 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:07 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:07 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:07 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:07 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:07 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:09 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:09 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:09 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:09 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:09 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:09 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:10 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:10 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:10 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:10 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java
+2026.04.01 14:47:10 INFO  Created report: Optional[file:///Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java]
+2026.04.01 14:47:10 INFO  QDox parse error in file:///Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java (full report at: "/Users/elenalungu/Documents/OOP-chaosjack/.metals/.reports/metals-full/2026-04-01/r_qdox-error_14-47-10-618.md")
+2026.04.01 14:47:10 WARN  Running javac-semanticdb failed for file:///Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Output:
+
+2026.04.01 14:47:10 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:10 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:10 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:11 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:11 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+Apr 01, 2026 2:47:11 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 548
+2026.04.01 14:47:11 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:11 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:11 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:11 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:11 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:11 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:11 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:12 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:12 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:12 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:12 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:12 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:14 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:14 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:14 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:14 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:14 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:14 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:14 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:14 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:16 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:16 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java
+2026.04.01 14:47:16 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:16 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:18 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:18 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:23 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:23 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:23 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:27 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:27 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:35 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:47:35 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:35 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:42 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Configuration.java
+2026.04.01 14:47:42 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Configuration.java. Using fallback presentation compiler.
+2026.04.01 14:47:42 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Configuration.java. Using fallback presentation compiler.
+2026.04.01 14:47:42 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Configuration.java. Using fallback presentation compiler.
+2026.04.01 14:47:43 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:47:42 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:44 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:55 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java
+2026.04.01 14:47:55 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:55 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:55 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:56 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:47:56 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:00 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:00 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:00 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:00 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:01 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java
+2026.04.01 14:48:02 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:15 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:15 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:15 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:16 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:16 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:18 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:18 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:19 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java
+2026.04.01 14:48:19 WARN  Running javac-semanticdb failed for file:///Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Output:
+
+2026.04.01 14:48:20 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:20 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:20 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:21 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:21 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:21 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:22 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java
+2026.04.01 14:48:23 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:23 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:24 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java
+2026.04.01 14:48:28 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:28 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:28 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:29 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:29 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:29 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:30 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:30 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:33 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:33 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:33 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:33 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:34 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:34 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:34 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:34 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:36 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:36 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:37 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:37 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:39 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:39 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:39 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:39 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:39 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:39 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:39 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:40 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:40 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:40 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:40 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:40 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:40 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:41 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:41 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:41 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:41 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:41 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:41 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:42 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:42 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:42 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:42 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:42 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:43 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:43 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:43 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:43 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:43 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:43 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:43 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:45 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:45 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:45 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:45 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:45 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:46 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:46 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java
+2026.04.01 14:48:47 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:47 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:47 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:47 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:47 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:47 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:47 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:48 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:48 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:48 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:48 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:48 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:48 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:48 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:48 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:49 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:49 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:49 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:49 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:49 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:50 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:50 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:50 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:50 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:50 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:51 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:51 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:52 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java
+2026.04.01 14:48:53 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:54 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:54 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:48:55 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java
+2026.04.01 14:48:59 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:04 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:06 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:07 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:07 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:07 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:09 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:09 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:09 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:09 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:09 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:09 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:09 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:09 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:10 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:10 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:10 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:10 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:10 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:10 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:10 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:11 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:11 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:11 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:11 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:11 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:11 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:12 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:12 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:12 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:12 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:12 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:12 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:12 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:13 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:15 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:15 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:15 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:16 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:16 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:16 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:17 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java
+2026.04.01 14:49:25 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/StandardWallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:29 WARN  no build target for: /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java
+2026.04.01 14:49:29 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:29 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:49:29 INFO  no build target found for /Users/elenalungu/Documents/OOP-chaosjack/src/main/java/it/unibo/samplejavafx/mvcexample/model/Wallet.java. Using fallback presentation compiler.
+2026.04.01 14:50:39 INFO  > Task :configureBloopInstall
+2026.04.01 14:51:09 INFO  > Task :bloopInstall
+2026.04.01 14:51:35 INFO  
+2026.04.01 14:51:35 INFO  [Incubating] Problems report is available at: file:///Users/elenalungu/Documents/OOP-chaosjack/build/reports/problems/problems-report.html
+2026.04.01 14:51:35 INFO  
+2026.04.01 14:51:35 INFO  Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+2026.04.01 14:51:35 INFO  
+2026.04.01 14:51:35 INFO  You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+2026.04.01 14:51:35 INFO  
+2026.04.01 14:51:35 INFO  For more on this, please refer to https://docs.gradle.org/9.4.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+2026.04.01 14:51:35 INFO  
+2026.04.01 14:51:35 INFO  BUILD SUCCESSFUL in 9m 50s
+2026.04.01 14:51:35 INFO  2 actionable tasks: 2 executed
+2026.04.01 14:51:35 INFO  Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.0/userguide/configuration_cache_enabling.html
+2026.04.01 14:51:35 INFO  time: ran 'gradle bloopInstall' in 9m50s
+2026.04.01 14:51:35 INFO  Attempting to connect to the build server...
+2026.04.01 14:51:35 INFO  No running Bloop server found, starting one.
+2026.04.01 14:51:43 INFO  Starting compilation server
+2026.04.01 14:51:44 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/elenalungu/Documents/OOP-chaosjack/.metals/bsp.trace.json or /Users/elenalungu/Library/Caches/org.scalameta.metals/bsp.trace.json
+2026.04.01 14:51:45 INFO  time: Connected to build server in 9.59s
+2026.04.01 14:51:44 INFO  Connected to Build server: Bloop v2.0.19
+2026.04.01 14:51:45 INFO  time: Imported build in 0.17s
+2026.04.01 14:51:47 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.04.01 14:52:11 INFO  time: indexed workspace in 25s
+2026.04.01 14:52:11 INFO  compiling sample-javafx-project (22 java sources)
+2026.04.01 14:52:11 WARN  Unexpected javac output: error: invalid target release: 21
+Usage: javac <options> <source files>
+use --help for a list of possible options.
+2026.04.01 14:52:11 WARN  javac exited with exit code 2
+2026.04.01 14:52:11 INFO  time: compiled sample-javafx-project in 0.69s
+2026.04.01 14:57:28 INFO  Created report: Optional[file:///Users/elenalungu/Documents/OOP-chaosjack/src/test/java/it/unibo/samplejavafx/model/WalletTest.java]
+2026.04.01 14:57:28 INFO  QDox parse error in file:///Users/elenalungu/Documents/OOP-chaosjack/src/test/java/it/unibo/samplejavafx/model/WalletTest.java (full report at: "/Users/elenalungu/Documents/OOP-chaosjack/.metals/.reports/metals-full/2026-04-01/r_qdox-error_(sample-javafx-project-test)_14-57-28-895.md")
+2026.04.01 14:57:29 INFO  compiling sample-javafx-project (22 java sources)
+2026.04.01 14:57:29 WARN  Unexpected javac output: error: invalid target release: 21
+Usage: javac <options> <source files>
+use --help for a list of possible options.
+2026.04.01 14:57:29 WARN  javac exited with exit code 2
+2026.04.01 14:57:29 INFO  time: compiled sample-javafx-project in 0.28s
+2026.04.01 14:57:30 INFO  compiling sample-javafx-project (22 java sources)
+2026.04.01 14:57:30 WARN  Unexpected javac output: error: invalid target release: 21
+Usage: javac <options> <source files>
+use --help for a list of possible options.
+2026.04.01 14:57:30 WARN  javac exited with exit code 2
+2026.04.01 14:57:30 INFO  time: compiled sample-javafx-project in 0.19s
+2026.04.01 14:57:42 INFO  compiling sample-javafx-project (22 java sources)
+2026.04.01 14:57:42 WARN  Unexpected javac output: error: invalid target release: 21
+Usage: javac <options> <source files>
+use --help for a list of possible options.
+2026.04.01 14:57:42 WARN  javac exited with exit code 2
+2026.04.01 14:57:42 INFO  time: compiled sample-javafx-project in 0.2s
+Apr 01, 2026 2:57:49 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1038
+2026.04.01 14:58:10 INFO  compiling sample-javafx-project (22 java sources)
+2026.04.01 14:58:10 WARN  Unexpected javac output: error: invalid target release: 21
+Usage: javac <options> <source files>
+use --help for a list of possible options.
+2026.04.01 14:58:10 WARN  javac exited with exit code 2
+2026.04.01 14:58:10 INFO  time: compiled sample-javafx-project in 0.26s
+2026.04.01 14:58:18 INFO  compiling sample-javafx-project (22 java sources)
+2026.04.01 14:58:18 WARN  Unexpected javac output: error: invalid target release: 21
+Usage: javac <options> <source files>
+use --help for a list of possible options.
+2026.04.01 14:58:18 WARN  javac exited with exit code 2
+2026.04.01 14:58:18 INFO  time: compiled sample-javafx-project in 0.22s
+2026.04.01 14:58:22 INFO  compiling sample-javafx-project (22 java sources)
+2026.04.01 14:58:22 WARN  Unexpected javac output: error: invalid target release: 21
+Usage: javac <options> <source files>
+use --help for a list of possible options.
+2026.04.01 14:58:22 WARN  javac exited with exit code 2
+2026.04.01 14:58:22 INFO  time: compiled sample-javafx-project in 0.3s
+2026.04.01 15:01:16 INFO  compiling sample-javafx-project (22 java sources)
+2026.04.01 15:01:16 WARN  Unexpected javac output: error: invalid target release: 21
+Usage: javac <options> <source files>
+use --help for a list of possible options.
+2026.04.01 15:01:16 WARN  javac exited with exit code 2
+2026.04.01 15:01:16 INFO  time: compiled sample-javafx-project in 0.28s
+2026.04.01 15:01:30 INFO  compiling sample-javafx-project (22 java sources)
+2026.04.01 15:01:30 WARN  Unexpected javac output: error: invalid target release: 21
+Usage: javac <options> <source files>
+use --help for a list of possible options.
+2026.04.01 15:01:30 WARN  javac exited with exit code 2
+2026.04.01 15:01:30 INFO  time: compiled sample-javafx-project in 0.25s
