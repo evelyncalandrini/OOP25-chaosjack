@@ -1,4 +1,4 @@
-package it.unibo.samplejavafx.mvcexample.model;
+package it.unibo.chaosjack.model.api;
 
 /**
  * Interface representing a generic game card.

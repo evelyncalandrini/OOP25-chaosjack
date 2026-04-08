@@ -1,9 +1,14 @@
-package it.unibo.samplejavafx.mvcexample.model;
+package it.unibo.chaosjack.model.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+
+import it.unibo.chaosjack.model.api.Card;
+import it.unibo.chaosjack.model.api.Deck;
+import it.unibo.chaosjack.model.impl.StandardDeck;
+
 import java.util.Optional;
 
 class StandardDeckTest {

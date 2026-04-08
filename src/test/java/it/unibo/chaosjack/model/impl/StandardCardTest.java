@@ -1,7 +1,12 @@
-package it.unibo.samplejavafx.mvcexample.model;
+package it.unibo.chaosjack.model.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+
+import it.unibo.chaosjack.model.api.Card;
+import it.unibo.chaosjack.model.impl.Rank;
+import it.unibo.chaosjack.model.impl.StandardCard;
+import it.unibo.chaosjack.model.impl.Suit;
 
 class StandardCardTest {
 
