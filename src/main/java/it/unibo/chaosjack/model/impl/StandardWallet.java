@@ -1,4 +1,6 @@
-package it.unibo.samplejavafx.mvcexample.model;
+package it.unibo.chaosjack.model.impl;
+
+import it.unibo.chaosjack.model.api.Wallet;
 
 public class StandardWallet implements Wallet {
     
