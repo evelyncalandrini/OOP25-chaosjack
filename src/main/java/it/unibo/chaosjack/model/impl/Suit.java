@@ -1,4 +1,4 @@
-package it.unibo.samplejavafx.mvcexample.model;
+package it.unibo.chaosjack.model.impl;
 
 /**
  * Enumeration for standard card suits.

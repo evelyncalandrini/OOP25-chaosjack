@@ -1,4 +1,4 @@
-package it.unibo.samplejavafx.mvcexample.model;
+package it.unibo.chaosjack.model.api;
 
 import java.util.Optional;
 
