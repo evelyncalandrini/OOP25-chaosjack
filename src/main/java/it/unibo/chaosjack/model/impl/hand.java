@@ -2,13 +2,12 @@ package it.unibo.chaosjack.model.impl;
 
 import it.unibo.chaosjack.model.api.Card;
 import java.util.List;
+import java.util.ArrayList;
 
 public class hand {
-    private final List<Card> cards;
+    private final List<Card> cards = new ArrayList<>(); // è l'insieme di carte che ho in mano 
 
-    public hand(List<Card> cards) {
-        this.cards = cards;
-    }
+    
 
     public void addCard( Card card) { // metodo per aggiungere una carta nella mia mano 
         cards.add(card);

@@ -2,6 +2,9 @@ package it.unibo.chaosjack.model.impl;
 
 import it.unibo.chaosjack.model.api.gameEngine;
 import it.unibo.chaosjack.model.api.turnState;
+
+import java.util.Optional;
+
 import it.unibo.chaosjack.model.api.Card;
 
 public class dealerTurn implements turnState { 
@@ -14,8 +17,12 @@ public class dealerTurn implements turnState {
     
   @Override
   public void hit() {
-    Card cartaPescata = game.getDeck().drawCard(); // il banco pesca una carta
-    game.getDealerHand().addCard(cartaPescata); // aggiungo la carta
+    Optional<Card> controlloCarta = game.getDeck().draw(); //questo metodo andrà bene quando elena farà il push
+        
+        if (controlloCarta.isPresent()){ // contorllo che il valore della carta non sia nullo (che il mazzo non sia vuoto)
+            Card cartaPescata = controlloCarta.get(); // se la carta è presnete allora la assegno a una carta vera e propria e la aggiungo alla mano
+            game.getDealerHand().addCard(cartaPescata);
+        }
   }
 
   @Override
@@ -34,5 +41,3 @@ public class dealerTurn implements turnState {
 
 /* gestisco il turno del banco  */    
 }
-
-
