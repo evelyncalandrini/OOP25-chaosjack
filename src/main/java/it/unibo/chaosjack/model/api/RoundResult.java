@@ -10,6 +10,9 @@ package it.unibo.chaosjack.model.api;
  */
 public record RoundResult(Outcome outcome, int playerPoints, int dealerPoints, int payOut) {
 
+    /**
+     * Possible round results
+     */
     public enum Outcome {
 
         /**
@@ -38,7 +41,6 @@ public record RoundResult(Outcome outcome, int playerPoints, int dealerPoints, i
         /**
          * @return a description of the round result
          */
-
         public String getMessage() {
             return message;
         }
