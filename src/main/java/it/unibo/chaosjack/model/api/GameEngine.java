@@ -2,10 +2,10 @@ package it.unibo.chaosjack.model.api;
 
 public interface GameEngine {
     
-    void StartNewRound(); //incomincia una nuova partita,resetta le mani e mischia il mazzo
-    void hit(); //pesca una carta dal mazzo per il giocatore
-    void stand(); //termina il turno
-    GameStatus getCurrentStatus(); //usa gamestatus per dirmi a che punto sono con il gioco
-    Player getPlayer(); //restituisce il giocatore e il banco per farli vedere a video
-    Dealer getDealer();
+    void startNewRound(); //starts a new game
+    void hit(); //draws a card for the player
+    void stand(); //ends the turn
+    GameStatus getCurrentStatus(); //tells me at what point we are at with the game
+    Player getPlayer(); //gives the players to show him on video
+    Dealer getDealer(); //same with the dealer
 }

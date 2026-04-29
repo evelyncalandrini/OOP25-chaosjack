@@ -6,8 +6,8 @@ public interface Player {
 
      void addCard(Card card); 
      int getScore();
-     boolean isBusted(); //mi dice se ha superato i 21
-     List<Card> getHand(); //mi restituisce le carte che ho in mano
-     void stand();//per dire che il giocatore ha finito di giocare
+     boolean isBusted(); //tells if I'm above 21
+     List<Card> getHand(); //gives the card in  the hand of the player
+     void stand();//when the player wants to end the game
 
 }
