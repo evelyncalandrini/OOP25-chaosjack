@@ -1,43 +1,90 @@
 package it.unibo.chaosjack.model.impl;
-import it.unibo.chaosjack.model.api.gameEngine;
-import it.unibo.chaosjack.model.api.deck;
-import it.unibo.chaosjack.model.api.turnState;
-import it.unibo.chaosjack.model.impl.hand;
+import it.unibo.chaosjack.model.api.GameEngine;
+import it.unibo.chaosjack.model.api.Deck;
+import it.unibo.chaosjack.model.api.TurnState;
+import java.util.List;
 
-public class gameEngineImpl implements gameEngine {
+public class GameEngineImpl implements GameEngine {
 
-    private deck deck;
-    private hand playerHand;
-    private hand dealerHand;
+    private Deck deck;
+    private Hand dealerHand;
+    private List<Player> players;
     //private Wallet walletPlayer;
-    private turnState currentState;
+    private TurnState currentState;
+    private int currentPlayerIndex = -1;
 
-    public gameEngineImpl( deck deck, hand PlayerHand, hand DealerHand) { // ricorda di aggiuungere il wallet
+    public GameEngineImpl( Deck deck, List<Player> players) { // ricorda di aggiuungere il wallet
         this.deck = deck;
-        this.playerHand = new hand();
-        this.dealerHand = new hand();
+        this.players = players;
+        this.dealerHand = new Hand();
 
-        this.currentState = new playerTurn(this); // il gioco inizia con il turno del giocatore.
+        this.nextTurn();
     }
 
+
+    
+
     @Override
-    public void changeState(turnState newState){
+    public void changeState(TurnState newState){
         this.currentState = newState; // questo metodo mi permette di cambiare lo stato del gioco (passare dal turno del giocatore a quello del banco e viceversa)
     }
 
+
     @Override
-    public deck getDeck() {
+    public Deck getDeck() {
         return deck;
     }
 
+    
     @Override
-    public hand getPlayerHand() {
-        return playerHand;
-    }
-
-    @Override
-    public hand getDealerHand() {
+    public Hand getDealerHand() {
         return dealerHand;
     }
 
-}
+    
+
+    
+    public int getPlayerScore(String name) { // metodo per ottenere lo score di un giocatore specifico
+        for ( Player p : players) {
+           if ( p.getName().equals(name) ) {
+             return p.getHand().getScore();
+           }
+        }
+        return 0; 
+    }
+
+
+    @Override
+    public void nextTurn() {
+       currentPlayerIndex++; //aumento l'inidice del giocatore corrente
+         if (currentPlayerIndex < players.size()) { 
+
+            Player nextPlayer = players.get(currentPlayerIndex);
+            if (nextPlayer.isBot()) { // controllo che sia effettivamente presente il giocatore 
+                this.changeState(new BotTurn(this, currentPlayerIndex));
+            } else {
+                this.changeState(new PlayerTurn(this, currentPlayerIndex)); // passo al turno del giocatore successivo
+            } 
+            
+        } else {
+            this.changeState(new DealerTurn(this)); // se non ci sono più giocatori passo al turno del banco
+        }
+    }
+
+    @Override
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    @Override
+    public void hit(){
+        this.currentState.hit();
+    }
+
+    @Override
+    public void stand(){
+        this.currentState.stand();
+    }
+   }
+
+

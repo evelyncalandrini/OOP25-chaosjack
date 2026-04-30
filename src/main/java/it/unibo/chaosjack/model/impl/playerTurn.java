@@ -1,42 +1,52 @@
 package it.unibo.chaosjack.model.impl;
 import it.unibo.chaosjack.model.api.Card;
-import it.unibo.chaosjack.model.api.gameEngine;
-import it.unibo.chaosjack.model.api.turnState;
+import it.unibo.chaosjack.model.api.GameEngine;
+import it.unibo.chaosjack.model.api.TurnState;
 import java.util.Optional;
 
-public class playerTurn  implements turnState{
+public class PlayerTurn  implements TurnState{
     /* gestisco il turno del giocatore */
    
-   private final gameEngine game;
+   private final GameEngine game;
+   private int myIndex;
 
-   public playerTurn(gameEngine game){
+   public PlayerTurn(GameEngine game, int index){
     this.game = game;
+    this.myIndex = index;
    }
 
    @Override
     public void hit(){
-        Optional<Card> controlloCarta = game.getDeck().draw(); //questo metodo andrà bene quando elena farà il push
+        Optional<Card> controlloCarta = game.getDeck().draw(); 
         
-        if (controlloCarta.isPresent()){ // contorllo che il valore della carta non sia nullo (che il mazzo non sia vuoto)
+        if (controlloCarta.isPresent()){ // controllo che il valore della carta non sia nullo (che il mazzo non sia vuoto)
             Card cartaPescata = controlloCarta.get(); // se la carta è presnete allora la assegno a una carta vera e propria e la aggiungo alla mano
-            game.getPlayerHand().addCard(cartaPescata);
+            game.getPlayers().get(myIndex).getHand().addCard(cartaPescata);
+        }
+
+        if (game.getPlayers().get(myIndex).getHand().getScore() > 21) { // se il giocatore sballa passo al turno successivo
+            stand();
         }
     }
        
 
     @Override
-    public void stand(){ // cambio  il turno ( passo al banco )
-        game.changeState(new dealerTurn(game));// passo il turno al giocatore successivo o al banco 
-
+    public boolean stand(){ // cambio  il turno ( passo al giocatore successvo o al banco )
+        game.nextTurn(); // passo il turno al giocatore successivo o al banco 
+        return true;
     }
 
     @Override
-    public void doubleDown(){
+    public boolean doubleDown() {
+        if ( game.getPlayers().get(myIndex).getBet() *2 < game.getPlayers().get(myIndex).getWallet().getBalance() ) { // controllo che il giocatore abbia abbastanza soldi per raddoppiare
+            this.hit(); // faccio pescare una carta al giocatore
+            this.stand(); // passo al turno successivo
+            return true;
+        } else{
+            // se il giocatore non ha abbastanza soldi per raddoppiare, non faccio nulla e restituisco la scommessa originale
+            return false; 
+        }
     }
 
-    @Override
-    public String getStateName(){
-        return "playerTurn";
-    }
-
+    
 }

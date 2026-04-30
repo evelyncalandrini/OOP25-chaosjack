@@ -1,8 +1,8 @@
 package it.unibo.chaosjack.model.api;
 
-public interface turnState {
+public interface TurnState {
     void hit();
-    void stand();
-    void doubleDown();
-    String getStateName();
+    boolean stand();
+    boolean doubleDown();
+    
 }

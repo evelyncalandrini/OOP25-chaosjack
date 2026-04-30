@@ -4,7 +4,7 @@ import it.unibo.chaosjack.model.api.Card;
 import java.util.List;
 import java.util.ArrayList;
 
-public class hand {
+public class Hand {
     private final List<Card> cards = new ArrayList<>(); // è l'insieme di carte che ho in mano 
 
     
@@ -33,9 +33,23 @@ public class hand {
         return score;
     }
 
-    public boolean isBusted() {
-        return getScore() > 21;
+
+    public boolean isRed(List<Card> cards){
+        int redCount = 0;
+        for (Card c : cards) {
+            if (c.getName().equals("HEARTS") || c.getName().equals("DIAMONDS")){
+                redCount++;
+            }
+        }
+
+        if ( redCount == cards.size()) {
+            return true;
+        } else {
+            return false;
+        }
     }
+
+    
 
     
 }

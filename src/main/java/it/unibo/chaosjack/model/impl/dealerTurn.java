@@ -1,15 +1,15 @@
 package it.unibo.chaosjack.model.impl;
 
-import it.unibo.chaosjack.model.api.gameEngine;
-import it.unibo.chaosjack.model.api.turnState;
+import it.unibo.chaosjack.model.api.GameEngine;
+import it.unibo.chaosjack.model.api.TurnState;
 
 import java.util.Optional;
 
 import it.unibo.chaosjack.model.api.Card;
 
-public class dealerTurn implements turnState { 
-  private final gameEngine game;
-  public dealerTurn(gameEngine game){
+public class DealerTurn implements TurnState { 
+  private final GameEngine game;
+  public DealerTurn(GameEngine game){
     this.game = game;
   }
 
@@ -19,25 +19,26 @@ public class dealerTurn implements turnState {
   public void hit() {
     Optional<Card> controlloCarta = game.getDeck().draw(); //questo metodo andrà bene quando elena farà il push
         
-        if (controlloCarta.isPresent()){ // contorllo che il valore della carta non sia nullo (che il mazzo non sia vuoto)
-            Card cartaPescata = controlloCarta.get(); // se la carta è presnete allora la assegno a una carta vera e propria e la aggiungo alla mano
+        if (controlloCarta.isPresent()){ // controllo che il valore della carta non sia nullo (che il mazzo non sia vuoto)
+            Card cartaPescata = controlloCarta.get(); // se la carta è presente allora la assegno a una carta vera e propria e la aggiungo alla mano
             game.getDealerHand().addCard(cartaPescata);
         }
   }
 
   @Override
-  public void stand() {
-    // il banco si ferma e si confronta il punteggio con quello del giocatore per decidere chi vince
+  public boolean stand() {
+    // il banco si ferma e il turno passa la tavolo ( si fanno i contorlli per i punteggi e si decide chi ha vinto )
+    return true;
   }
 
   @Override
-    public void doubleDown() {
-    }
+  public boolean doubleDown() {
+    return false; // i bot non possono raddoppiare 
+  }
 
-  @Override
-    public String getStateName() {
-        return "dealerTurn";
-    }
+  
+
+  
 
 /* gestisco il turno del banco  */    
 }
