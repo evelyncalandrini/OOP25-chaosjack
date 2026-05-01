@@ -136,13 +136,13 @@ public class TableImpl implements Table{
     @Override
     public int getPlayerScore(String playerName) {
         return 0;
-        // return engine.getPlayerHand().getScore();
+        // return engine.getPlayerScore(playerName);
     }
 
     @Override
     public int getDealerScore() {
         return 0;
-        //return engine.getDealerHand().getScore();
+        //return engine.getDealerScore(playerName);
     }
 
     @Override
