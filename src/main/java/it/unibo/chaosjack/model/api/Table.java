@@ -2,6 +2,8 @@ package it.unibo.chaosjack.model.api;
 
 import java.util.List;
 
+import it.unibo.chaosjack.model.impl.Hand;
+
 public interface Table {
 
     /**

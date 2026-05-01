@@ -20,6 +20,10 @@ public record RoundResult(Outcome outcome, int playerPoints, int dealerPoints, i
          */
         PLAYER_WON("You win!"),
         /**
+         * player win with bonus
+         */
+        PLAYER_BONUS("Your winnings multiplied"),
+        /**
          * dealer win
          */
         DEALER_WON("Dealer win!"),

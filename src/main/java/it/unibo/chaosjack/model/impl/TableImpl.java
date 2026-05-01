@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import it.unibo.chaosjack.model.api.GameEngine;
 import it.unibo.chaosjack.model.api.RoundResult;
 import it.unibo.chaosjack.model.api.RoundResult.Outcome;
 import it.unibo.chaosjack.model.api.Table;
@@ -17,14 +18,14 @@ public class TableImpl implements Table{
     private final Map<String, Integer> playerPots = new HashMap<>();
     private final Map<String, Integer> playerWins = new HashMap<>();
     private final List<String> players = new ArrayList<>();
-    //private final gameEngine engine;
+    private final GameEngine engine;
     private final Wallet wallet;
 
-    public TableImpl(Wallet wallet, List<String> playerName){ // gameEngine engine
+    public TableImpl(Wallet wallet, List<String> playerName, GameEngine engine){ 
         this.wallet = wallet;
         this.players.addAll(playerName);
-        //this.roundCount = 0;
-        // this.engine = engine
+        this.roundCount = 0;
+        this.engine = engine;
         this.reset();
     }
 
@@ -120,16 +121,22 @@ public class TableImpl implements Table{
             for (String winnerName : bestPlayers) {
                 winCounters.put(winnerName, winCounters.getOrDefault(winnerName, 0) + 1);
             }
-
+            if (max == 21){
+                return new RoundResult(Outcome.PLAYER_BLACKJACK, max, dealerScore, getPot()*3);
+            } 
             if (bestPlayers.size() > 1){
                 return new RoundResult(Outcome.PLAYERS_PUSH, max, dealerScore, getPot()*2);
-            } else {
-            /*if (hand.isMonocolor(bestPlayer)){
-                return new RoundResult(Outcome.PLAYER_WON, max, dealerScore, getPot()*3);
-            } else {*/
-                return new RoundResult(Outcome.PLAYER_WON, max, dealerScore, getPot()/*2*/);
+            } 
+            String oneWinner = bestPlayers.get(0);
+            Hand winnerHand = engine.getPlayers().stream()
+                .filter(p -> p.getName().equals(oneWinner))
+                .findFirst()
+                .get()
+                .getHand();
+            if (winnerHand.sameColor(winnerHand.getCards())){
+                    return new RoundResult(Outcome.PLAYER_BONUS, max, dealerScore, getPot()*3);
             }
-            //}
+            return new RoundResult(Outcome.PLAYER_WON, max, dealerScore, getPot()*2);
         }
     }
 
@@ -140,12 +147,12 @@ public class TableImpl implements Table{
 
     @Override
     public int getDealerScore() {
-        engine.getDealerScore(playerName);
+        return engine.getDealerHand().getScore();
     }
 
     @Override
     public int getWalletBalance(String playerName) {
-        return wallet.getBalance(); //wallet.getBalance(playerName)
+        return wallet.getBalance();
     }
 
     @Override

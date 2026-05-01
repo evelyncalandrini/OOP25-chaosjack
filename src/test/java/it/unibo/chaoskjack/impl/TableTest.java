@@ -8,10 +8,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.umd.cs.findbugs.annotations.CleanupObligation;
+import it.unibo.chaosjack.model.api.Deck;
+import it.unibo.chaosjack.model.api.GameEngine;
 import it.unibo.chaosjack.model.api.RoundResult;
+import it.unibo.chaosjack.model.api.RoundResult.Outcome;
 import it.unibo.chaosjack.model.api.Table;
 import it.unibo.chaosjack.model.api.Table.State;
+import it.unibo.chaosjack.model.api.TurnState;
 import it.unibo.chaosjack.model.api.Wallet;
+import it.unibo.chaosjack.model.impl.Hand;
+import it.unibo.chaosjack.model.impl.Player;
 import it.unibo.chaosjack.model.impl.TableImpl;
 
 public class TableTest {
@@ -33,9 +39,9 @@ public class TableTest {
                 return false;
             }
         };
-        table = new TableImpl(wallet, players);
-    }
 
+        table = new TableImpl(wallet, players, createEngine(0,0));
+    }
 
     @Test
     void testInitialState(){
@@ -73,30 +79,31 @@ public class TableTest {
         assertThrows(IllegalArgumentException.class, () -> table.placeBet("Bob", 5000));
         assertEquals(0, table.getPot(), "The plate must not increase if the funds are insufficient");
     }
-    /* 
+    
     @Test
     void testGetWinnerPlayerWins() {
-        gameEngine winEngine = createEngine(20,18)
+        GameEngine winEngine = createEngine(20,18);
         table = new TableImpl(wallet, List.of("Marameo"), winEngine);
 
         table.placeBet("Marameo", 100);
-        table.stepPassege();
+        table.stepPassage();
+
         RoundResult result = table.getWinner();
-        assertEquals(Outcome.PLAYER_WON, result.getOutcome());
+        assertEquals(Outcome.PLAYER_WON, result.outcome());
         assertEquals(200, result.getPayOut(), "the wins must be double value of the pot");
         assertEquals(1, table.getWinsCount("Marameo"), "the player had win a round");
     }
 
     @Test
     void testWinnerMultiplePlayersTieAndWin() {
-        gameEngine winEngine = createEngine(20,18)
+        GameEngine winEngine = createEngine(20,18);
         table = new TableImpl(wallet, List.of("Marameo", "Bob"), winEngine);
 
         table.placeBet("Marameo", 100);
         table.placeBet("Bob", 100);
-        table.stepPassege();
+        table.stepPassage();
         RoundResult result = table.getWinner();
-        assertEquals(Outcome.PLAYERS_PUSH, result.getOutcome());
+        assertEquals(Outcome.PLAYERS_PUSH, result.outcome());
         assertEquals(400, result.getPayOut(), "the wins must be double value of the pot");
         assertEquals(1, table.getWinsCount("Marameo"), "the player had win a round");
         assertEquals(1, table.getWinsCount("Bob"), "the player had win a round");
@@ -104,11 +111,180 @@ public class TableTest {
 
     @Test
     void testWinnerPushWithDealer() {
-        gameEngine pushEngine = createEngine(19,19);
+        GameEngine pushEngine = createEngine(19,19);
         table = new TableImpl(wallet, List.of("Marameo"), pushEngine);
-        table 
+        
+        table.placeBet("Marameo", 100);
+        table.stepPassage();
+
+        RoundResult result = table.getWinner();
+        assertEquals(Outcome.PUSH, result.outcome());
+        assertEquals(0, result.getPayOut(), "Standard push with dealer");
+        assertEquals(0, table.getWinsCount("Marameo"), "Push is not a win");
     }
-    */
+
+    @Test
+    void testWinnerDealerWins() {
+        GameEngine lossEngine = createEngine(18,20);
+        table = new TableImpl(wallet, List.of("Marameo"), lossEngine);
+        
+        table.placeBet("Marameo", 100);
+        table.stepPassage();
+
+        RoundResult result = table.getWinner();
+        assertEquals(Outcome.DEALER_WON, result.outcome());
+        assertEquals(0, result.getPayOut());
+    }
+
+    @Test
+    void testWinnerAllPlayerGoOut() {
+        GameEngine outEngine = createEngine(25,20);
+        table = new TableImpl(wallet, List.of("Marameo", "Bob"), outEngine);
+
+        table.placeBet("Marameo", 100);
+        table.placeBet("Bob", 100);
+        table.stepPassage();
+
+        RoundResult result = table.getWinner();
+        assertEquals(Outcome.DEALER_WON, result.outcome());
+        assertEquals(0, result.getPayOut());
+        assertEquals(0, table.getWinsCount("Marameo"), "the player had lose a round");
+        assertEquals(0, table.getWinsCount("Bob"), "the player had lose a round");
+
+    }
+
+    @Test
+    void testDealerGoOut() {
+        GameEngine outDealerEngine = new GameEngine() {
+            @Override 
+            public int getPlayerScore(String name) { 
+                return name.equals("Marameo") ? 20 : 19; 
+            }
+            @Override
+            public Hand getDealerHand() { 
+                return new Hand() {
+                    @Override
+                    public int getScore() { return 27; }
+                };
+            }
+            @Override
+            public void changeState(TurnState newState) {}
+            @Override
+            public void nextTurn() {}
+            @Override
+            public Deck getDeck() { return null; }
+            @Override
+            public List<Player> getPlayers() { return List.of(); }
+            @Override
+            public void hit() {}
+            @Override
+            public void stand() {}
+            
+        };
+;
+        table = new TableImpl(wallet, List.of("Marameo", "Bob"), outDealerEngine);
+
+        table.placeBet("Marameo", 100);
+        table.placeBet("Bob", 100);
+        table.stepPassage();
+
+        RoundResult result = table.getWinner();
+        assertEquals(Outcome.PLAYER_WON, result.outcome());
+        assertEquals(400, result.getPayOut());
+        assertEquals(1, table.getWinsCount("Marameo"), "the player had lose a round");
+        assertEquals(0, table.getWinsCount("Bob"), "the player had lose a round");
+
+    }
+    
+
+    @Test
+    void testOneWinsOneLoses() {
+        GameEngine mixEngine = new GameEngine() {
+            @Override 
+            public int getPlayerScore(String name) { 
+                return name.equals("Marameo") ? 17 : 20; 
+            }
+            @Override
+            public Hand getDealerHand() { 
+                return new Hand() {
+                    @Override
+                    public int getScore() { return 18; }
+                };
+            }
+            @Override
+            public void changeState(TurnState newState) {}
+            @Override
+            public void nextTurn() {}
+            @Override
+            public Deck getDeck() { return null; }
+            @Override
+            public List<Player> getPlayers() { return List.of(); }
+            @Override
+            public void hit() {}
+            @Override
+            public void stand() {}
+            
+        };
+
+        table = new TableImpl(wallet, List.of("Marameo", "Bob"), mixEngine);
+
+        table.placeBet("Marameo", 100);
+        table.placeBet("Bob", 100);
+        table.stepPassage();
+
+        RoundResult result = table.getWinner();
+
+        assertEquals(Outcome.PLAYER_WON, result.outcome());
+        assertEquals(400, result.getPayOut());
+        assertEquals(0, table.getWinsCount("Marameo"), "the player had win a round");
+        assertEquals(1, table.getWinsCount("Bob"), "the player had lose a round");
+
+    }
+
+    @Test
+    void testWinnerPLayerBlackJack() {
+        GameEngine bjEngine = new GameEngine() {
+            @Override 
+            public int getPlayerScore(String name) { 
+                return name.equals("Marameo") ? 21 : 20; 
+            }
+            @Override
+            public Hand getDealerHand() { 
+                return new Hand() {
+                    @Override
+                    public int getScore() { return 18; }
+                };
+            }
+            @Override
+            public void changeState(TurnState newState) {}
+            @Override
+            public void nextTurn() {}
+            @Override
+            public Deck getDeck() { return null; }
+            @Override
+            public List<Player> getPlayers() { return List.of(); }
+            @Override
+            public void hit() {}
+            @Override
+            public void stand() {}
+            
+        };
+
+        table = new TableImpl(wallet, List.of("Marameo", "Bob"), bjEngine);
+
+        table.placeBet("Marameo", 100);
+        table.placeBet("Bob", 100);
+        table.stepPassage();
+
+        RoundResult result = table.getWinner();
+
+        assertEquals(Outcome.PLAYER_BLACKJACK, result.outcome());
+        assertEquals(600, result.getPayOut());
+        assertEquals(1, table.getWinsCount("Marameo"), "the player had win a round");
+        assertEquals(0, table.getWinsCount("Bob"), "the player had lose a round");
+
+    }
+
     @Test
     void testOtherGame() {
         table.placeBet("Marameo", 100);
@@ -128,20 +304,34 @@ public class TableTest {
         assertEquals(1, table.getRoundCount(), "The round must return a one round");
     }
 
-    /*
-    private gameEngine createEngine(int pScore, int dScore) {
-        return new gameEngine() {
+    
+    private GameEngine createEngine(int pScore, int dScore) {
+        return new GameEngine() {
             @Override 
-            public hand getPlayerHand() { return () -> pScore; }
+            public int getPlayerScore(String name) { 
+                return pScore; 
+            }
             @Override
-            public hand getDealerHand() { return () -> dScore; }
+            public Hand getDealerHand() { 
+                return new Hand() {
+                    @Override
+                    public int getScore() { return dScore; }
+                };
+            }
             @Override
-            public deck getDeck() { return null; }
+            public void changeState(TurnState newState) {}
             @Override
-            public void changeState(turnState s) {}
+            public void nextTurn() {}
+            @Override
+            public Deck getDeck() { return null; }
+            @Override
+            public List<Player> getPlayers() { return List.of(); }
+            @Override
+            public void hit() {}
+            @Override
+            public void stand() {}
+            
         };
     }
-    */
-
 
 }
