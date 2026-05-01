@@ -17,22 +17,37 @@ public class Player {
 
     }
 
+    /*
+    * @return true if the player is a bot, false otherwise
+     */
     public boolean isBot() {
        return this.isBot;
     }
 
+    /**
+     * @return the name of the player
+     */
     public String getName(){
         return this.name;
     }
 
+    /**
+     * @return the hand of the player
+     */
     public Hand getHand(){
         return this.playerHand;
     }
 
+    /**
+     * @return the initial bet of the player
+     */
     public int getBet() {
         return this.bet;
     }
 
+    /**
+     * @return the wallet of the player
+     */
     public Wallet getWallet() {
         return this.wallet;
     }

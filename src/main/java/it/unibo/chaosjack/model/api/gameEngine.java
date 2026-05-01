@@ -9,10 +9,25 @@ public interface GameEngine {
     void changeState(TurnState newState);
     void nextTurn();
 
-    Deck getDeck(); // restituisce il mazzo di carte
-    Hand getDealerHand(); // restituisce la mano del banco
+    /**
+     * @return the Deck of the table
+     */
+    Deck getDeck(); 
 
-    int getPlayerScore(String name); // restituisce lo score di un giocatore specifico
+    /**
+     * @return the hand of the dealer
+     */
+    Hand getDealerHand(); 
+
+
+    /**
+     * @return the score of a player by their name
+     */
+    int getPlayerScore(String name); 
+
+    /**
+     * @return the list of players in the game
+     */
     List<Player> getPlayers();
 
     void hit(); // metodo per il controller

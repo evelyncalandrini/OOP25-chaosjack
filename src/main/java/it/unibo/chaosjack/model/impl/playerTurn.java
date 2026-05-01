@@ -18,32 +18,45 @@ public class PlayerTurn  implements TurnState{
    @Override
     public void hit(){
         Optional<Card> controlloCarta = game.getDeck().draw(); 
-        
-        if (controlloCarta.isPresent()){ // controllo che il valore della carta non sia nullo (che il mazzo non sia vuoto)
-            Card cartaPescata = controlloCarta.get(); // se la carta è presnete allora la assegno a una carta vera e propria e la aggiungo alla mano
+        /**
+         * check that the deck is not empty 
+         */
+        if (controlloCarta.isPresent()){ 
+            Card cartaPescata = controlloCarta.get(); 
+            /**
+             * if the deck is not empty,add the drawn card to the player's hand
+             */
             game.getPlayers().get(myIndex).getHand().addCard(cartaPescata);
         }
 
-        if (game.getPlayers().get(myIndex).getHand().getScore() > 21) { // se il giocatore sballa passo al turno successivo
+        if (game.getPlayers().get(myIndex).getHand().getScore() > 21) { 
+            /**
+             * if the player's score is greater than 21, the player automatically passes his turn
+             */
             stand();
         }
     }
        
 
     @Override
-    public boolean stand(){ // cambio  il turno ( passo al giocatore successvo o al banco )
-        game.nextTurn(); // passo il turno al giocatore successivo o al banco 
+    public boolean stand(){ 
+        game.nextTurn(); 
         return true;
     }
 
     @Override
     public boolean doubleDown() {
+        /**
+         * I check if the player has enough money to double bet
+         */
         if ( game.getPlayers().get(myIndex).getBet() *2 < game.getPlayers().get(myIndex).getWallet().getBalance() ) { // controllo che il giocatore abbia abbastanza soldi per raddoppiare
-            this.hit(); // faccio pescare una carta al giocatore
-            this.stand(); // passo al turno successivo
+            this.hit(); 
+            this.stand(); 
             return true;
         } else{
-            // se il giocatore non ha abbastanza soldi per raddoppiare, non faccio nulla e restituisco la scommessa originale
+            /**
+             * If the player doesn't have enough money to double the bet the method does nothing
+             */
             return false; 
         }
     }

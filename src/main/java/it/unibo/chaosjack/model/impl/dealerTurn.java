@@ -27,7 +27,7 @@ public class DealerTurn implements TurnState {
 
   @Override
   public boolean stand() {
-    // il banco si ferma e il turno passa la tavolo ( si fanno i contorlli per i punteggi e si decide chi ha vinto )
+    
     return true;
   }
 

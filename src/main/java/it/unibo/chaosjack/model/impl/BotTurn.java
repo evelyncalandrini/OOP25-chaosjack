@@ -3,8 +3,13 @@ import it.unibo.chaosjack.model.api.GameEngine;
 import it.unibo.chaosjack.model.api.TurnState;
 
 public class BotTurn implements TurnState {
+
+   /**
+     * this interface represents the bot player's turn
+     */
      private GameEngine game;
      private int myIndex;
+
 
      public BotTurn(GameEngine game, int myindex) {
         this.game = game;
@@ -20,7 +25,10 @@ public class BotTurn implements TurnState {
      }
 
 
-     @Override
+     /**
+     * the bot continues to draw cards until it reaches a certain condition
+     */
+     @Override 
         public void hit() {
          Hand botHand = game.getPlayers().get(myIndex).getHand();
          while (botHand.getScore() < 21){
@@ -45,7 +53,7 @@ public class BotTurn implements TurnState {
 
 
      
-        // i bot non possono raddoppiare, quindi questo metodo non fa nulla
+        
 
 
     

@@ -5,15 +5,28 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Hand {
-    private final List<Card> cards = new ArrayList<>(); // è l'insieme di carte che ho in mano 
+
+    /**
+     * This class represents the player's or the dealer's hand
+     */
+
+    /**
+     * the cards in the hand
+     */
+    private final List<Card> cards = new ArrayList<>();  
 
     
-
-    public void addCard( Card card) { // metodo per aggiungere una carta nella mia mano 
+    /**
+     * adds a card to the hand
+     */
+    public void addCard( Card card) {  
         cards.add(card);
     }
 
-    public int getScore(){ // restituisce lo score della mano 
+    /**
+     * @return returns the card score in a standard round
+     */
+    public int getScore(){ 
         int score = 0;
         int assesCount = 0;
 
@@ -24,8 +37,11 @@ public class Hand {
               }
         }
 
-        while ( score > 21 && assesCount > 0) { /*se ho deli assi in mano e il punteggio totale è maggiore di 21 toglo 10 dal punteggio 
-            è come se contassi alcuni assi con vlaore 1*/
+        /**
+         * if the score is greater than 21 and there are aces in the hand, the score is reduced by 10 
+         * for each ace until the score is less than or equal to 21 or there are no more aces to reduce
+         */
+        while ( score > 21 && assesCount > 0) { 
             score -=10;
             assesCount--;
         }
@@ -34,19 +50,33 @@ public class Hand {
     }
 
 
-    public boolean isRed(List<Card> cards){
-        int redCount = 0;
-        for (Card c : cards) {
-            if (c.getName().equals("HEARTS") || c.getName().equals("DIAMONDS")){
-                redCount++;
+    /**
+     * @param cards is the list of cards in the player's hand
+     * @return true if all the cards in the hand are of the same color, false otherwise
+     */
+    public boolean sameColor(List<Card> cards){
+       boolean firstIsRed = isRed(cards.get(0));
+        for ( Card c : cards) {
+            if(isRed(c) != firstIsRed) {
+                return false;
             }
         }
+        return true;
+    }
 
-        if ( redCount == cards.size()) {
-            return true;
-        } else {
-            return false;
-        }
+    /**
+     * @param card
+     * @return true if the card is red, false otherwise
+     */
+    private boolean isRed(Card card){
+        return card.getName().equals("HEARTS") || card.getName().equals("DIAMONDS");
+    }
+
+    /**
+    * @return the list of cards in the hand
+    */
+    public List<Card> getCards() {
+        return cards;
     }
 
     

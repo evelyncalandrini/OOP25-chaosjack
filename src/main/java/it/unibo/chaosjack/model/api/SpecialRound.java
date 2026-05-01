@@ -8,4 +8,5 @@ public interface SpecialRound {
      */
     int specialScore(List<Card> playersCards);
     
+   
 }
