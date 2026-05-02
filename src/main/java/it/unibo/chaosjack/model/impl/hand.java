@@ -69,7 +69,7 @@ public class Hand {
      * @return true if the card is red, false otherwise
      */
     private boolean isRed(Card card){
-        return card.getName().equals("HEARTS") || card.getName().equals("DIAMONDS");
+        return card.getName().contains("HEARTS") || card.getName().contains("DIAMONDS");
     }
 
     /**
