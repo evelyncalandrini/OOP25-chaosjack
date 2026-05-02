@@ -7,7 +7,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.umd.cs.findbugs.annotations.CleanupObligation;
 import it.unibo.chaosjack.model.api.Deck;
 import it.unibo.chaosjack.model.api.GameEngine;
 import it.unibo.chaosjack.model.api.RoundResult;
@@ -18,6 +17,9 @@ import it.unibo.chaosjack.model.api.TurnState;
 import it.unibo.chaosjack.model.api.Wallet;
 import it.unibo.chaosjack.model.impl.Hand;
 import it.unibo.chaosjack.model.impl.Player;
+import it.unibo.chaosjack.model.impl.Rank;
+import it.unibo.chaosjack.model.impl.StandardCard;
+import it.unibo.chaosjack.model.impl.Suit;
 import it.unibo.chaosjack.model.impl.TableImpl;
 
 public class TableTest {
@@ -174,7 +176,16 @@ public class TableTest {
             @Override
             public Deck getDeck() { return null; }
             @Override
-            public List<Player> getPlayers() { return List.of(); }
+            public List<Player> getPlayers() { 
+                Player p1 = new Player("Marameo", false, wallet, 100);
+                Player p2 = new Player("Bob", false, wallet, 100);
+                p1.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
+                p1.getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS));
+
+                p2.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
+                p2.getHand().addCard(new StandardCard(Rank.ACE, Suit.DIAMONDS));
+                return List.of(p1,p2);
+            }
             @Override
             public void hit() {}
             @Override
@@ -191,7 +202,7 @@ public class TableTest {
         RoundResult result = table.getWinner();
         assertEquals(Outcome.PLAYER_WON, result.outcome());
         assertEquals(400, result.getPayOut());
-        assertEquals(1, table.getWinsCount("Marameo"), "the player had lose a round");
+        assertEquals(1, table.getWinsCount("Marameo"), "the player had win a round");
         assertEquals(0, table.getWinsCount("Bob"), "the player had lose a round");
 
     }
@@ -218,7 +229,15 @@ public class TableTest {
             @Override
             public Deck getDeck() { return null; }
             @Override
-            public List<Player> getPlayers() { return List.of(); }
+            public List<Player> getPlayers() { 
+                Player p1 = new Player("Marameo", false, wallet, 100);
+                Player p2 = new Player("Bob", false, wallet, 100);
+                p1.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
+                p1.getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS));
+                p2.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
+                 p2.getHand().addCard(new StandardCard(Rank.ACE, Suit.DIAMONDS));
+                return List.of(p1,p2);
+            }
             @Override
             public void hit() {}
             @Override
@@ -262,7 +281,15 @@ public class TableTest {
             @Override
             public Deck getDeck() { return null; }
             @Override
-            public List<Player> getPlayers() { return List.of(); }
+            public List<Player> getPlayers() { 
+                Player p1 = new Player("Marameo", false, wallet, 100);
+                Player p2 = new Player("Bob", false, wallet, 100);
+                p1.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
+                p1.getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS));
+                p2.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
+                p2.getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS));
+                return List.of(p1,p2);
+            }
             @Override
             public void hit() {}
             @Override
@@ -280,6 +307,58 @@ public class TableTest {
 
         assertEquals(Outcome.PLAYER_BLACKJACK, result.outcome());
         assertEquals(600, result.getPayOut());
+        assertEquals(1, table.getWinsCount("Marameo"), "the player had win a round");
+        assertEquals(0, table.getWinsCount("Bob"), "the player had lose a round");
+
+    }
+
+    @Test
+    void testPLayerBlackJackBonus() {
+        GameEngine bjEngine = new GameEngine() {
+            @Override 
+            public int getPlayerScore(String name) { 
+                return name.equals("Marameo") ? 21 : 20; 
+            }
+            @Override
+            public Hand getDealerHand() { 
+                return new Hand() {
+                    @Override
+                    public int getScore() { return 18; }
+                };
+            }
+            @Override
+            public void changeState(TurnState newState) {}
+            @Override
+            public void nextTurn() {}
+            @Override
+            public Deck getDeck() { return null; }
+            @Override
+            public List<Player> getPlayers() { 
+                Player p1 = new Player("Marameo", false, wallet, 100);
+                Player p2 = new Player("Bob", false, wallet, 100);
+                p1.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
+                p1.getHand().addCard(new StandardCard(Rank.TWO, Suit.CLUBS));
+                p2.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
+                p2.getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS));
+                return List.of(p1,p2);
+            }
+            @Override
+            public void hit() {}
+            @Override
+            public void stand() {}
+            
+        };
+
+        table = new TableImpl(wallet, List.of("Marameo", "Bob"), bjEngine);
+
+        table.placeBet("Marameo", 100);
+        table.placeBet("Bob", 100);
+        table.stepPassage();
+
+        RoundResult result = table.getWinner();
+
+        assertEquals(Outcome.PLAYER_BONUS, result.outcome());
+        assertEquals(1000, result.getPayOut());
         assertEquals(1, table.getWinsCount("Marameo"), "the player had win a round");
         assertEquals(0, table.getWinsCount("Bob"), "the player had lose a round");
 
@@ -325,7 +404,15 @@ public class TableTest {
             @Override
             public Deck getDeck() { return null; }
             @Override
-            public List<Player> getPlayers() { return List.of(); }
+            public List<Player> getPlayers() {
+                Player p1 = new Player("Marameo", false, wallet, 100);
+                Player p2 = new Player("Bob", false, wallet, 100);
+                p1.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
+                p1.getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS));
+                p2.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
+                p2.getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS));
+                return List.of(p1,p2);
+            }
             @Override
             public void hit() {}
             @Override

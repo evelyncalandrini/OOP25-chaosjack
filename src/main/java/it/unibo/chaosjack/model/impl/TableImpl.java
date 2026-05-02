@@ -121,9 +121,7 @@ public class TableImpl implements Table{
             for (String winnerName : bestPlayers) {
                 winCounters.put(winnerName, winCounters.getOrDefault(winnerName, 0) + 1);
             }
-            if (max == 21){
-                return new RoundResult(Outcome.PLAYER_BLACKJACK, max, dealerScore, getPot()*3);
-            } 
+            
             if (bestPlayers.size() > 1){
                 return new RoundResult(Outcome.PLAYERS_PUSH, max, dealerScore, getPot()*2);
             } 
@@ -133,10 +131,19 @@ public class TableImpl implements Table{
                 .findFirst()
                 .get()
                 .getHand();
-            if (winnerHand.sameColor(winnerHand.getCards())){
-                    return new RoundResult(Outcome.PLAYER_BONUS, max, dealerScore, getPot()*3);
+
+            boolean isMonocolor = winnerHand.sameColor(winnerHand.getCards());
+            int bonus = isMonocolor ? 3 : 2;
+            if (max == 21 && isMonocolor){
+                return new RoundResult(Outcome.PLAYER_BONUS, max, dealerScore, getPot()* (bonus + 2));
+            } else if (max == 21) {
+                return new RoundResult(Outcome.PLAYER_BLACKJACK, max, dealerScore, getPot()* 3);
+            } 
+            if (isMonocolor == true) {
+                return new RoundResult(Outcome.PLAYER_BONUS, max, dealerScore, getPot() * bonus);
+            } else {
+                return new RoundResult(Outcome.PLAYER_WON, max, dealerScore, getPot() * bonus);
             }
-            return new RoundResult(Outcome.PLAYER_WON, max, dealerScore, getPot()*2);
         }
     }
 
