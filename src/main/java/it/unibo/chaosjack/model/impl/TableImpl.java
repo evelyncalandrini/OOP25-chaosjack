@@ -10,38 +10,50 @@ import it.unibo.chaosjack.model.api.RoundResult;
 import it.unibo.chaosjack.model.api.RoundResult.Outcome;
 import it.unibo.chaosjack.model.api.Table;
 import it.unibo.chaosjack.model.api.Wallet;
+import it.unibo.chaosjack.model.api.Statistics;
 
-public class TableImpl implements Table{
+/**
+ * Implementation of the Table interface
+ */
+public class TableImpl implements Table {
+    private static final int MAX_SCORE = 21;
     private State currentState;
-    private final Map<String, Integer> winCounters = new HashMap<>();
-    private int roundCount;
+    //private final Map<String, Integer> winCounters = new HashMap<>();
     private final Map<String, Integer> playerPots = new HashMap<>();
-    private final Map<String, Integer> playerWins = new HashMap<>();
+    private final Statistics statistics = new StatisticsImpl();
     private final List<String> players = new ArrayList<>();
     private final GameEngine engine;
     private final Wallet wallet;
 
-    public TableImpl(Wallet wallet, List<String> playerName, GameEngine engine){ 
+    /**
+     * Constructs a new TableImpl with the specified wallet, playerName and engine
+     * 
+     * @param wallet wallet the player's starting wallet
+     * @param playerName the name of the player
+     * @param engine the game engine instance
+     */
+    public TableImpl(final Wallet wallet, final List<String> playerName, final GameEngine engine) { 
         this.wallet = wallet;
         this.players.addAll(playerName);
-        this.roundCount = 0;
         this.engine = engine;
         this.reset();
     }
 
     @Override
     public State getCurrentState() {
-        return currentState;
+        return this.currentState;
     }
 
     @Override
     public void stepPassage() {
         if (this.currentState == State.FIRST_BET && getPot() > 0) {
             this.currentState = State.PLAYING;
-            //engine.changeState(turnState.PLAYER_TURN);
+        } else if (this.currentState == State.PLAYING) {
+            this.currentState = State.FINAL_BET;
         } else if (this.currentState == State.FINAL_BET) {
             this.currentState = State.DEALER_TURN;
-            //engine.changeState(turnState.DEALER_TURN);
+        } else if (this.currentState == State.DEALER_TURN) {
+            this.currentState = State.RESULTS;
         } else {
             throw new IllegalStateException("impossible step the phases");
         }
@@ -49,17 +61,17 @@ public class TableImpl implements Table{
 
     @Override
     public void otherGame() {
-        playerPots.clear();
-        currentState = State.FIRST_BET;
-        roundCount++;
+        this.playerPots.clear();
+        this.currentState = State.FIRST_BET;
+        this.statistics.incrementTotalRound();
     }
 
     @Override
     public void reset() {
-        playerPots.clear();
-        playerWins.clear();
-        currentState = State.FIRST_BET;
-        roundCount = 1;
+        this.playerPots.clear();
+        this.statistics.resetStats();
+        this.currentState = State.FIRST_BET;
+        this.statistics.incrementTotalRound();
     }
 
     @Override
@@ -69,18 +81,18 @@ public class TableImpl implements Table{
 
     @Override
     public void placeBet(final String playerName, final int amount) {
-        if (amount <= 0 ) {
+        if (amount <= 0) {
             throw new IllegalArgumentException("The amount must be positive");
         }
-        if (currentState != State.FIRST_BET && currentState != State.FINAL_BET) {
+        if (!(currentState == State.FIRST_BET || currentState == State.FINAL_BET)) {
             throw new IllegalStateException("Betting is not allowed during the " + currentState + " phase");
         }
-        for (String name : players){
+        for (final String name : players) {
             if (name.equals(playerName)){
-                if (wallet.removeFunds(amount) == false){
+                if (wallet.removeFunds(amount) == false) {
                     throw new IllegalArgumentException("insufficient founds");
                 }
-                int currentPot = playerPots.getOrDefault(playerName, 0);
+                final int currentPot = playerPots.getOrDefault(playerName, 0);
                 playerPots.put(playerName, currentPot + amount);
             }
         }
@@ -94,13 +106,13 @@ public class TableImpl implements Table{
     @Override
     public RoundResult getWinner() {
         final int dealerScore = getDealerScore();
-        List<String> bestPlayers = new ArrayList<>();
+        final List<String> bestPlayers = new ArrayList<>();
         int max = -1;
 
-        for (String name : getPlayers()){
-            int score = getPlayerScore(name);
-            if (score <= 21){
-                if (score > max){
+        for (final String name : getPlayers()) {
+            final int score = getPlayerScore(name);
+            if (score <= MAX_SCORE) {
+                if (score > max) {
                     max = score;
                     bestPlayers.clear();
                     bestPlayers.add(name);
@@ -110,45 +122,49 @@ public class TableImpl implements Table{
             }
         }
 
-        // Dealer win or nobody players is valid
-        if (bestPlayers.isEmpty() || (dealerScore <= 21 && dealerScore > max)) {
-            return new RoundResult(Outcome.DEALER_WON, max == -1 ? 0 : max, dealerScore, 0);
-        }
-        // Push
-        if (max == dealerScore) {
-            return new RoundResult(Outcome.PUSH, max, dealerScore,0);
+        RoundResult result;
+
+        if (bestPlayers.isEmpty() || (dealerScore <= MAX_SCORE && dealerScore > max)) {
+            result = new RoundResult(Outcome.DEALER_WON, max == -1 ? 0 : max, dealerScore, 0);
+        } else if (max == dealerScore) {
+            result = new RoundResult(Outcome.PUSH, max, dealerScore, 0);
+        } else if (bestPlayers.size() > 1) {
+                result = new RoundResult(Outcome.PLAYERS_PUSH, max, dealerScore, getPot()*2);
         } else {
-            for (String winnerName : bestPlayers) {
-                winCounters.put(winnerName, winCounters.getOrDefault(winnerName, 0) + 1);
-            }
-            
-            if (bestPlayers.size() > 1) {
-                return new RoundResult(Outcome.PLAYERS_PUSH, max, dealerScore, getPot()*2);
-            } 
-            String oneWinner = bestPlayers.get(0);
-            Hand winnerHand = engine.getPlayers().stream()
+            final String oneWinner = bestPlayers.get(0);
+            final Hand winnerHand = engine.getPlayers().stream()
                 .filter(p -> p.getName().equals(oneWinner))
                 .findFirst()
                 .get()
                 .getHand();
 
-            boolean isMonocolor = winnerHand.sameColor(winnerHand.getCards());
-            int bonus = isMonocolor ? 3 : 2;
-            if (max == 21 && isMonocolor){
-                return new RoundResult(Outcome.PLAYER_BONUS, max, dealerScore, getPot()* (bonus + 2));
-            } else if (max == 21) {
-                return new RoundResult(Outcome.PLAYER_BLACKJACK, max, dealerScore, getPot()* 3);
-            } 
-            if (isMonocolor == true) {
-                return new RoundResult(Outcome.PLAYER_BONUS, max, dealerScore, getPot() * bonus);
+            final boolean isMonocolor = winnerHand.sameColor(winnerHand.getCards());
+            final int bonus = isMonocolor ? 3 : 2;
+            if (max == MAX_SCORE && isMonocolor) {
+                result = new RoundResult(Outcome.PLAYER_BONUS, max, dealerScore, getPot() * (bonus + 2));
+            } else if (max == MAX_SCORE) {
+                result = new RoundResult(Outcome.PLAYER_BLACKJACK, max, dealerScore, getPot() * 3);
+            } else if (isMonocolor == true) {
+                result = new RoundResult(Outcome.PLAYER_BONUS, max, dealerScore, getPot() * bonus);
             } else {
-                return new RoundResult(Outcome.PLAYER_WON, max, dealerScore, getPot() * bonus);
+                result = new RoundResult(Outcome.PLAYER_WON, max, dealerScore, getPot() * bonus);
             }
         }
+
+        for (final String name : getPlayers()) {
+            int bet = playerPots.getOrDefault(name, 0);
+            if (bestPlayers.contains(name)) {
+                statistics.updateStats(name, result, bet);
+            } else {
+                RoundResult individuaLoss = new RoundResult(Outcome.DEALER_WON, getPlayerScore(name), dealerScore, 0);
+                statistics.updateStats(name, individuaLoss, bet);
+            }
+        }
+        return result;
     }
 
     @Override
-    public int getPlayerScore(String playerName) {
+    public int getPlayerScore(final String playerName) {
         return engine.getPlayerScore(playerName);
     }
 
@@ -158,17 +174,12 @@ public class TableImpl implements Table{
     }
 
     @Override
-    public int getWalletBalance(String playerName) {
+    public int getWalletBalance(final String playerName) {
         return wallet.getBalance();
     }
 
     @Override
-    public int getRoundCount() {
-        return roundCount;
-    }
-
-    @Override
-    public int getWinsCount(String playerName) {
-        return winCounters.getOrDefault(playerName, 0);
+    public Statistics geStatistics() {
+        return this.statistics;
     }
 }

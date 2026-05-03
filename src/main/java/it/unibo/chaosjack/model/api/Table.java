@@ -76,11 +76,11 @@ public interface Table {
     /**
      * @return the number of rounds we have reached
      */
-    int getRoundCount();
+    //int getRoundCount();
 
     /**
-     * @return the total number of rounds won by the player
+     * @return return the statistics for each player
      */
-    int getWinsCount(String playerName);
+    Statistics geStatistics();
 
 }

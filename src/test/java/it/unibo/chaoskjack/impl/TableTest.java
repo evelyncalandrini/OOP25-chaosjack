@@ -49,7 +49,6 @@ public class TableTest {
     void testInitialState(){
         assertEquals(State.FIRST_BET, table.getCurrentState());
         assertEquals(0, table.getPot(), "the pot must be 0");
-        assertEquals(1,table.getRoundCount());
     }
 
     @Test
@@ -67,6 +66,15 @@ public class TableTest {
         table.placeBet("Bob", 100);
         table.stepPassage();
         assertEquals(State.PLAYING, table.getCurrentState());
+
+        table.stepPassage();
+        assertEquals(State.FINAL_BET, table.getCurrentState());
+
+        table.stepPassage();
+        assertEquals(State.DEALER_TURN, table.getCurrentState());
+
+        table.stepPassage();
+        assertEquals(State.RESULTS, table.getCurrentState());
     }
 
     @Test
@@ -93,7 +101,7 @@ public class TableTest {
         RoundResult result = table.getWinner();
         assertEquals(Outcome.PLAYER_WON, result.outcome());
         assertEquals(200, result.getPayOut(), "the wins must be double value of the pot");
-        assertEquals(1, table.getWinsCount("Marameo"), "the player had win a round");
+        assertEquals(1, table.geStatistics().getWinHistory().getOrDefault("Marameo", 0));
     }
 
     @Test
@@ -107,8 +115,8 @@ public class TableTest {
         RoundResult result = table.getWinner();
         assertEquals(Outcome.PLAYERS_PUSH, result.outcome());
         assertEquals(400, result.getPayOut(), "the wins must be double value of the pot");
-        assertEquals(1, table.getWinsCount("Marameo"), "the player had win a round");
-        assertEquals(1, table.getWinsCount("Bob"), "the player had win a round");
+        assertEquals(1, table.geStatistics().getPushHistory().getOrDefault("Marameo", 0));
+        assertEquals(1, table.geStatistics().getPushHistory().getOrDefault("Bob", 0));
     }
 
     @Test
@@ -122,7 +130,8 @@ public class TableTest {
         RoundResult result = table.getWinner();
         assertEquals(Outcome.PUSH, result.outcome());
         assertEquals(0, result.getPayOut(), "Standard push with dealer");
-        assertEquals(0, table.getWinsCount("Marameo"), "Push is not a win");
+        assertEquals(0, table.geStatistics().getWinHistory().getOrDefault("Marameo", 0));
+        assertEquals(1, table.geStatistics().getLossHistory().getOrDefault("Marameo", 0));
     }
 
     @Test
@@ -136,6 +145,8 @@ public class TableTest {
         RoundResult result = table.getWinner();
         assertEquals(Outcome.DEALER_WON, result.outcome());
         assertEquals(0, result.getPayOut());
+        assertEquals(1, table.geStatistics().getLossHistory().getOrDefault("Marameo", 0));
+
     }
 
     @Test
@@ -150,9 +161,8 @@ public class TableTest {
         RoundResult result = table.getWinner();
         assertEquals(Outcome.DEALER_WON, result.outcome());
         assertEquals(0, result.getPayOut());
-        assertEquals(0, table.getWinsCount("Marameo"), "the player had lose a round");
-        assertEquals(0, table.getWinsCount("Bob"), "the player had lose a round");
-
+        assertEquals(1, table.geStatistics().getLossHistory().getOrDefault("Marameo", 0));
+        assertEquals(1, table.geStatistics().getLossHistory().getOrDefault("Bob", 0));
     }
 
     @Test
@@ -202,9 +212,8 @@ public class TableTest {
         RoundResult result = table.getWinner();
         assertEquals(Outcome.PLAYER_WON, result.outcome());
         assertEquals(400, result.getPayOut());
-        assertEquals(1, table.getWinsCount("Marameo"), "the player had win a round");
-        assertEquals(0, table.getWinsCount("Bob"), "the player had lose a round");
-
+        assertEquals(1, table.geStatistics().getWinHistory().getOrDefault("Marameo", 0));
+        assertEquals(0, table.geStatistics().getWinHistory().getOrDefault("Bob", 0));
     }
     
 
@@ -255,9 +264,59 @@ public class TableTest {
 
         assertEquals(Outcome.PLAYER_WON, result.outcome());
         assertEquals(400, result.getPayOut());
-        assertEquals(0, table.getWinsCount("Marameo"), "the player had win a round");
-        assertEquals(1, table.getWinsCount("Bob"), "the player had lose a round");
+        assertEquals(0, table.geStatistics().getWinHistory().getOrDefault("Marameo", 0));
+        assertEquals(1, table.geStatistics().getWinHistory().getOrDefault("Bob", 0));
+    }
 
+    @Test
+    void testWinsPLayerWithBonus() {
+        GameEngine bonusWinEngine = new GameEngine() {
+            @Override 
+            public int getPlayerScore(String name) { 
+                return name.equals("Marameo") ? 19 : 18; 
+            }
+            @Override
+            public Hand getDealerHand() { 
+                return new Hand() {
+                    @Override
+                    public int getScore() { return 18; }
+                };
+            }
+            @Override
+            public void changeState(TurnState newState) {}
+            @Override
+            public void nextTurn() {}
+            @Override
+            public Deck getDeck() { return null; }
+            @Override
+            public List<Player> getPlayers() { 
+                Player p1 = new Player("Marameo", false, wallet, 100);
+                Player p2 = new Player("Bob", false, wallet, 100);
+                p1.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
+                p1.getHand().addCard(new StandardCard(Rank.TWO, Suit.CLUBS));
+                p2.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
+                p2.getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS));
+                return List.of(p1,p2);
+            }
+            @Override
+            public void hit() {}
+            @Override
+            public void stand() {}
+            
+        };
+
+        table = new TableImpl(wallet, List.of("Marameo", "Bob"), bonusWinEngine);
+
+        table.placeBet("Marameo", 100);
+        table.placeBet("Bob", 100);
+        table.stepPassage();
+
+        RoundResult result = table.getWinner();
+
+        assertEquals(Outcome.PLAYER_BONUS, result.outcome());
+        assertEquals(600, result.getPayOut());
+        assertEquals(1, table.geStatistics().getBonusHistory().getOrDefault("Marameo", 0));
+        assertEquals(0, table.geStatistics().getBonusHistory().getOrDefault("Bob", 0));
     }
 
     @Test
@@ -307,9 +366,8 @@ public class TableTest {
 
         assertEquals(Outcome.PLAYER_BLACKJACK, result.outcome());
         assertEquals(600, result.getPayOut());
-        assertEquals(1, table.getWinsCount("Marameo"), "the player had win a round");
-        assertEquals(0, table.getWinsCount("Bob"), "the player had lose a round");
-
+        assertEquals(1, table.geStatistics().getBlackHistory().getOrDefault("Marameo", 0));
+        assertEquals(0, table.geStatistics().getBlackHistory().getOrDefault("Bob", 0));
     }
 
     @Test
@@ -359,9 +417,9 @@ public class TableTest {
 
         assertEquals(Outcome.PLAYER_BONUS, result.outcome());
         assertEquals(1000, result.getPayOut());
-        assertEquals(1, table.getWinsCount("Marameo"), "the player had win a round");
-        assertEquals(0, table.getWinsCount("Bob"), "the player had lose a round");
-
+        assertEquals(1, table.geStatistics().getWinHistory().getOrDefault("Marameo", 0));
+        assertEquals(1, table.geStatistics().getBonusHistory().getOrDefault("Marameo", 0));
+        assertEquals(0, table.geStatistics().getBonusHistory().getOrDefault("Bob", 0));
     }
 
     @Test
@@ -370,9 +428,17 @@ public class TableTest {
         table.otherGame();
 
         assertEquals(0, table.getPot(), "the pot must be empty");
-        assertEquals(2, table.getRoundCount(), "the counter od the round must be incremented");
+        assertEquals(2, table.geStatistics().getTotalRounds());
         assertEquals(State.FIRST_BET, table.getCurrentState());
     }
+
+   @Test
+   void testIncremetsRound() {
+    assertEquals(1, table.geStatistics().getTotalRounds());
+    table.otherGame();
+    assertEquals(2, table.geStatistics().getTotalRounds());
+
+   }
 
     @Test
     void testReset() {
@@ -380,7 +446,7 @@ public class TableTest {
         table.reset();
 
         assertEquals(0, table.getPot());
-        assertEquals(1, table.getRoundCount(), "The round must return a one round");
+        assertEquals(1, table.geStatistics().getTotalRounds());
     }
 
     
