@@ -23,14 +23,45 @@ import it.unibo.chaosjack.model.impl.Suit;
 import it.unibo.chaosjack.model.impl.TableImpl;
 
 public class TableTest {
+    private static final int INITIAL_BALANCE = 2000;
+    private static final int INITIAL_POT = 0;
+    private static final int STANDARD_BET = 100;
+    private static final int HIGH_BET = 200;
+    private static final int NEGATIVE_BET = -50;
+    private static final int POSITIVE_BET = 50;
+    private static final int IMPOSSIBLE_BET = 5000;
+
+    private static final int BALANCE_AFTER_HIGH_BET = 1800;
+
+    private static final int SCORE_ZERO = 0;
+    private static final int SCORE_WINNING = 20;
+    private static final int SCORE_LOSING = 17;
+    private static final int SCORE_MID = 18;
+    private static final int SCORE_HIGH = 19;
+    private static final int SCORE_BLACKJACK = 21;
+    private static final int SCORE_BUSTED = 25;
+    private static final int SCORE_DEALER_BUSTED = 27;
+
+    private static final int PAYOUT_WIN_SINGLE = 200;
+    private static final int PAYOUT_WIN_DOUBLE = 400;
+    private static final int PAYOUT_BONUS = 600;
+    private static final int PAYOUT_BJ_BONUS = 1000;
+    private static final int PAYOUT_LOSS = 0;
+
+    private static final int ROUND_ONE = 1;
+    private static final int ROUND_TWO = 2;
+    private static final int DEFAULT_INCREMENT = 1;
+
     private Table table;
     private Wallet wallet;
-    private final List<String> players = List.of("Marameo", "Bob");
+    private static final String P1 = "Marameo";
+    private static final String P2 = "Bob";
+    private final List<String> players = List.of(P1, P2);
     
     @BeforeEach
     void setUp(){
         wallet = new Wallet() {
-            private int balance = 2000;
+            private int balance = INITIAL_BALANCE;
             @Override
             public int getBalance() {return balance;}
             @Override
@@ -42,28 +73,28 @@ public class TableTest {
             }
         };
 
-        table = new TableImpl(wallet, players, createEngine(0,0));
+        table = new TableImpl(wallet, players, createEngine(SCORE_ZERO, SCORE_ZERO));
     }
 
     @Test
     void testInitialState(){
         assertEquals(State.FIRST_BET, table.getCurrentState());
-        assertEquals(0, table.getPot(), "the pot must be 0");
+        assertEquals(INITIAL_POT, table.getPot(), "the pot must be 0");
     }
 
     @Test
     void testBettingLogic() {
-        table.placeBet("Marameo", 200);
-        assertEquals(200, table.getPot());
-        assertEquals(1800, wallet.getBalance(), "the account holder balance must decrease");
-        assertThrows(IllegalArgumentException.class, () ->table.placeBet("Marameo", -50));
+        table.placeBet(P1, HIGH_BET);
+        assertEquals(HIGH_BET, table.getPot());
+        assertEquals(BALANCE_AFTER_HIGH_BET, wallet.getBalance(), "the account holder balance must decrease");
+        assertThrows(IllegalArgumentException.class, () ->table.placeBet(P1, NEGATIVE_BET));
     }
 
     @Test
     void testStepPassageValidation() {
         assertThrows(IllegalStateException.class, () -> table.stepPassage());
 
-        table.placeBet("Bob", 100);
+        table.placeBet(P2, STANDARD_BET);
         table.stepPassage();
         assertEquals(State.PLAYING, table.getCurrentState());
 
@@ -79,90 +110,90 @@ public class TableTest {
 
     @Test
     void testBettingInWrongState() {
-        table.placeBet("Bob", 100);
+        table.placeBet(P2, STANDARD_BET);
         table.stepPassage();
-        assertThrows(IllegalStateException.class, () -> table.placeBet("Marameo", 50));
+        assertThrows(IllegalStateException.class, () -> table.placeBet(P1, POSITIVE_BET));
     }
 
     @Test
     void testInsufficientFunds() {
-        assertThrows(IllegalArgumentException.class, () -> table.placeBet("Bob", 5000));
-        assertEquals(0, table.getPot(), "The plate must not increase if the funds are insufficient");
+        assertThrows(IllegalArgumentException.class, () -> table.placeBet(P2, IMPOSSIBLE_BET));
+        assertEquals(INITIAL_POT, table.getPot(), "The plate must not increase if the funds are insufficient");
     }
     
     @Test
     void testGetWinnerPlayerWins() {
-        GameEngine winEngine = createEngine(20,18);
-        table = new TableImpl(wallet, List.of("Marameo"), winEngine);
+        GameEngine winEngine = createEngine(SCORE_WINNING, SCORE_MID);
+        table = new TableImpl(wallet, List.of(P1), winEngine);
 
-        table.placeBet("Marameo", 100);
+        table.placeBet(P1, STANDARD_BET);
         table.stepPassage();
 
         RoundResult result = table.getWinner();
         assertEquals(Outcome.PLAYER_WON, result.outcome());
-        assertEquals(200, result.getPayOut(), "the wins must be double value of the pot");
-        assertEquals(1, table.geStatistics().getWinHistory().getOrDefault("Marameo", 0));
+        assertEquals(PAYOUT_WIN_SINGLE, result.getPayOut(), "the wins must be double value of the pot");
+        assertEquals(DEFAULT_INCREMENT, table.geStatistics().getWinHistory().getOrDefault(P1, 0));
     }
 
     @Test
     void testWinnerMultiplePlayersTieAndWin() {
-        GameEngine winEngine = createEngine(20,18);
-        table = new TableImpl(wallet, List.of("Marameo", "Bob"), winEngine);
+        GameEngine winEngine = createEngine(SCORE_WINNING, SCORE_MID);
+        table = new TableImpl(wallet, players, winEngine);
 
-        table.placeBet("Marameo", 100);
-        table.placeBet("Bob", 100);
+        table.placeBet(P1, STANDARD_BET);
+        table.placeBet(P2, STANDARD_BET);
         table.stepPassage();
         RoundResult result = table.getWinner();
         assertEquals(Outcome.PLAYERS_PUSH, result.outcome());
-        assertEquals(400, result.getPayOut(), "the wins must be double value of the pot");
-        assertEquals(1, table.geStatistics().getPushHistory().getOrDefault("Marameo", 0));
-        assertEquals(1, table.geStatistics().getPushHistory().getOrDefault("Bob", 0));
+        assertEquals(PAYOUT_WIN_DOUBLE, result.getPayOut(), "the wins must be double value of the pot");
+        assertEquals(DEFAULT_INCREMENT, table.geStatistics().getPushHistory().getOrDefault(P1, 0));
+        assertEquals(DEFAULT_INCREMENT, table.geStatistics().getPushHistory().getOrDefault(P2, 0));
     }
 
     @Test
     void testWinnerPushWithDealer() {
-        GameEngine pushEngine = createEngine(19,19);
-        table = new TableImpl(wallet, List.of("Marameo"), pushEngine);
+        GameEngine pushEngine = createEngine(SCORE_HIGH, SCORE_HIGH);
+        table = new TableImpl(wallet, List.of(P1), pushEngine);
         
-        table.placeBet("Marameo", 100);
+        table.placeBet(P1, STANDARD_BET);
         table.stepPassage();
 
         RoundResult result = table.getWinner();
         assertEquals(Outcome.PUSH, result.outcome());
-        assertEquals(0, result.getPayOut(), "Standard push with dealer");
-        assertEquals(0, table.geStatistics().getWinHistory().getOrDefault("Marameo", 0));
-        assertEquals(1, table.geStatistics().getLossHistory().getOrDefault("Marameo", 0));
+        assertEquals(PAYOUT_LOSS, result.getPayOut(), "Standard push with dealer");
+        assertEquals(INITIAL_POT, table.geStatistics().getWinHistory().getOrDefault(P1, 0));
+        assertEquals(DEFAULT_INCREMENT, table.geStatistics().getLossHistory().getOrDefault(P1, 0));
     }
 
     @Test
     void testWinnerDealerWins() {
-        GameEngine lossEngine = createEngine(18,20);
-        table = new TableImpl(wallet, List.of("Marameo"), lossEngine);
+        GameEngine lossEngine = createEngine(SCORE_MID, SCORE_WINNING);
+        table = new TableImpl(wallet, List.of(P1), lossEngine);
         
-        table.placeBet("Marameo", 100);
+        table.placeBet(P1, STANDARD_BET);
         table.stepPassage();
 
         RoundResult result = table.getWinner();
         assertEquals(Outcome.DEALER_WON, result.outcome());
-        assertEquals(0, result.getPayOut());
-        assertEquals(1, table.geStatistics().getLossHistory().getOrDefault("Marameo", 0));
+        assertEquals(PAYOUT_LOSS, result.getPayOut());
+        assertEquals(DEFAULT_INCREMENT, table.geStatistics().getLossHistory().getOrDefault(P1, 0));
 
     }
 
     @Test
     void testWinnerAllPlayerGoOut() {
-        GameEngine outEngine = createEngine(25,20);
-        table = new TableImpl(wallet, List.of("Marameo", "Bob"), outEngine);
+        GameEngine outEngine = createEngine(SCORE_BUSTED, SCORE_WINNING);
+        table = new TableImpl(wallet, players, outEngine);
 
-        table.placeBet("Marameo", 100);
-        table.placeBet("Bob", 100);
+        table.placeBet(P1, STANDARD_BET);
+        table.placeBet(P2, STANDARD_BET);
         table.stepPassage();
 
         RoundResult result = table.getWinner();
         assertEquals(Outcome.DEALER_WON, result.outcome());
-        assertEquals(0, result.getPayOut());
-        assertEquals(1, table.geStatistics().getLossHistory().getOrDefault("Marameo", 0));
-        assertEquals(1, table.geStatistics().getLossHistory().getOrDefault("Bob", 0));
+        assertEquals(PAYOUT_LOSS, result.getPayOut());
+        assertEquals(DEFAULT_INCREMENT, table.geStatistics().getLossHistory().getOrDefault(P1, 0));
+        assertEquals(DEFAULT_INCREMENT, table.geStatistics().getLossHistory().getOrDefault(P2, 0));
     }
 
     @Test
@@ -170,13 +201,13 @@ public class TableTest {
         GameEngine outDealerEngine = new GameEngine() {
             @Override 
             public int getPlayerScore(String name) { 
-                return name.equals("Marameo") ? 20 : 19; 
+                return name.equals(P1) ? SCORE_WINNING : SCORE_HIGH; 
             }
             @Override
             public Hand getDealerHand() { 
                 return new Hand() {
                     @Override
-                    public int getScore() { return 27; }
+                    public int getScore() { return SCORE_DEALER_BUSTED; }
                 };
             }
             @Override
@@ -187,8 +218,8 @@ public class TableTest {
             public Deck getDeck() { return null; }
             @Override
             public List<Player> getPlayers() { 
-                Player p1 = new Player("Marameo", false, wallet, 100);
-                Player p2 = new Player("Bob", false, wallet, 100);
+                Player p1 = new Player(P1, false, wallet, STANDARD_BET);
+                Player p2 = new Player(P2, false, wallet, STANDARD_BET);
                 p1.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
                 p1.getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS));
 
@@ -203,17 +234,17 @@ public class TableTest {
             
         };
 ;
-        table = new TableImpl(wallet, List.of("Marameo", "Bob"), outDealerEngine);
+        table = new TableImpl(wallet, players, outDealerEngine);
 
-        table.placeBet("Marameo", 100);
-        table.placeBet("Bob", 100);
+        table.placeBet(P1, STANDARD_BET);
+        table.placeBet(P2, STANDARD_BET);
         table.stepPassage();
 
         RoundResult result = table.getWinner();
         assertEquals(Outcome.PLAYER_WON, result.outcome());
-        assertEquals(400, result.getPayOut());
-        assertEquals(1, table.geStatistics().getWinHistory().getOrDefault("Marameo", 0));
-        assertEquals(0, table.geStatistics().getWinHistory().getOrDefault("Bob", 0));
+        assertEquals(PAYOUT_WIN_DOUBLE, result.getPayOut());
+        assertEquals(DEFAULT_INCREMENT, table.geStatistics().getWinHistory().getOrDefault("Marameo", 0));
+        assertEquals(INITIAL_POT, table.geStatistics().getWinHistory().getOrDefault("Bob", 0));
     }
     
 
@@ -222,13 +253,13 @@ public class TableTest {
         GameEngine mixEngine = new GameEngine() {
             @Override 
             public int getPlayerScore(String name) { 
-                return name.equals("Marameo") ? 17 : 20; 
+                return name.equals(P1)? SCORE_LOSING : SCORE_WINNING; 
             }
             @Override
             public Hand getDealerHand() { 
                 return new Hand() {
                     @Override
-                    public int getScore() { return 18; }
+                    public int getScore() { return SCORE_MID; }
                 };
             }
             @Override
@@ -239,8 +270,8 @@ public class TableTest {
             public Deck getDeck() { return null; }
             @Override
             public List<Player> getPlayers() { 
-                Player p1 = new Player("Marameo", false, wallet, 100);
-                Player p2 = new Player("Bob", false, wallet, 100);
+                Player p1 = new Player(P1, false, wallet, STANDARD_BET);
+                Player p2 = new Player(P2, false, wallet, STANDARD_BET);
                 p1.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
                 p1.getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS));
                 p2.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
@@ -254,18 +285,18 @@ public class TableTest {
             
         };
 
-        table = new TableImpl(wallet, List.of("Marameo", "Bob"), mixEngine);
+        table = new TableImpl(wallet, players, mixEngine);
 
-        table.placeBet("Marameo", 100);
-        table.placeBet("Bob", 100);
+        table.placeBet(P1, STANDARD_BET);
+        table.placeBet(P2, STANDARD_BET);
         table.stepPassage();
 
         RoundResult result = table.getWinner();
 
         assertEquals(Outcome.PLAYER_WON, result.outcome());
-        assertEquals(400, result.getPayOut());
-        assertEquals(0, table.geStatistics().getWinHistory().getOrDefault("Marameo", 0));
-        assertEquals(1, table.geStatistics().getWinHistory().getOrDefault("Bob", 0));
+        assertEquals(PAYOUT_WIN_DOUBLE, result.getPayOut());
+        assertEquals(INITIAL_POT, table.geStatistics().getWinHistory().getOrDefault("Marameo", 0));
+        assertEquals(DEFAULT_INCREMENT, table.geStatistics().getWinHistory().getOrDefault("Bob", 0));
     }
 
     @Test
@@ -273,13 +304,13 @@ public class TableTest {
         GameEngine bonusWinEngine = new GameEngine() {
             @Override 
             public int getPlayerScore(String name) { 
-                return name.equals("Marameo") ? 19 : 18; 
+                return name.equals(P1) ? SCORE_HIGH : SCORE_MID; 
             }
             @Override
             public Hand getDealerHand() { 
                 return new Hand() {
                     @Override
-                    public int getScore() { return 18; }
+                    public int getScore() { return SCORE_MID; }
                 };
             }
             @Override
@@ -290,8 +321,8 @@ public class TableTest {
             public Deck getDeck() { return null; }
             @Override
             public List<Player> getPlayers() { 
-                Player p1 = new Player("Marameo", false, wallet, 100);
-                Player p2 = new Player("Bob", false, wallet, 100);
+                Player p1 = new Player(P1, false, wallet, STANDARD_BET);
+                Player p2 = new Player(P2, false, wallet, STANDARD_BET);
                 p1.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
                 p1.getHand().addCard(new StandardCard(Rank.TWO, Suit.CLUBS));
                 p2.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
@@ -305,18 +336,18 @@ public class TableTest {
             
         };
 
-        table = new TableImpl(wallet, List.of("Marameo", "Bob"), bonusWinEngine);
+        table = new TableImpl(wallet, players, bonusWinEngine);
 
-        table.placeBet("Marameo", 100);
-        table.placeBet("Bob", 100);
+        table.placeBet(P1, STANDARD_BET);
+        table.placeBet(P2, STANDARD_BET);
         table.stepPassage();
 
         RoundResult result = table.getWinner();
 
         assertEquals(Outcome.PLAYER_BONUS, result.outcome());
-        assertEquals(600, result.getPayOut());
-        assertEquals(1, table.geStatistics().getBonusHistory().getOrDefault("Marameo", 0));
-        assertEquals(0, table.geStatistics().getBonusHistory().getOrDefault("Bob", 0));
+        assertEquals(PAYOUT_BONUS, result.getPayOut());
+        assertEquals(DEFAULT_INCREMENT, table.geStatistics().getBonusHistory().getOrDefault("Marameo", 0));
+        assertEquals(INITIAL_POT, table.geStatistics().getBonusHistory().getOrDefault("Bob", 0));
     }
 
     @Test
@@ -324,13 +355,13 @@ public class TableTest {
         GameEngine bjEngine = new GameEngine() {
             @Override 
             public int getPlayerScore(String name) { 
-                return name.equals("Marameo") ? 21 : 20; 
+                return name.equals(P1) ? SCORE_BLACKJACK : SCORE_WINNING; 
             }
             @Override
             public Hand getDealerHand() { 
                 return new Hand() {
                     @Override
-                    public int getScore() { return 18; }
+                    public int getScore() { return SCORE_MID; }
                 };
             }
             @Override
@@ -341,8 +372,8 @@ public class TableTest {
             public Deck getDeck() { return null; }
             @Override
             public List<Player> getPlayers() { 
-                Player p1 = new Player("Marameo", false, wallet, 100);
-                Player p2 = new Player("Bob", false, wallet, 100);
+                Player p1 = new Player(P1, false, wallet, STANDARD_BET);
+                Player p2 = new Player(P2, false, wallet, STANDARD_BET);
                 p1.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
                 p1.getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS));
                 p2.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
@@ -356,18 +387,18 @@ public class TableTest {
             
         };
 
-        table = new TableImpl(wallet, List.of("Marameo", "Bob"), bjEngine);
+        table = new TableImpl(wallet, players, bjEngine);
 
-        table.placeBet("Marameo", 100);
-        table.placeBet("Bob", 100);
+        table.placeBet(P1, STANDARD_BET);
+        table.placeBet(P2, STANDARD_BET);
         table.stepPassage();
 
         RoundResult result = table.getWinner();
 
         assertEquals(Outcome.PLAYER_BLACKJACK, result.outcome());
-        assertEquals(600, result.getPayOut());
-        assertEquals(1, table.geStatistics().getBlackHistory().getOrDefault("Marameo", 0));
-        assertEquals(0, table.geStatistics().getBlackHistory().getOrDefault("Bob", 0));
+        assertEquals(PAYOUT_BONUS, result.getPayOut());
+        assertEquals(DEFAULT_INCREMENT, table.geStatistics().getBlackHistory().getOrDefault("Marameo", 0));
+        assertEquals(INITIAL_POT, table.geStatistics().getBlackHistory().getOrDefault("Bob", 0));
     }
 
     @Test
@@ -375,13 +406,13 @@ public class TableTest {
         GameEngine bjEngine = new GameEngine() {
             @Override 
             public int getPlayerScore(String name) { 
-                return name.equals("Marameo") ? 21 : 20; 
+                return name.equals(P1) ? SCORE_BLACKJACK : SCORE_WINNING; 
             }
             @Override
             public Hand getDealerHand() { 
                 return new Hand() {
                     @Override
-                    public int getScore() { return 18; }
+                    public int getScore() { return SCORE_MID; }
                 };
             }
             @Override
@@ -392,8 +423,8 @@ public class TableTest {
             public Deck getDeck() { return null; }
             @Override
             public List<Player> getPlayers() { 
-                Player p1 = new Player("Marameo", false, wallet, 100);
-                Player p2 = new Player("Bob", false, wallet, 100);
+                Player p1 = new Player(P1, false, wallet, STANDARD_BET);
+                Player p2 = new Player(P2, false, wallet, STANDARD_BET);
                 p1.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
                 p1.getHand().addCard(new StandardCard(Rank.TWO, Suit.CLUBS));
                 p2.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
@@ -407,46 +438,46 @@ public class TableTest {
             
         };
 
-        table = new TableImpl(wallet, List.of("Marameo", "Bob"), bjEngine);
+        table = new TableImpl(wallet, players, bjEngine);
 
-        table.placeBet("Marameo", 100);
-        table.placeBet("Bob", 100);
+        table.placeBet(P1, STANDARD_BET);
+        table.placeBet(P2, STANDARD_BET);
         table.stepPassage();
 
         RoundResult result = table.getWinner();
 
         assertEquals(Outcome.BLACKJACK_BONUS, result.outcome());
-        assertEquals(1000, result.getPayOut());
-        assertEquals(1, table.geStatistics().getWinHistory().getOrDefault("Marameo", 0));
-        assertEquals(1, table.geStatistics().getBlackBonusHistory().getOrDefault("Marameo", 0));
-        assertEquals(0, table.geStatistics().getBlackBonusHistory().getOrDefault("Bob", 0));
+        assertEquals(PAYOUT_BJ_BONUS, result.getPayOut());
+        assertEquals(DEFAULT_INCREMENT, table.geStatistics().getWinHistory().getOrDefault("Marameo", 0));
+        assertEquals(DEFAULT_INCREMENT, table.geStatistics().getBlackBonusHistory().getOrDefault("Marameo", 0));
+        assertEquals(INITIAL_POT, table.geStatistics().getBlackBonusHistory().getOrDefault("Bob", 0));
     }
 
     @Test
     void testOtherGame() {
-        table.placeBet("Marameo", 100);
+        table.placeBet(P1, STANDARD_BET);
         table.otherGame();
 
-        assertEquals(0, table.getPot(), "the pot must be empty");
-        assertEquals(2, table.geStatistics().getTotalRounds());
+        assertEquals(INITIAL_POT, table.getPot(), "the pot must be empty");
+        assertEquals(ROUND_TWO, table.geStatistics().getTotalRounds());
         assertEquals(State.FIRST_BET, table.getCurrentState());
     }
 
    @Test
    void testIncremetsRound() {
-    assertEquals(1, table.geStatistics().getTotalRounds());
+    assertEquals(ROUND_ONE, table.geStatistics().getTotalRounds());
     table.otherGame();
-    assertEquals(2, table.geStatistics().getTotalRounds());
+    assertEquals(ROUND_TWO, table.geStatistics().getTotalRounds());
 
    }
 
     @Test
     void testReset() {
-        table.placeBet("Marameo", 100);
+        table.placeBet(P1, STANDARD_BET);
         table.reset();
 
-        assertEquals(0, table.getPot());
-        assertEquals(1, table.geStatistics().getTotalRounds());
+        assertEquals(INITIAL_POT, table.getPot());
+        assertEquals(ROUND_ONE, table.geStatistics().getTotalRounds());
     }
 
     
@@ -471,8 +502,8 @@ public class TableTest {
             public Deck getDeck() { return null; }
             @Override
             public List<Player> getPlayers() {
-                Player p1 = new Player("Marameo", false, wallet, 100);
-                Player p2 = new Player("Bob", false, wallet, 100);
+                Player p1 = new Player(P1, false, wallet, STANDARD_BET);
+                Player p2 = new Player(P2, false, wallet, STANDARD_BET);
                 p1.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
                 p1.getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS));
                 p2.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));

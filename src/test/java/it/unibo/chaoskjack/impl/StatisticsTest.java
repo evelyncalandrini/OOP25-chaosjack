@@ -11,10 +11,33 @@ import it.unibo.chaosjack.model.api.RoundResult.Outcome;
 import it.unibo.chaosjack.model.impl.StatisticsImpl;
 
 public class StatisticsTest {
+    private static final int BET = 100;
+    private static final int INITIAL_COUNT = 0;
+    private static final int SINGLE_INCREMENT = 1;
+    private static final int WIN_INCREMENT = 3;
+
+    private static final int PAYOUT_WIN = 200;
+    private static final int PAYOUT_BONUS = 400;
+    private static final int PAYOUT_PUSH_MULTIPLE = 400;
+    private static final int PAYOUT_ZERO = 0;
+
+    private static final int EXPECTED_PROFIT_WIN = 100;
+    private static final int EXPECTED_LOSS = -100;
+    private static final int EXPECTED_LOSS_NEGATIVE = -200;
+    private static final int TOTAL_PROFIT = 500;
+
+    private static final int SCORE_20 = 20;
+    private static final int SCORE_21 = 21;
+    private static final int SCORE_19 = 19;
+    private static final int SCORE_18 = 18;
+
+    private static final int ROUNDS_TWO = 2;
+    private static final int ROUNDS_ZERO = 0;
+
     private Statistics stats;
     private static final String P1 = "Marameo";
     private static final String P2 = "Bob";
-    private static final int BET = 100;
+     private static final String PI = "PlayerInesistente";
 
     @BeforeEach
     void setUp() {
@@ -23,55 +46,95 @@ public class StatisticsTest {
 
     @Test
     void testWinning() {
-        stats.updateStats(P1, new RoundResult(Outcome.PLAYER_WON, 20, 19, 200), BET);
-        assertEquals(1, stats.getWinHistory().getOrDefault(P1, 0));
-        assertEquals(100, stats.getNetProfit().get(P1));
+        stats.updateStats(P1, new RoundResult(Outcome.PLAYER_WON, SCORE_20, SCORE_19, PAYOUT_WIN), BET);
+        assertEquals(SINGLE_INCREMENT, stats.getWinHistory().getOrDefault(P1, 0));
+        assertEquals(EXPECTED_PROFIT_WIN, stats.getNetProfit().get(P1));
 
-        stats.updateStats(P1, new RoundResult(Outcome.PLAYER_BONUS, 20, 19, 400), BET);
-        assertEquals(1, stats.getBonusHistory().getOrDefault(P1, 0));
-        assertEquals(400, stats.getNetProfit().get(P1));
+        stats.updateStats(P1, new RoundResult(Outcome.PLAYER_BONUS, SCORE_20, SCORE_19, PAYOUT_BONUS), BET);
+        assertEquals(SINGLE_INCREMENT, stats.getBonusHistory().getOrDefault(P1, 0));
+        assertEquals(PAYOUT_BONUS, stats.getNetProfit().get(P1));
 
-        stats.updateStats(P1, new RoundResult(Outcome.PLAYER_BLACKJACK, 21, 19, 200), BET);
-        assertEquals(1, stats.getBlackHistory().getOrDefault(P1, 0));
-        assertEquals(500, stats.getNetProfit().get(P1));
+        stats.updateStats(P1, new RoundResult(Outcome.PLAYER_BLACKJACK, SCORE_21, SCORE_19, PAYOUT_WIN), BET);
+        assertEquals(SINGLE_INCREMENT, stats.getBlackHistory().getOrDefault(P1, 0));
+        assertEquals(TOTAL_PROFIT, stats.getNetProfit().get(P1));
 
-        stats.updateStats(P2, new RoundResult(Outcome.BLACKJACK_BONUS, 21, 19, 200), BET);
-        assertEquals(1, stats.getBlackBonusHistory().getOrDefault(P2, 0));
-        assertEquals(100, stats.getNetProfit().get(P2));
+        stats.updateStats(P2, new RoundResult(Outcome.BLACKJACK_BONUS, SCORE_21, SCORE_19, PAYOUT_WIN), BET);
+        assertEquals(SINGLE_INCREMENT, stats.getBlackBonusHistory().getOrDefault(P2, 0));
+        assertEquals(EXPECTED_PROFIT_WIN, stats.getNetProfit().get(P2));
 
     }          
 
     @Test
     void testPlayersPush() {
-        RoundResult pushResult = new RoundResult(Outcome.PLAYERS_PUSH, 20, 18, 400);
+        RoundResult pushResult = new RoundResult(Outcome.PLAYERS_PUSH, SCORE_20, SCORE_18, PAYOUT_PUSH_MULTIPLE);
         stats.updateStats(P1, pushResult, BET);
         stats.updateStats(P2, pushResult, BET);
 
-        assertEquals(1, stats.getPushHistory().getOrDefault(P1, 0));
-        assertEquals(1, stats.getPushHistory().getOrDefault(P2, 0));
+        assertEquals(SINGLE_INCREMENT, stats.getPushHistory().getOrDefault(P1, 0));
+        assertEquals(SINGLE_INCREMENT, stats.getPushHistory().getOrDefault(P2, 0));
 
-        assertEquals(100, stats.getNetProfit().get(P1));
-        assertEquals(100, stats.getNetProfit().get(P2));
+        assertEquals(EXPECTED_PROFIT_WIN, stats.getNetProfit().get(P1));
+        assertEquals(EXPECTED_PROFIT_WIN, stats.getNetProfit().get(P2));
     }
 
     @Test
     void testPushWithDealer() {
-        stats.updateStats(P1, new RoundResult(Outcome.PUSH, 20, 20, 0), BET);
+        stats.updateStats(P1, new RoundResult(Outcome.PUSH, SCORE_20, SCORE_20, PAYOUT_ZERO), BET);
 
-        assertEquals(1, stats.getLossHistory().getOrDefault(P1, 0));
-        assertEquals(-100, stats.getNetProfit().get(P1));
+        assertEquals(SINGLE_INCREMENT, stats.getLossHistory().getOrDefault(P1, 0));
+        assertEquals(EXPECTED_LOSS, stats.getNetProfit().get(P1));
+    }
+
+    @Test
+    void testWinsConsistency() {
+        stats.updateStats(P1, new RoundResult(Outcome.PLAYER_WON, SCORE_20, SCORE_19, PAYOUT_WIN), BET);
+        stats.updateStats(P1, new RoundResult(Outcome.PLAYER_WON, SCORE_21, SCORE_19, PAYOUT_WIN), BET);
+        stats.updateStats(P1, new RoundResult(Outcome.PLAYER_WON, SCORE_20, SCORE_19, PAYOUT_WIN), BET);
+
+        assertEquals(WIN_INCREMENT, stats.getWinHistory().getOrDefault(P1,0));
+    }
+
+    @Test
+    void testDealerWon() {
+        stats.updateStats(P1, new RoundResult(Outcome.DEALER_WON, SCORE_18, SCORE_20, PAYOUT_ZERO), BET);
+        assertEquals(SINGLE_INCREMENT, stats.getLossHistory().getOrDefault(P1, 0));
+        assertEquals(EXPECTED_LOSS, stats.getNetProfit().get(P1));
+    }
+    
+    @Test
+    void testNegativeProfitAccumulation() {
+        stats.updateStats(P1, new RoundResult(Outcome.DEALER_WON, SCORE_18, SCORE_20, PAYOUT_ZERO), BET);
+        stats.updateStats(P1, new RoundResult(Outcome.PUSH, SCORE_20, SCORE_20, PAYOUT_ZERO), BET);
+
+        assertEquals(EXPECTED_LOSS_NEGATIVE, stats.getNetProfit().get(P1));
+    }
+
+    @Test
+    void testEmptyPlayerStats() {
+        assertEquals(INITIAL_COUNT, stats.getWinHistory().getOrDefault(PI, 0));
+        assertNull(stats.getNetProfit().get(PI));
+    }
+
+    @Test
+    void testProfitFluctuation() {
+        stats.updateStats(P1, new RoundResult(Outcome.PLAYER_WON, SCORE_20, SCORE_18, PAYOUT_WIN), BET);
+        stats.updateStats(P1, new RoundResult(Outcome.DEALER_WON, SCORE_18, SCORE_20, PAYOUT_ZERO), BET);
+        stats.updateStats(P1, new RoundResult(Outcome.PLAYER_WON, SCORE_20, SCORE_18, PAYOUT_WIN), BET);
+
+        assertEquals(EXPECTED_PROFIT_WIN, stats.getNetProfit().get(P1));
     }
 
     @Test
     void testRoundAndReset() {
         stats.incrementTotalRound();
         stats.incrementTotalRound();
-        assertEquals(2, stats.getTotalRounds());
+        assertEquals(ROUNDS_TWO, stats.getTotalRounds());
 
-        stats.updateStats(P1, new RoundResult(Outcome.PLAYER_WON, 20, 18, 200), BET);
+        stats.updateStats(P1, new RoundResult(Outcome.PLAYER_WON, SCORE_20, SCORE_18, PAYOUT_WIN), BET);
+        stats.updateStats(P1, new RoundResult(Outcome.PLAYER_WON, SCORE_20, SCORE_18, PAYOUT_WIN), BET);
         stats.resetStats();
 
-        assertEquals(0, stats.getTotalRounds());
+        assertEquals(ROUNDS_ZERO, stats.getTotalRounds());
         assertTrue(stats.getWinHistory().isEmpty());
         assertTrue(stats.getNetProfit().isEmpty());
     }
