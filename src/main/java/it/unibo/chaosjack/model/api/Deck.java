@@ -22,7 +22,7 @@ public interface Deck {
     
     /**
      * @return the number of cards left in the deck.
-     */
+    */
     int remainingCards();
 }
 

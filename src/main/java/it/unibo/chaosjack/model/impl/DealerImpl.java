@@ -22,7 +22,7 @@ public class DealerImpl  extends AbstractPlayer implements Dealer {
    */
     @Override
     public boolean shouldHit() {
-         return this.getScore() < STAY_THRESHOLD; 
+         return this.getHand().getScore() < STAY_THRESHOLD; 
     }
 
     /**
@@ -35,6 +35,8 @@ public class DealerImpl  extends AbstractPlayer implements Dealer {
          deck.draw().ifPresent(this :: addCard);
        }
     }
+
+    
     
 }
 

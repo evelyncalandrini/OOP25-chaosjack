@@ -1,6 +1,7 @@
 package it.unibo.chaosjack.model.api;
 
-import java.util.List;
+
+import it.unibo.chaosjack.model.impl.Hand;
 
    /**
    * This interface represents a generic player in Blackjack.
@@ -30,17 +31,12 @@ public interface Partecipant {
     void addCard(Card card);
 
     /**
-     * @return  the total score of the cards currently in the player's hand.
-     */
-    int getScore();
-
-    /**
      * Checks if the player's score exceeds the maximum limit of 21.
      * 
      * @return true if the partecipant is busted
      */
     default boolean isBusted() {
-        return getScore() > MAX_SCORE;
+        return getHand().getScore() > MAX_SCORE;
     }
 
     /**
@@ -48,6 +44,6 @@ public interface Partecipant {
      * 
      * @return the list of the cards in the partecipant's hands
      */
-    List<Card> getHand();
+    Hand getHand();
 
 }
