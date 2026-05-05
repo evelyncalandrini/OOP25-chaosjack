@@ -1,24 +1,28 @@
 package it.unibo.chaosjack.model.api;
-/*
- * this interface rapresents the NPC that is a specialized player that can make autonomous decisions
- * without human input
- */
-public interface  NPC extends Player {
 
     /**
-     * It decides and sets the initial bet for the current round
-     */
-    public void makeBet();
+    * this interface rapresents the NPC that is a specialized player that can make autonomous decisions.
+    * without human input
+    */
 
-   /**
-    * Decides if the NPC wants to draw another card
-    * @return true if the NPC should hit
-     */
-    public boolean wantsToHit();
+public interface NPC extends Player {
 
     /**
-     * Decides if the NPC wants to double the bet
+    * It decides and sets the initial bet for the current round.
+    */
+     void makeBet();
+
+    /**
+     * Decides if the NPC wants to draw another card.
+     * 
+     * @return true if the NPC should hit
+     */
+     boolean wantsToHit();
+
+    /**
+     * Decides if the NPC wants to double the bet.
+     * 
      * @return true if the NPC should double
      */
-    public boolean wantsToDouble();
+     boolean wantsToDouble();
 }

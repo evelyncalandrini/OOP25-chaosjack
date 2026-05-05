@@ -1,38 +1,46 @@
 package it.unibo.chaosjack.model.impl;
 
-import it.unibo.chaosjack.model.api.*; 
+import it.unibo.chaosjack.model.api.Player;
+import it.unibo.chaosjack.model.api.Wallet;
+
 /**
- * This class implements a generic human player
+ * This class implements a generic human player.
  * Manages the player's financial state through a {@link Wallet}
  * Tracks the current bet
  */
-public class PlayerImpl extends BasePlayer implements Player {  
+
+public class PlayerImpl extends AbstractPlayer implements Player {  
     
     private final Wallet wallet;
     private  int currentBet;
 
     /**
-     * Constructs a new human player with a specific name and  initial funds
+     * Constructs a new human player with a specific name and  initial funds.
      * @param name
      * @param initialFunds
      */
-    public PlayerImpl(final String name,final int initialFunds){ //this is the constructor
-        super(name); //lo eredito
+
+    public PlayerImpl(final String name, final int initialFunds) { 
+        super(name); 
         this.wallet = new StandardWallet(initialFunds);
-        this.currentBet = 0; //quando inizio ancora non ho ancora nessuna bet
+        this.currentBet = 0; 
             
     }
 
     /**
-     * Sets the bet with an assigned amount
+     * Sets the bet with an assigned amount.
      */
     @Override
-    public void setBet(int amount) {
-        this.currentBet = amount;
+    public void setBet(final int amount) {
+        if (amount > 0 && amount <= this.getWallet()) {
+            this.currentBet = amount;
+        } else {
+            throw new IllegalArgumentException("Insufficient funds for the bet");
+        }
     }
 
     /**
-     * @return the amount of funds of the player
+     * @return the amount of funds of the player.
      */
     @Override
     public int getWallet() {
@@ -40,27 +48,26 @@ public class PlayerImpl extends BasePlayer implements Player {
     }
 
     /**
-     * Updates the player's wallet balance
+     * Updates the player's wallet balance.
      * @param  amount to add or subtract
      * @return true if the operation was successfull
      */
     @Override
-    public boolean updateWallet(int amount) {
-        if( amount > 0){
+    public boolean updateWallet(final int amount) {
+        if (amount > 0) {
             this.wallet.addFunds(amount);
             return true;
-        }
-        else if ( amount <0 ){
+        }else if (amount < 0 ) {
             return this.wallet.removeFunds(Math.abs(amount));
         }
         return true; 
     }
 
     /**
-     * Gets the current bet
+     * Gets the current bet.
      */
     @Override
-    public int getCurrentBet(){
+    public int getCurrentBet() {
         return this.currentBet;
     }
 
@@ -70,7 +77,7 @@ public class PlayerImpl extends BasePlayer implements Player {
      * and doubles the value of the bet on the table.
      */
     @Override
-    public void doubleDown(){
+    public void doubleDown() {
         this.updateWallet(-this.currentBet);
         this.currentBet *= 2; 
     }
