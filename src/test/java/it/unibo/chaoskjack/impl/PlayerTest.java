@@ -68,10 +68,10 @@ import it.unibo.chaosjack.model.impl.Suit;
     final Player player = new PlayerImpl("Paolo", initialFunds);
     player.addCard(new StandardCard(Rank.SEVEN, Suit.CLUBS));
     player.addCard(new StandardCard(Rank.EIGHT, Suit.DIAMONDS));
-    player.getScore();
-    assertEquals(15, player.getScore(), "Il punteggio dovrebbe essere 15");
+    player.getHand().getScore();
+    assertEquals(15, player.getHand().getScore(), "Il punteggio dovrebbe essere 15");
     player.addCard(new StandardCard(Rank.KING, Suit.SPADES));
-    assertEquals(25, player.getScore(), "Il punteggio dovrebbe essere 25");
+    assertEquals(25, player.getHand().getScore(), "Il punteggio dovrebbe essere 25");
    }
 
    @Test
@@ -80,10 +80,10 @@ import it.unibo.chaosjack.model.impl.Suit;
     final Player player = new PlayerImpl("Emanuele", initialFunds);
     player.addCard(new StandardCard(Rank.ACE, Suit.DIAMONDS));
     player.addCard(new StandardCard(Rank.JACK, Suit.DIAMONDS));
-    player.getScore();
-    assertEquals(21, player.getScore(), "Il punteggio dovrebbe essere 21"); 
+    player.getHand().getScore();
+    assertEquals(21, player.getHand().getScore(), "Il punteggio dovrebbe essere 21"); 
     player.addCard(new StandardCard(Rank.FIVE, Suit.HEARTS));
-    assertEquals(16, player.getScore(), "Il punteggio dovrebbe essere 16");
+    assertEquals(16, player.getHand().getScore(), "Il punteggio dovrebbe essere 16");
    }
 }
 

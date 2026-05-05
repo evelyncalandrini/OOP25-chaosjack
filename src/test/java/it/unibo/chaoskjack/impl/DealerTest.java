@@ -44,7 +44,7 @@ import it.unibo.chaosjack.model.api.Deck;
         
         dealer.addCard(new StandardCard(Rank.TEN, Suit.CLUBS));
         dealer.playTurn(deck);
-        final int score = dealer.getScore();
+        final int score = dealer.getHand().getScore();
         assertTrue(score >= DEALER_THRESHOLD, "Il dealer deve finire con almeno 17");
 
         if (score <= MAX_SCORE) {
