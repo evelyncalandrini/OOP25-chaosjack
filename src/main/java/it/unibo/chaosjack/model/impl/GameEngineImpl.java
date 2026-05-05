@@ -1,4 +1,5 @@
 package it.unibo.chaosjack.model.impl;
+
 import it.unibo.chaosjack.model.api.GameEngine;
 import it.unibo.chaosjack.model.api.Deck;
 import it.unibo.chaosjack.model.api.TurnState;
@@ -6,6 +7,9 @@ import java.util.List;
 import java.util.Optional;
 import it.unibo.chaosjack.model.api.SpecialRound;
 
+/**
+ * This class implements the GameEngine interface and represents the core of the game logic.
+ */
 public class GameEngineImpl implements GameEngine {
 
     private Deck deck;
@@ -29,6 +33,7 @@ public class GameEngineImpl implements GameEngine {
      * this method allows to set a special round, if the parameter is null the special round is removed 
      * and the game returns to normal
      */
+    @Override
     public void setSpecialRound(SpecialRound  specialRound){
         this.specialRound = Optional.ofNullable(specialRound);
     }
@@ -39,6 +44,7 @@ public class GameEngineImpl implements GameEngine {
      * if a special shift is active it will calculate the score based on the shift rules,
      *  otherwise it will calculate it normally
     */
+   @Override
     public int currentScore(Hand hand){
         if(this.specialRound.isPresent()){
             return this.specialRound.get().specialScore(hand.getCards());
@@ -54,6 +60,7 @@ public class GameEngineImpl implements GameEngine {
     @Override
     public void changeState(TurnState newState){
         this.currentState = newState; // questo metodo mi permette di cambiare lo stato del gioco (passare dal turno del giocatore a quello del banco e viceversa)
+        
     }
 
     /**
@@ -126,6 +133,11 @@ public class GameEngineImpl implements GameEngine {
     @Override
     public void stand(){
         this.currentState.stand();
+    }
+
+    @Override
+    public TurnState getActualState() {
+        return this.currentState;
     }
    }
 

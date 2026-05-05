@@ -7,6 +7,11 @@ public interface GameEngine {
     
 
     void changeState(TurnState newState);
+
+    default TurnState getActualState() {
+        return null;
+    }
+
     void nextTurn();
 
     /**
@@ -32,5 +37,13 @@ public interface GameEngine {
 
     void hit(); // metodo per il controller
     void stand(); // metodo che richiama il controller
+
+    default int currentScore(Hand hand) {
+        return 0;
+    }
     
+    default void setSpecialRound(SpecialRound  specialRound) {
+        // Default implementation - can be overridden by subclasses
+    }
+
 }
