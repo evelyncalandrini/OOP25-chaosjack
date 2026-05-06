@@ -4,82 +4,55 @@ import it.unibo.chaosjack.model.api.Card;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+* This class represents the player's or the dealer's hand
+*/
 public class Hand {
 
-    /**
-     * This class represents the player's or the dealer's hand
-     */
+    private static final int MAX_SCORE = 21;
+    private static final int ACE_VALUE = 11;
 
-    /**
-     * the cards in the hand
-     */
     private final List<Card> cards = new ArrayList<>();  
 
-    
-    /**
-     * adds a card to the hand
-     */
-    public void addCard( Card card) {  
+    public void addCard(final Card card) {  
         cards.add(card);
     }
 
-    /**
-     * @return returns the card score in a standard round
-     */
-    public int getScore(){ 
+    public int getScore() { 
         int score = 0;
         int assesCount = 0;
 
         for (int i = 0; i < cards.size(); i++) {
              score += cards.get(i).getValue();
-              if ( cards.get(i).getValue() == 11) {
+              if (cards.get(i).getValue() == ACE_VALUE) 
+            {
                 assesCount++;
-              }
+            }
         }
 
-        /**
-         * if the score is greater than 21 and there are aces in the hand, the score is reduced by 10 
-         * for each ace until the score is less than or equal to 21 or there are no more aces to reduce
-         */
-        while ( score > 21 && assesCount > 0) { 
-            score -=10;
+        while (score > MAX_SCORE && assesCount > 0) { 
+            score -= 10;
             assesCount--;
         }
 
         return score;
     }
 
-
-    /**
-     * @param cards is the list of cards in the player's hand
-     * @return true if all the cards in the hand are of the same color, false otherwise
-     */
-    public boolean sameColor(List<Card> cards){
+    public boolean sameColor(final List<Card> cards) {
        boolean firstIsRed = isRed(cards.get(0));
-        for ( Card c : cards) {
-            if(isRed(c) != firstIsRed) {
+        for (final Card c : cards) {
+            if (isRed(c) != firstIsRed) {
                 return false;
             }
         }
         return true;
     }
 
-    /**
-     * @param card
-     * @return true if the card is red, false otherwise
-     */
-    private boolean isRed(Card card){
+    private boolean isRed(Card card) {
         return card.getName().contains("HEARTS") || card.getName().contains("DIAMONDS");
     }
 
-    /**
-    * @return the list of cards in the hand
-    */
     public List<Card> getCards() {
         return cards;
-    }
-
-    
-
-    
+    }    
 }

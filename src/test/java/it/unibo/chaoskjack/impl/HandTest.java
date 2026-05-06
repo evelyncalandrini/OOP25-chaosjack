@@ -14,8 +14,8 @@ public class HandTest {
     @Test
 
     public void addCard(){
-        Hand myHand = new Hand();
-        Card card1 = new StandardCard(Rank.TWO, Suit.HEARTS);
+        final Hand myHand = new Hand();
+        final Card card1 = new StandardCard(Rank.TWO, Suit.HEARTS);
 
         myHand.addCard(card1);
         assertEquals(1, myHand.getCards().size());
@@ -28,10 +28,10 @@ public class HandTest {
 
     @Test
     public void getScore() {
-        Hand myHand = new Hand();
-        Card card1 = new StandardCard(Rank.TWO, Suit.HEARTS);
-        Card card2 = new StandardCard(Rank.JACK, Suit.SPADES);
-        Card card3 = new StandardCard(Rank.ACE, Suit.CLUBS);
+        final Hand myHand = new Hand();
+        final Card card1 = new StandardCard(Rank.TWO, Suit.HEARTS);
+        final Card card2 = new StandardCard(Rank.JACK, Suit.SPADES);
+        final Card card3 = new StandardCard(Rank.ACE, Suit.CLUBS);
 
         myHand.addCard(card1);
         myHand.addCard(card2);
@@ -42,10 +42,10 @@ public class HandTest {
 
     @Test
     public void sameColor() {
-        Hand myHand = new Hand();
-        Card card1 = new StandardCard(Rank.TWO, Suit.HEARTS);
-        Card card2 = new StandardCard(Rank.THREE, Suit.HEARTS);
-        Card card3 = new StandardCard(Rank.FOUR, Suit.CLUBS);
+        final Hand myHand = new Hand();
+        final Card card1 = new StandardCard(Rank.TWO, Suit.HEARTS);
+        final Card card2 = new StandardCard(Rank.THREE, Suit.HEARTS);
+        final Card card3 = new StandardCard(Rank.FOUR, Suit.CLUBS);
 
         myHand.addCard(card1);
         myHand.addCard(card2);
