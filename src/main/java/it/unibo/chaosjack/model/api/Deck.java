@@ -9,9 +9,10 @@ public interface Deck {
     
     /**
      * Draws a card from the top of the deck.
-     * Uses Optional to safely handle the case where the deck is empty.
+     * @return an Optional containing the drawn Card, or an empty Optional if the deck is empty
      */
     Optional<Card> draw();
+
     
     /**
      * Shuffles the remaining cards in the deck.
