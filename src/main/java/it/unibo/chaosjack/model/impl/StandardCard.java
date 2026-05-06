@@ -10,6 +10,12 @@ public final class StandardCard implements Card {
     private final Rank rank;
     private final Suit suit;
 
+    /**
+     * Constructs a new StandardCard.
+     *
+     * @param rank the rank of the card
+     * @param suit the suit of the card
+     */
     public StandardCard(final Rank rank, final Suit suit) {
         this.rank = rank;
         this.suit = suit;
@@ -17,19 +23,16 @@ public final class StandardCard implements Card {
 
     @Override
     public int getValue() {
-        // Prende il valore matematico del Blackjack direttamente dal tuo enum Rank!
         return this.rank.getValue();
     }
 
     @Override
     public String getName() {
-        // Es: "QUEEN of HEARTS"
         return this.rank + " of " + this.suit;
     }
 
-    // Il prof apprezzerà questo tocco di classe per il debugging nel terminale
     @Override
     public String toString() {
-        return getName();
+        return this.getName();
     }
 }

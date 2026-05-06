@@ -1,4 +1,4 @@
-package it.unibo.chaosjack.impl;
+package it.unibo.chaosjack.model.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -7,16 +7,17 @@ import org.junit.jupiter.api.Test;
 
 import it.unibo.chaosjack.model.api.Card;
 import it.unibo.chaosjack.model.api.Deck;
-import it.unibo.chaosjack.model.impl.StandardDeck;
 
 import java.util.Optional;
 
 class StandardDeckTest {
+    private static final int FULL_DECK = 52;
+    private static final int DECK_MINUS_ONE = 51;
 
     @Test
     void testInitialDeckSize() {
         final Deck deck = new StandardDeck();
-        assertEquals(52, deck.remainingCards());
+        assertEquals(FULL_DECK, deck.remainingCards());
     }
 
     @Test
@@ -24,25 +25,20 @@ class StandardDeckTest {
         final Deck deck = new StandardDeck();
         final Optional<Card> drawnCard = deck.draw();
 
-        // Verifica che la carta sia stata pescata con successo
         assertTrue(drawnCard.isPresent());
-        // Verifica che il numero di carte rimanenti sia sceso a 51
-        assertEquals(51, deck.remainingCards());
+        assertEquals(DECK_MINUS_ONE, deck.remainingCards());
     }
 
     @Test
     void testEmptyDeck() {
         final Deck deck = new StandardDeck();
 
-        // Svuotiamo brutalmente tutto il mazzo pescando 52 volte
-        for (int i = 0; i < 52; i++) {
+        for (int i = 0; i < FULL_DECK; i++) {
             assertTrue(deck.draw().isPresent());
         }
 
         assertEquals(0, deck.remainingCards());
 
-        // La prova del 9: peschiamo la 53esima carta.
-        // Il gioco non deve crashare, ma deve dirci che la carta è assente.
         final Optional<Card> impossibleCard = deck.draw();
         assertFalse(impossibleCard.isPresent());
     }
