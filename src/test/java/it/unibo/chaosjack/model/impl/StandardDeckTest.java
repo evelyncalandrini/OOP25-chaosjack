@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.chaosjack.model.api.Card;
+import it.unibo.chaosjack.model.api.CardModifier;
 import it.unibo.chaosjack.model.api.Deck;
 
 import java.util.Optional;
@@ -18,6 +19,7 @@ class StandardDeckTest {
     private static final int DECK_MINUS_ONE = 51;
     private static final int CARDS_TO_DRAW = 2;
     private static final int DECK_AFTER_DRAW = 50;
+    private static final int EXPECTED_SPECIAL_CARDS = 12;
 
     @Test
     void testInitialDeckSize() {
@@ -56,5 +58,21 @@ class StandardDeckTest {
         assertEquals(0, deck.remainingCards());
         final Optional<Card> impossibleCard = deck.draw();
         assertFalse(impossibleCard.isPresent());
+    }
+
+    @Test
+    void testSpecialCardsDistribution() {
+        final Deck deck = new StandardDeck();
+        int specialCount = 0;
+
+        for (int i = 0; i < FULL_DECK; i++) {
+            final Optional<Card> drawnCard = deck.draw();
+            assertTrue(drawnCard.isPresent()); // Mettiamo in sicurezza l'Optional per il linter
+            if (drawnCard.get().getModifier() != CardModifier.NONE) {
+                specialCount++;
+            }
+        }
+
+        assertEquals(EXPECTED_SPECIAL_CARDS, specialCount);
     }
 }
