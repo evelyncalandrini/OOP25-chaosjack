@@ -1,34 +1,63 @@
 package it.unibo.chaosjack.model.impl;
 
 import it.unibo.chaosjack.model.api.Card;
+import it.unibo.chaosjack.model.api.CardModifier;
 
 /**
- * Implementation of a standard playing card.
+ * Implementation of a standard playing card with optional modifiers.
  */
 public final class StandardCard implements Card {
 
+    private static final int BUST_VALUE = 12;
+
     private final Rank rank;
     private final Suit suit;
+    private final CardModifier modifier;
 
     /**
-     * Constructs a new StandardCard.
+     * Standard constructor for a card without modifiers.
+     * This ensures compatibility with existing code.
      *
      * @param rank the rank of the card
      * @param suit the suit of the card
      */
     public StandardCard(final Rank rank, final Suit suit) {
+        this(rank, suit, CardModifier.NONE);
+    }
+
+    /**
+     * Constructs a card with a specific modifier for Chaos Jack mechanics.
+     *
+     * @param rank the rank of the card
+     * @param suit the suit of the card
+     * @param modifier the special modifier of the card
+     */
+    public StandardCard(final Rank rank, final Suit suit, final CardModifier modifier) {
         this.rank = rank;
         this.suit = suit;
+        this.modifier = modifier;
     }
 
     @Override
     public int getValue() {
+        if (this.modifier == CardModifier.BUST_MAGNET) {
+            return BUST_VALUE;
+        }
         return this.rank.getValue();
     }
 
     @Override
+    public CardModifier getModifier() {
+        return this.modifier;
+    }
+
+    @Override
     public String getName() {
-        return this.rank + " of " + this.suit;
+        final String baseName = this.rank + " of " + this.suit;
+        if (this.modifier == CardModifier.NONE) {
+            return baseName;
+        }
+        return "[" + this.modifier + "] " + baseName;
     }
 
     @Override
