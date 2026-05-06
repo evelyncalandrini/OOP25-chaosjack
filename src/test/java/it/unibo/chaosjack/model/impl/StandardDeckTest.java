@@ -19,7 +19,10 @@ class StandardDeckTest {
     private static final int DECK_MINUS_ONE = 51;
     private static final int CARDS_TO_DRAW = 2;
     private static final int DECK_AFTER_DRAW = 50;
-    private static final int EXPECTED_SPECIAL_CARDS = 12;
+
+    // Costanti per il controllo millimetrico del Caos
+    private static final int EXPECTED_EACH_SPECIAL = 4;
+    private static final int EXPECTED_NORMAL_CARDS = 40;
 
     @Test
     void testInitialDeckSize() {
@@ -39,12 +42,11 @@ class StandardDeckTest {
     @Test
     void testResetDeck() {
         final Deck deck = new StandardDeck();
-        // Utilizzo CARDS_TO_DRAW per evitare errori PMD
         for (int i = 0; i < CARDS_TO_DRAW; i++) {
             deck.draw();
         }
         assertEquals(DECK_AFTER_DRAW, deck.remainingCards());
-        // Reset e verifica che sia tornato pieno
+
         deck.reset();
         assertEquals(FULL_DECK, deck.remainingCards());
     }
@@ -61,18 +63,44 @@ class StandardDeckTest {
     }
 
     @Test
-    void testSpecialCardsDistribution() {
+    void testShuffleMaintainsIntegrity() {
         final Deck deck = new StandardDeck();
-        int specialCount = 0;
+        // Mescoliamo a caso un po' di volte per assicurarci che non "perda" carte
+        deck.shuffle();
+        deck.shuffle();
+        assertEquals(FULL_DECK, deck.remainingCards());
+    }
+
+    @Test
+    void testExactSpecialCardsDistribution() {
+        final Deck deck = new StandardDeck();
+
+        int bustCount = 0;
+        int reverseCount = 0;
+        int ghostCount = 0;
+        int normalCount = 0;
 
         for (int i = 0; i < FULL_DECK; i++) {
             final Optional<Card> drawnCard = deck.draw();
-            assertTrue(drawnCard.isPresent()); // Mettiamo in sicurezza l'Optional per il linter
-            if (drawnCard.get().getModifier() != CardModifier.NONE) {
-                specialCount++;
+            assertTrue(drawnCard.isPresent());
+
+            final CardModifier mod = drawnCard.get().getModifier();
+
+            if (mod == CardModifier.BUST_MAGNET) {
+                bustCount++;
+            } else if (mod == CardModifier.REVERSE) {
+                reverseCount++;
+            } else if (mod == CardModifier.GHOST) {
+                ghostCount++;
+            } else if (mod == CardModifier.NONE) {
+                normalCount++;
             }
         }
 
-        assertEquals(EXPECTED_SPECIAL_CARDS, specialCount);
+        // Il verdetto finale: il mazzo è truccato con precisione chirurgica?
+        assertEquals(EXPECTED_EACH_SPECIAL, bustCount);
+        assertEquals(EXPECTED_EACH_SPECIAL, reverseCount);
+        assertEquals(EXPECTED_EACH_SPECIAL, ghostCount);
+        assertEquals(EXPECTED_NORMAL_CARDS, normalCount);
     }
 }
