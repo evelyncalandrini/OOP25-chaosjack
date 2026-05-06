@@ -6,7 +6,7 @@ import it.unibo.chaosjack.model.api.Card;
  * Implementation of a standard playing card.
  */
 public final class StandardCard implements Card {
-    
+
     private final Rank rank;
     private final Suit suit;
 
@@ -18,7 +18,7 @@ public final class StandardCard implements Card {
     @Override
     public int getValue() {
         // Prende il valore matematico del Blackjack direttamente dal tuo enum Rank!
-        return this.rank.getValue(); 
+        return this.rank.getValue();
     }
 
     @Override
@@ -26,7 +26,7 @@ public final class StandardCard implements Card {
         // Es: "QUEEN of HEARTS"
         return this.rank + " of " + this.suit;
     }
-    
+
     // Il prof apprezzerà questo tocco di classe per il debugging nel terminale
     @Override
     public String toString() {
