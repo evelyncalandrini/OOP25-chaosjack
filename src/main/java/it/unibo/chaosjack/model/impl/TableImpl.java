@@ -39,12 +39,12 @@ public final class TableImpl implements Table {
     }
 
     @Override
-    public final State getCurrentState() {
+    public State getCurrentState() {
         return this.currentState;
     }
 
     @Override
-    public final void stepPassage() {
+    public void stepPassage() {
         if (this.currentState == State.FIRST_BET && getPot() > 0) {
             this.currentState = State.PLAYING;
         } else if (this.currentState == State.PLAYING) {
@@ -59,14 +59,14 @@ public final class TableImpl implements Table {
     }
 
     @Override
-    public final void otherGame() {
+    public void otherGame() {
         this.playerPots.clear();
         this.currentState = State.FIRST_BET;
         this.statistics.incrementTotalRound();
     }
 
     @Override
-    public final void reset() {
+    public void reset() {
         this.playerPots.clear();
         this.statistics.resetStats();
         this.currentState = State.FIRST_BET;
@@ -74,12 +74,12 @@ public final class TableImpl implements Table {
     }
 
     @Override
-    public final List<String> getPlayers() {
+    public List<String> getPlayers() {
         return List.copyOf(this.players);
     }
 
     @Override
-    public final void placeBet(final String playerName, final int amount) {
+    public void placeBet(final String playerName, final int amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("The amount must be positive");
         }
@@ -98,12 +98,12 @@ public final class TableImpl implements Table {
     }
 
     @Override
-    public final int getPot() {
+    public int getPot() {
         return playerPots.values().stream().mapToInt(Integer::intValue).sum();
     }
 
     @Override
-    public final RoundResult getWinner() {
+    public RoundResult getWinner() {
         final int dealerScore = getDealerScore();
         final List<String> bestPlayers = new ArrayList<>();
         int max = -1;
@@ -128,7 +128,7 @@ public final class TableImpl implements Table {
         } else if (max == dealerScore) {
             result = new RoundResult(Outcome.PUSH, max, dealerScore, 0);
         } else if (bestPlayers.size() > 1) {
-                result = new RoundResult(Outcome.PLAYERS_PUSH, max, dealerScore, getPot()*2);
+                result = new RoundResult(Outcome.PLAYERS_PUSH, max, dealerScore, getPot() * 2);
         } else {
             final String oneWinner = bestPlayers.get(0);
             final Hand winnerHand = engine.getPlayers().stream()
@@ -163,22 +163,22 @@ public final class TableImpl implements Table {
     }
 
     @Override
-    public final int getPlayerScore(final String playerName) {
+    public int getPlayerScore(final String playerName) {
         return engine.getPlayerScore(playerName);
     }
 
     @Override
-    public final int getDealerScore() {
+    public int getDealerScore() {
         return engine.getDealerHand().getScore();
     }
 
     @Override
-    public final int getWalletBalance(final String playerName) {
+    public int getWalletBalance(final String playerName) {
         return wallet.getBalance();
     }
 
     @Override
-    public final Statistics geStatistics() {
+    public Statistics geStatistics() {
         return this.statistics;
     }
 }

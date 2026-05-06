@@ -3,7 +3,7 @@ package it.unibo.chaosjack.model.api;
 import java.util.Map;
 
 /**
- * Manages player statistics and scores
+ * Manages player statistics and scores.
  */
 public interface Statistics {
 
@@ -50,7 +50,7 @@ public interface Statistics {
      * @return the number of pushes with other player for each player.
      */
     Map<String, Integer> getPushHistory();
-    
+
     /**
      * @return the net profit (winnings - losses) for each player.
      */
@@ -64,6 +64,6 @@ public interface Statistics {
     /**
      * Reset statistics.
      */
-    void resetStats(); 
-    
+    void resetStats();
+
 }

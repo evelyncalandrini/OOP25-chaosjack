@@ -4,10 +4,12 @@ import java.util.List;
 
 /**
  * Rappresents the game table for the players.
+ * 
  */
 public interface Table {
     /**
      * Rapresents the game phases managed by the table.
+     * 
      */
     enum State {
         FIRST_BET,
@@ -56,12 +58,12 @@ public interface Table {
      * @return total fishes on the table.
      */
     int getPot();
-    
+
     /**
      * @return winner of the round.
      */
     RoundResult getWinner();
-    
+
     /**
      * @param playerName is the player's name.
      * @return player's current score.

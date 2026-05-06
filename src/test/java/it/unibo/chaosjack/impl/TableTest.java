@@ -1,6 +1,7 @@
 package it.unibo.chaosjack.impl;
 
-import static org.junit.jupiter.api.Assertions. *;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ import it.unibo.chaosjack.model.impl.Suit;
 import it.unibo.chaosjack.model.impl.TableImpl;
 
 /**
- * Test for method of TableImpl
+ * Test for method of TableImpl.
  */
 class TableTest {
     private static final int INITIAL_BALANCE = 2000;
@@ -67,18 +68,28 @@ class TableTest {
     private Table table;
     private Wallet wallet;
     private final List<String> players = List.of(P1, P2);
-    
+
     @BeforeEach
-    void setUp(){
+    void setUp() {
         wallet = new Wallet() {
             private int balance = INITIAL_BALANCE;
+
             @Override
-            public int getBalance() {return balance;}
+            public int getBalance() { 
+                return balance; 
+            }
+
             @Override
-            public void addFunds(final int amount){balance += amount;}
+            public void addFunds(final int amount) { 
+                balance += amount; 
+            }
+
             @Override
-            public boolean removeFunds(final int amount){
-                if (balance >= amount) {balance -= amount; return true;}
+            public boolean removeFunds(final int amount) {
+                if (balance >= amount) { 
+                    balance -= amount; 
+                    return true; 
+                }
                 return false;
             }
         };
@@ -87,7 +98,7 @@ class TableTest {
     }
 
     @Test
-    void testInitialState(){
+    void testInitialState() {
         assertEquals(State.FIRST_BET, table.getCurrentState());
         assertEquals(INITIAL_POT, table.getPot(), "the pot must be 0");
     }
@@ -97,7 +108,7 @@ class TableTest {
         table.placeBet(P1, HIGH_BET);
         assertEquals(HIGH_BET, table.getPot());
         assertEquals(BALANCE_AFTER_HIGH_BET, wallet.getBalance(), "the account holder balance must decrease");
-        assertThrows(IllegalArgumentException.class, () ->table.placeBet(P1, NEGATIVE_BET));
+        assertThrows(IllegalArgumentException.class, () -> table.placeBet(P1, NEGATIVE_BET));
     }
 
     @Test
@@ -130,7 +141,7 @@ class TableTest {
         assertThrows(IllegalArgumentException.class, () -> table.placeBet(P2, IMPOSSIBLE_BET));
         assertEquals(INITIAL_POT, table.getPot(), "The plate must not increase if the funds are insufficient");
     }
-    
+
     @Test
     void testGetWinnerPlayerWins() {
         final var score = Map.of(P1, SCORE_WINNING);
@@ -195,7 +206,6 @@ class TableTest {
         assertEquals(DEFAULT_INCREMENT, table.geStatistics().getWinHistory().getOrDefault(P1, 0));
         assertEquals(INITIAL_POT, table.geStatistics().getWinHistory().getOrDefault(P2, 0));
     }
-    
 
     @Test
     void testOneWinsOneLoses() {
@@ -264,14 +274,13 @@ class TableTest {
     void testReset() {
         table.placeBet(P1, STANDARD_BET);
         table.reset();
-
         assertEquals(INITIAL_POT, table.getPot());
         assertEquals(ROUND_ONE, table.geStatistics().getTotalRounds());
     }
 
-    private RoundResult playRound(GameEngine engine, final Map<String, Integer> player) {
+    private RoundResult playRound(final GameEngine engine, final Map<String, Integer> player) {
         table = new TableImpl(wallet, players, engine);
-        for (String playersName : player.keySet()){
+        for (final String playersName : player.keySet()) {
             table.placeBet(playersName, STANDARD_BET);
         }
         table.stepPassage();
@@ -280,27 +289,31 @@ class TableTest {
 
     private GameEngine createEngine(final Map<String, Integer> pScore, final int dScore, final boolean p1Card) {
         return new GameEngine() {
-            
+
             @Override 
             public int getPlayerScore(final String name) { 
                 return pScore.getOrDefault(name, 0); 
             }
-            
+
             @Override
             public Hand getDealerHand() { 
                 return new Hand() {
                     @Override
-                    public int getScore() { return dScore; }
+                    public int getScore() { 
+                        return dScore; 
+                    }
                 };
             }
 
             @Override
             public void nextTurn() {
             }
-           
+
             @Override
-            public Deck getDeck() { return null; }
-            
+            public Deck getDeck() { 
+                return null; 
+            }
+
             @Override
             public List<Partecipant> getPlayers() {
                 final Player p1 = new PlayerImpl(P1, STANDARD_BET);
@@ -328,14 +341,14 @@ class TableTest {
             }
 
             @Override
-            public int currentScore(Hand hand) {
+            public int currentScore(final Hand hand) {
                 return 0;
             }
 
             @Override
-            public void setSpecialRound(SpecialRound specialRound) {
+            public void setSpecialRound(final SpecialRound specialRound) {
             }
-            
+
         };
     }
 
