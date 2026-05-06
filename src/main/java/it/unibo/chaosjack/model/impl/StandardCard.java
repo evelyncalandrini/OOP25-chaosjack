@@ -5,7 +5,7 @@ import it.unibo.chaosjack.model.api.Card;
 /**
  * Implementation of a standard playing card.
  */
-public class StandardCard implements Card {
+public final class StandardCard implements Card {
     
     private final Rank rank;
     private final Suit suit;

@@ -2,7 +2,7 @@ package it.unibo.chaosjack.model.impl;
 
 import it.unibo.chaosjack.model.api.Wallet;
 
-public class StandardWallet implements Wallet {
+public final class StandardWallet implements Wallet {
     
     private int balance;
 
