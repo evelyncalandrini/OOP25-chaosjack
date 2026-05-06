@@ -1,10 +1,11 @@
-package it.unibo.chaosjack.model.impl;
+package it.unibo.chaoskjack.model.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import it.unibo.chaosjack.model.api.Wallet;
+import it.unibo.chaosjack.model.impl.StandardWallet;
 
 class WalletTest {
 

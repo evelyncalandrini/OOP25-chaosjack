@@ -1,4 +1,4 @@
-package it.unibo.chaosjack.model.impl;
+package it.unibo.chaoskjack.model.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import it.unibo.chaosjack.model.api.Card;
 import it.unibo.chaosjack.model.api.CardModifier;
 import it.unibo.chaosjack.model.api.Deck;
+import it.unibo.chaosjack.model.impl.StandardDeck;
 
 import java.util.Optional;
 
