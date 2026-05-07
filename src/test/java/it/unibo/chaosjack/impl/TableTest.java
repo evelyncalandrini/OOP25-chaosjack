@@ -1,4 +1,4 @@
-package it.unibo.chaoskjack.impl;
+package it.unibo.chaosjack.impl;
 
 import static org.junit.jupiter.api.Assertions. *;
 
@@ -17,7 +17,7 @@ import it.unibo.chaosjack.model.api.Table;
 import it.unibo.chaosjack.model.api.Table.State;
 import it.unibo.chaosjack.model.api.Player;
 import it.unibo.chaosjack.model.api.Wallet;
-import it.unibo.chaosjack.model.impl.Hand;
+import it.unibo.chaosjack.model.impl.HandImpl;
 import it.unibo.chaosjack.model.impl.PlayerImpl;
 import it.unibo.chaosjack.model.impl.Rank;
 import it.unibo.chaosjack.model.impl.StandardCard;
@@ -212,8 +212,8 @@ class TableTest {
             }
 
             @Override
-            public Hand getDealerHand() { 
-                return new Hand() {
+            public HandImpl getDealerHand() { 
+                return new HandImpl() {
                     @Override
                     public int getScore() { return SCORE_DEALER_BUSTED; }
                 };
@@ -252,7 +252,7 @@ class TableTest {
             }
 
             @Override
-            public int currentScore(Hand hand) {
+            public int currentScore(HandImpl hand) {
                 return 0;
             }
 
@@ -286,8 +286,8 @@ class TableTest {
             }
 
             @Override
-            public Hand getDealerHand() { 
-                return new Hand() {
+            public HandImpl getDealerHand() { 
+                return new HandImpl() {
                     @Override
                     public int getScore() { return SCORE_MID; }
                 };
@@ -325,7 +325,7 @@ class TableTest {
             }
 
             @Override
-            public int currentScore(Hand hand) {
+            public int currentScore(HandImpl hand) {
                 return 0;
             }
 
@@ -359,8 +359,8 @@ class TableTest {
             }
 
             @Override
-            public Hand getDealerHand() { 
-                return new Hand() {
+            public HandImpl getDealerHand() { 
+                return new HandImpl() {
                     @Override
                     public int getScore() { return SCORE_MID; }
                 };
@@ -398,7 +398,7 @@ class TableTest {
             }
 
             @Override
-            public int currentScore(Hand hand) {
+            public int currentScore(HandImpl hand) {
                 return 0;
             }
 
@@ -432,8 +432,8 @@ class TableTest {
             }
 
             @Override
-            public Hand getDealerHand() { 
-                return new Hand() {
+            public HandImpl getDealerHand() { 
+                return new HandImpl() {
                     @Override
                     public int getScore() { return SCORE_MID; }
                 };
@@ -468,7 +468,7 @@ class TableTest {
             }
 
             @Override
-            public int currentScore(Hand hand) {
+            public int currentScore(HandImpl hand) {
                return 0;
             }
 
@@ -501,8 +501,8 @@ class TableTest {
             }
             
             @Override
-            public Hand getDealerHand() { 
-                return new Hand() {
+            public HandImpl getDealerHand() { 
+                return new HandImpl() {
                     @Override
                     public int getScore() { return SCORE_MID; }
                 };
@@ -540,7 +540,7 @@ class TableTest {
             }
 
             @Override
-            public int currentScore(Hand hand) {
+            public int currentScore(HandImpl hand) {
                 return 0;
             }
 
@@ -601,8 +601,8 @@ class TableTest {
             }
             
             @Override
-            public Hand getDealerHand() { 
-                return new Hand() {
+            public HandImpl getDealerHand() { 
+                return new HandImpl() {
                     @Override
                     public int getScore() { return dScore; }
                 };
@@ -640,7 +640,7 @@ class TableTest {
             }
 
             @Override
-            public int currentScore(Hand hand) {
+            public int currentScore(HandImpl hand) {
                 return 0;
             }
 

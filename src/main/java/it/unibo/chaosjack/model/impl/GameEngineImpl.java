@@ -20,7 +20,6 @@ public class GameEngineImpl implements GameEngine {
     private final Deck deck;
     private final Dealer dealer;
     private final List<Partecipant> players;
-    //private Wallet walletPlayer;
     private int currentPlayerIndex = 0;
     private Optional<SpecialRound> specialRound = Optional.empty();
     private Partecipant currentPlayer;
@@ -40,7 +39,7 @@ public class GameEngineImpl implements GameEngine {
     }
 
    @Override
-    public int currentScore(final Hand hand) {
+    public int currentScore(final HandImpl hand) {
         if (this.specialRound.isPresent()){
             return this.specialRound.get().specialScore(hand.getCards());
         } else 
@@ -55,7 +54,7 @@ public class GameEngineImpl implements GameEngine {
     }
 
     @Override
-    public Hand getDealerHand() {
+    public HandImpl getDealerHand() {
         return this.dealer.getHand();
     }
 
@@ -102,14 +101,14 @@ public class GameEngineImpl implements GameEngine {
         return players;
     }
 
-    @Override
-    public void hit(final Card card) {
-        this.getCurrentPlayer().addCard(card);;
-    }
-
+    
     @Override
     public void stand() {
-        this.nextTurn();
+        if(table.getCurrentState() == Table.State.DEALER_TURN) {
+            this.table.stepPassage();
+        } else {
+            this.nextTurn();
+        }
     }
 
     @Override

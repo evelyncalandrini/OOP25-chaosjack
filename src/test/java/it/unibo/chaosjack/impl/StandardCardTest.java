@@ -1,10 +1,13 @@
-package it.unibo.chaosjack.model.impl;
+package it.unibo.chaosjack.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.chaosjack.model.api.Card;
 import it.unibo.chaosjack.model.api.CardModifier;
+import it.unibo.chaosjack.model.impl.Rank;
+import it.unibo.chaosjack.model.impl.StandardCard;
+import it.unibo.chaosjack.model.impl.Suit;
 
 /**
  * Test class for StandardCard, including Chaos modifiers edge cases.

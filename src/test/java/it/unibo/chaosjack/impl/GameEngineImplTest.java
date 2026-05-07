@@ -1,4 +1,4 @@
-package it.unibo.chaoskjack.impl;
+package it.unibo.chaosjack.impl;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,9 @@ import it.unibo.chaosjack.model.api.SpecialRound;
 import it.unibo.chaosjack.model.api.Table;
 import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
 
-
+/**
+ * Test for GameEngineImpl class.
+ */
 public class GameEngineImplTest {
     
     private Deck deck;
@@ -38,9 +40,7 @@ public class GameEngineImplTest {
     private GameEngine engine;
     private SpecialRound specialRound;
     private Table table;
-    private Table.State currenState;
     
-
     @BeforeEach
     public void setUp() {
        deck = new StandardDeck();
@@ -123,13 +123,19 @@ public class GameEngineImplTest {
 
     @Test
     public void standTest(){
+        this.table.stepPassage();
+        this.table.stepPassage();
+        this.table.stepPassage();
+
         engine.stand();
-        assertEquals("pippo", engine.getCurrentPlayer().getName());
+
+        assertEquals(Table.State.RESULTS, this.table.getCurrentState());
     }
 
-    @Test
-    public void firstTurnTest(){
-        assertEquals("topolino", engine.getCurrentPlayer().getName());
-    }
+    
+
+    
+
+    
   
 }

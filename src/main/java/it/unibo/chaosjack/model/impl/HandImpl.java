@@ -1,23 +1,28 @@
 package it.unibo.chaosjack.model.impl;
 
 import it.unibo.chaosjack.model.api.Card;
+import it.unibo.chaosjack.model.api.Hand;
+
+
 import java.util.List;
 import java.util.ArrayList;
 
 /**
 * This class represents the player's or the dealer's hand
 */
-public class Hand {
+public class HandImpl implements Hand{
 
     private static final int MAX_SCORE = 21;
     private static final int ACE_VALUE = 11;
 
     private final List<Card> cards = new ArrayList<>();  
 
-    public void addCard(final Card card) {  
+    @Override
+    public void addCard(final Card card) {
         cards.add(card);
     }
 
+    @Override
     public int getScore() { 
         int score = 0;
         int assesCount = 0;
@@ -38,6 +43,7 @@ public class Hand {
         return score;
     }
 
+    @Override
     public boolean sameColor(final List<Card> cards) {
        boolean firstIsRed = isRed(cards.get(0));
         for (final Card c : cards) {
@@ -52,6 +58,7 @@ public class Hand {
         return card.getName().contains("HEARTS") || card.getName().contains("DIAMONDS");
     }
 
+    @Override
     public List<Card> getCards() {
         return cards;
     }    
