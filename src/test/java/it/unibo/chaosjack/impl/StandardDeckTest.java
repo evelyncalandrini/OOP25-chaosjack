@@ -1,4 +1,4 @@
-package it.unibo.chaoskjack.impl;
+package it.unibo.chaosjack.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -21,7 +21,6 @@ class StandardDeckTest {
     private static final int CARDS_TO_DRAW = 2;
     private static final int DECK_AFTER_DRAW = 50;
 
-    // Costanti per il controllo millimetrico del Caos
     private static final int EXPECTED_EACH_SPECIAL = 4;
     private static final int EXPECTED_NORMAL_CARDS = 40;
 
@@ -66,7 +65,6 @@ class StandardDeckTest {
     @Test
     void testShuffleMaintainsIntegrity() {
         final Deck deck = new StandardDeck();
-        // Mescoliamo a caso un po' di volte per assicurarci che non "perda" carte
         deck.shuffle();
         deck.shuffle();
         assertEquals(FULL_DECK, deck.remainingCards());
@@ -98,7 +96,6 @@ class StandardDeckTest {
             }
         }
 
-        // Il verdetto finale: il mazzo è truccato con precisione chirurgica?
         assertEquals(EXPECTED_EACH_SPECIAL, bustCount);
         assertEquals(EXPECTED_EACH_SPECIAL, reverseCount);
         assertEquals(EXPECTED_EACH_SPECIAL, ghostCount);

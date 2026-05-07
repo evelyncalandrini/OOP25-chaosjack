@@ -1,4 +1,4 @@
-package it.unibo.chaoskjack.impl;
+package it.unibo.chaosjack.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,6 @@ class StandardCardTest {
     private static final int FACE_VAL = 10;
     private static final int ACE_VAL = 11;
 
-    // Costanti per il Caos (niente numeri magici per PMD)
     private static final int BUST_VAL = 12;
     private static final int GHOST_VAL = 0;
     private static final int REVERSE_LOW_VAL = -5;
@@ -72,7 +71,6 @@ class StandardCardTest {
         assertEquals("QUEEN of SPADES", normalCard.getName());
         assertEquals("QUEEN of SPADES", normalCard.toString());
 
-        // Nome con modificatore
         final Card chaosCard = new StandardCard(Rank.TEN, Suit.DIAMONDS, CardModifier.REVERSE);
         assertEquals("[REVERSE] TEN of DIAMONDS", chaosCard.getName());
         assertEquals("[REVERSE] TEN of DIAMONDS", chaosCard.toString());
