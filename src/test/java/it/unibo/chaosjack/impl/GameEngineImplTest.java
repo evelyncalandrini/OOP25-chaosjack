@@ -44,16 +44,16 @@ public class GameEngineImplTest {
     @BeforeEach
     public void setUp() {
        deck = new StandardDeck();
-       table = new TableImpl(null, null, engine);
        human1 = new PlayerImpl("topolino",  1000);
        bot1 = new NPCimpl("pippo",  1000);
        dealer = new DealerImpl();
-        List<Partecipant> players = new ArrayList<>();
-        players.add(human1);
-        players.add(bot1);
-
-        engine = new GameEngineImpl(deck, players, dealer,table);
-        specialRound = new DoubleHeartsRule();
+       List<Partecipant> players = new ArrayList<>();
+       players.add(human1);
+       players.add(bot1);
+       List <String> names = List.of(players.get(0).getName(), players.get(1).getName());
+       engine = new GameEngineImpl(deck, players, dealer);
+       specialRound = new DoubleHeartsRule();
+       table = new TableImpl(null, names, this.engine);
         
     }
 

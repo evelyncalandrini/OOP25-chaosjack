@@ -24,13 +24,13 @@ public class GameEngineImpl implements GameEngine {
     private Optional<SpecialRound> specialRound = Optional.empty();
     private Partecipant currentPlayer;
     private Table.State currentState = Table.State.FIRST_BET;
-    private final Table table;
+    private Table table;
 
-    public GameEngineImpl(final Deck deck, final List<Partecipant> players, final Dealer dealer, final Table table) { 
+    public GameEngineImpl(final Deck deck, final List<Partecipant> players, final Dealer dealer) { 
         this.deck = deck;
         this.players = players;
         this.dealer = dealer;
-        this.table= table;
+        
     }
 
     @Override
@@ -77,6 +77,7 @@ public class GameEngineImpl implements GameEngine {
             
          } else {
             this.table.stepPassage();
+            this.currentState = this.table.getCurrentState();
          }
         } else {
             throw new IllegalStateException("impossible to play ");

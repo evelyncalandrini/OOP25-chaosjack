@@ -2,8 +2,8 @@ package it.unibo.chaosjack.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.lang.module.ModuleDescriptor.Exports.Modifier;
 
+import java.lang.module.ModuleDescriptor.Exports.Modifier;
 import it.unibo.chaosjack.model.impl.HandImpl;
 import it.unibo.chaosjack.model.api.Card;
 import it.unibo.chaosjack.model.api.CardModifier;
@@ -72,8 +72,4 @@ public class HandTest {
         assertEquals(20, playerHand.getScore());
 
     }
-
-    
-    
-   
 }

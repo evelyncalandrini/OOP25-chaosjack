@@ -8,7 +8,7 @@ import it.unibo.chaosjack.model.api.RoundResult.Outcome;
 import it.unibo.chaosjack.model.api.Statistics;
 
 /**
- * Implementation of interface Statistics
+ * Implementation of interface Statistics.
  */
 public final class StatisticsImpl implements Statistics {
 
@@ -103,5 +103,4 @@ public final class StatisticsImpl implements Statistics {
         pushes.clear();
         netProfit.clear();
     }
-    
 }

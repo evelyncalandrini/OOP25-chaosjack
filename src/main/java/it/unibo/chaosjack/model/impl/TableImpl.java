@@ -13,12 +13,11 @@ import it.unibo.chaosjack.model.api.Wallet;
 import it.unibo.chaosjack.model.api.Statistics;
 
 /**
- * Implementation of the Table interface
+ * Implementation of the Table interface.
  */
 public final class TableImpl implements Table {
     private static final int MAX_SCORE = 21;
     private State currentState;
-    //private final Map<String, Integer> winCounters = new HashMap<>();
     private final Map<String, Integer> playerPots = new HashMap<>();
     private final Statistics statistics = new StatisticsImpl();
     private final List<String> players = new ArrayList<>();
@@ -26,7 +25,7 @@ public final class TableImpl implements Table {
     private final Wallet wallet;
 
     /**
-     * Constructs a new TableImpl with the specified wallet, playerName and engine
+     * Constructs a new TableImpl with the specified wallet, playerName and engine.
      * 
      * @param wallet wallet the player's starting wallet
      * @param playerName the name of the player
@@ -88,8 +87,8 @@ public final class TableImpl implements Table {
             throw new IllegalStateException("Betting is not allowed during the " + currentState + " phase");
         }
         for (final String name : players) {
-            if (name.equals(playerName)){
-                if (!(wallet.removeFunds(amount))) {
+            if (name.equals(playerName)) {
+                if (!wallet.removeFunds(amount)) {
                     throw new IllegalArgumentException("insufficient founds");
                 }
                 final int currentPot = playerPots.getOrDefault(playerName, 0);
@@ -124,12 +123,12 @@ public final class TableImpl implements Table {
 
         final RoundResult result;
 
-        if (bestPlayers.isEmpty() || (dealerScore <= MAX_SCORE && dealerScore > max)) {
+        if (bestPlayers.isEmpty() || dealerScore <= MAX_SCORE && dealerScore > max) {
             result = new RoundResult(Outcome.DEALER_WON, max == -1 ? 0 : max, dealerScore, 0);
         } else if (max == dealerScore) {
             result = new RoundResult(Outcome.PUSH, max, dealerScore, 0);
         } else if (bestPlayers.size() > 1) {
-                result = new RoundResult(Outcome.PLAYERS_PUSH, max, dealerScore, getPot()*2);
+                result = new RoundResult(Outcome.PLAYERS_PUSH, max, dealerScore, getPot() * 2);
         } else {
             final String oneWinner = bestPlayers.get(0);
             final HandImpl winnerHand = engine.getPlayers().stream()

@@ -1,6 +1,8 @@
 package it.unibo.chaosjack.impl;
 
-import static org.junit.jupiter.api.Assertions. *;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +13,7 @@ import it.unibo.chaosjack.model.api.RoundResult.Outcome;
 import it.unibo.chaosjack.model.impl.StatisticsImpl;
 
 /**
- * Test for method of StatisticsImpl
+ * Test for method of StatisticsImpl.
  */
 class StatisticsTest {
     private static final int BET = 100;
@@ -37,10 +39,11 @@ class StatisticsTest {
     private static final int ROUNDS_TWO = 2;
     private static final int ROUNDS_ZERO = 0;
 
-    private Statistics stats;
     private static final String P1 = "Marameo";
     private static final String P2 = "Bob";
-     private static final String PI = "PlayerInesistente";
+    private static final String PI = "PlayerInesistente";
+
+    private Statistics stats;
 
     @BeforeEach
     void setUp() {
@@ -64,8 +67,7 @@ class StatisticsTest {
         stats.updateStats(P2, new RoundResult(Outcome.BLACKJACK_BONUS, SCORE_21, SCORE_19, PAYOUT_WIN), BET);
         assertEquals(SINGLE_INCREMENT, stats.getBlackBonusHistory().getOrDefault(P2, 0));
         assertEquals(EXPECTED_PROFIT_WIN, stats.getNetProfit().get(P2));
-
-    }          
+    }
 
     @Test
     void testPlayersPush() {
@@ -94,7 +96,7 @@ class StatisticsTest {
         stats.updateStats(P1, new RoundResult(Outcome.PLAYER_WON, SCORE_21, SCORE_19, PAYOUT_WIN), BET);
         stats.updateStats(P1, new RoundResult(Outcome.PLAYER_WON, SCORE_20, SCORE_19, PAYOUT_WIN), BET);
 
-        assertEquals(WIN_INCREMENT, stats.getWinHistory().getOrDefault(P1,0));
+        assertEquals(WIN_INCREMENT, stats.getWinHistory().getOrDefault(P1, 0));
     }
 
     @Test
@@ -103,7 +105,7 @@ class StatisticsTest {
         assertEquals(SINGLE_INCREMENT, stats.getLossHistory().getOrDefault(P1, 0));
         assertEquals(EXPECTED_LOSS, stats.getNetProfit().get(P1));
     }
-    
+
     @Test
     void testNegativeProfitAccumulation() {
         stats.updateStats(P1, new RoundResult(Outcome.DEALER_WON, SCORE_18, SCORE_20, PAYOUT_ZERO), BET);
