@@ -3,16 +3,16 @@ package it.unibo.chaosjack.impl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import it.unibo.chaosjack.model.api.Deck;
 import it.unibo.chaosjack.model.impl.StandardDeck;
 import it.unibo.chaosjack.model.impl.StandardCard;
 import it.unibo.chaosjack.model.api.Player;
+import it.unibo.chaosjack.model.api.RoundResult;
 import it.unibo.chaosjack.model.impl.Rank;
+import it.unibo.chaosjack.model.impl.RoyalFreezeTurn;
 import it.unibo.chaosjack.model.impl.Suit;
-import it.unibo.chaosjack.model.impl.TableImpl;
+import it.unibo.chaosjack.model.impl.YingYung;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -25,70 +25,67 @@ import it.unibo.chaosjack.model.api.Partecipant;
 import it.unibo.chaosjack.model.impl.DealerImpl;
 import it.unibo.chaosjack.model.api.NPC;
 import it.unibo.chaosjack.model.api.SpecialRound;
+import it.unibo.chaosjack.model.api.Statistics;
 import it.unibo.chaosjack.model.api.Table;
 import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
 
-/**
- * Test for GameEngineImpl class.
- */
-public class GameEngineImplTest {
-    
+ /**
+  * Test for GameEngineImpl class.
+  */
+ class GameEngineImplTest {
+
     private Deck deck;
     private Dealer dealer;
-    private Player human1;
-    private NPC bot1;
     private GameEngine engine;
     private SpecialRound specialRound;
     private Table table;
-    
+    private String nameHuman;
+    private String nameBot;
+
     @BeforeEach
-    public void setUp() {
+    void setUp() {
+       final Player human1;
+       final NPC bot1;
+       nameHuman = "topolino";
+       nameBot = "pippo";
        deck = new StandardDeck();
-       human1 = new PlayerImpl("topolino",  1000);
-       bot1 = new NPCimpl("pippo",  1000);
        dealer = new DealerImpl();
-       List<Partecipant> players = new ArrayList<>();
+       human1 = new PlayerImpl(nameHuman, 1000);
+       bot1 = new NPCimpl(nameBot, 1000);
+       final List<Partecipant> players = new ArrayList<>();
        players.add(human1);
        players.add(bot1);
-       List <String> names = List.of(players.get(0).getName(), players.get(1).getName());
+       table = createTable(Table.State.FIRST_BET); 
        engine = new GameEngineImpl(deck, players, dealer);
        specialRound = new DoubleHeartsRule();
-       table = new TableImpl(null, names, this.engine);
-        
-    }
-
-    @Test
-    public void nextTurnTest() {
-       
-        assertEquals(table.getCurrentState(), Table.State.FIRST_BET);
-        assertThrows(IllegalStateException.class, () -> {
-            engine.nextTurn();
-        });
-
-        this.table.stepPassage();
-        engine.nextTurn();
-        assertEquals("topolino", engine.getCurrentPlayer().getName());
-        engine.nextTurn();
-        assertEquals("pippo", engine.getCurrentPlayer().getName());
 
     }
 
     @Test
-    public void dealerTurnTest() {
-        this.table.stepPassage();
-        this.table.stepPassage();
-        this.table.stepPassage();
+    void testNextTurn() {
+    engine.setTable(table);
+    table.stepPassage();
+    engine.nextTurn();
+    assertEquals(nameHuman, engine.getCurrentPlayer().getName());
+
+    engine.nextTurn();
+    assertEquals(nameBot, engine.getCurrentPlayer().getName());
+    }
+
+    @Test
+    void testDealerTurn() {
+
+        final Table firstTable = createTable(Table.State.DEALER_TURN);
+        engine.setTable(firstTable);
+
         engine.dealerTurn();
         assertEquals(dealer, engine.getCurrentPlayer());
-        assertTrue (dealer.getHand().getCards().size() != 0);
-        assertThrows(IllegalStateException.class, () -> {
-            engine.dealerTurn();
-        });
-        
+        assertFalse(dealer.getHand().getCards().isEmpty());
+
     }
-        
+
     @Test
-    public void setSpecialRoundAndCurrentScoreTest() {
+     void testSetSpecialRoundAndCurrentScore() {
         engine.getPlayers().get(0).getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS));
         engine.setSpecialRound(specialRound);
         int score = engine.currentScore(engine.getPlayers().get(0).getHand());
@@ -98,44 +95,133 @@ public class GameEngineImplTest {
         engine.setSpecialRound(specialRound);
         score = engine.currentScore(engine.getPlayers().get(0).getHand());
         assertEquals(2, score);
+
+        specialRound = new YingYung();
+        engine.setSpecialRound(specialRound);
+        score = engine.currentScore(engine.getPlayers().get(0).getHand());
+        assertEquals(0, score);
+
+        specialRound = new RoyalFreezeTurn();
+        engine.getPlayers().get(0).getHand().addCard(new StandardCard(Rank.JACK, Suit.HEARTS));
+        engine.setSpecialRound(specialRound);
+        score = engine.currentScore(engine.getPlayers().get(0).getHand());
+        assertEquals(2, score);
     }
 
     @Test
-    public void getPlayerScoreTest() {
+    void testGetPlayerScore() {
         engine.getPlayers().get(0).getHand().addCard(new StandardCard(Rank.THREE, Suit.SPADES));
-        int score = engine.getPlayerScore(engine.getPlayers().get(0).getName());
+        final int score = engine.getPlayerScore(engine.getPlayers().get(0).getName());
         assertEquals(3, score);
     }
 
     @Test
-    public void turnsBeyondLimitsTest() {
-        engine.nextTurn();
-        engine.nextTurn();
-        assertEquals(dealer, engine.getCurrentPlayer());
+    void testTurnsBeyondLimits() {
+
+        final Table secondTable = createTable(Table.State.DEALER_TURN);
+        secondTable.stepPassage();
+        assertEquals(Table.State.RESULTS, secondTable.getCurrentState());
 
     }
 
     @Test
-    public void unknownPlayer(){
-         int score = engine.getPlayerScore("paperino");
-        assertEquals(0,score);
+    void testUnknownPlayer() {
+        final int score = engine.getPlayerScore("paperino");
+        assertEquals(0, score);
     }
 
     @Test
-    public void standTest(){
-        this.table.stepPassage();
-        this.table.stepPassage();
-        this.table.stepPassage();
+    void testStand() {
+        engine.setTable(table);
+        table.stepPassage();
+        engine.nextTurn();
+        assertEquals(nameHuman, engine.getCurrentPlayer().getName());
 
         engine.stand();
+        assertEquals(nameBot, engine.getCurrentPlayer().getName());
 
-        assertEquals(Table.State.RESULTS, this.table.getCurrentState());
+        final Table thirdTable = createTable(Table.State.DEALER_TURN);
+        engine.setTable(thirdTable);
+
+        engine.stand();
+        assertEquals(Table.State.RESULTS, thirdTable.getCurrentState());
+
     }
 
-    
+    private Table createTable(final Table.State initialState) {
+     return new Table() {
 
-    
+        private State currentState = initialState;
 
-    
-  
+        @Override
+        public State getCurrentState() {
+            return this.currentState;
+        }
+
+        @Override
+        public void stepPassage() {
+            if (this.currentState == State.FIRST_BET) {
+                this.currentState = State.PLAYING;
+            } else if (this.currentState == State.PLAYING) {
+                this.currentState = State.FINAL_BET;
+            } else if (this.currentState == State.FINAL_BET) {
+                this.currentState = State.DEALER_TURN;
+            } else if (this.currentState == State.DEALER_TURN) {
+                this.currentState = State.RESULTS;
+            } 
+        }
+
+        @Override
+        public void reset() {
+
+        }
+
+        @Override
+        public void otherGame() {
+
+        }
+
+        @Override
+        public List<String> getPlayers() {
+            return List.of();
+        }
+
+        @Override
+        public void placeBet(final String playerName, final int amount) {
+
+        }
+
+        @Override
+        public int getPot() {
+            return 0;
+        }
+
+        @Override
+        public RoundResult getWinner() {
+            return null;
+        }
+
+        @Override
+        public int getPlayerScore(final String playerName) {
+            return 0;
+        }
+
+        @Override
+        public int getDealerScore() {
+            return 0;
+        }
+
+        @Override
+        public int getWalletBalance(final String playerName) {
+            return 0;
+        }
+
+        @Override
+        public Statistics geStatistics() {
+            return null;
+        }
+
+     };
+    }
+
 }

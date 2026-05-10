@@ -7,15 +7,16 @@ import it.unibo.chaosjack.model.api.Deck;
 import java.util.List;
 import java.util.Optional;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.chaosjack.model.api.Table;
 import it.unibo.chaosjack.model.api.SpecialRound;
-import it.unibo.chaosjack.model.api.Card;
+
 import it.unibo.chaosjack.model.api.Dealer;
 
 /**
  * This class implements the GameEngine interface and represents the core of the game logic.
  */
-public class GameEngineImpl implements GameEngine {
+public final class GameEngineImpl implements GameEngine {
 
     private final Deck deck;
     private final Dealer dealer;
@@ -23,31 +24,44 @@ public class GameEngineImpl implements GameEngine {
     private int currentPlayerIndex = 0;
     private Optional<SpecialRound> specialRound = Optional.empty();
     private Partecipant currentPlayer;
-    private Table.State currentState = Table.State.FIRST_BET;
     private Table table;
 
+    /**
+     * constructor for the GameEngineImpl class.
+     * 
+     * @param deck is the deck used during the game.
+     * @param players is the list of player  playing. 
+     * @param dealer is the dealer of the game.
+     */
     public GameEngineImpl(final Deck deck, final List<Partecipant> players, final Dealer dealer) { 
         this.deck = deck;
-        this.players = players;
+        this.players = List.copyOf(players);
         this.dealer = dealer;
-        
     }
 
     @Override
-    public void setSpecialRound(final SpecialRound  specialRound) {
+    public void setTable(final Table table) {
+        if (table != null) {
+            this.table = table;
+        } else {
+            throw new IllegalArgumentException("the table cannot be null.");
+        }
+    }
+
+    @Override
+    public void setSpecialRound(final SpecialRound specialRound) {
         this.specialRound = Optional.ofNullable(specialRound);
     }
 
    @Override
     public int currentScore(final HandImpl hand) {
-        if (this.specialRound.isPresent()){
+        if (this.specialRound.isPresent()) {
             return this.specialRound.get().specialScore(hand.getCards());
-        } else 
-        {
+        } else {
             return hand.getScore();
         }
     }
-    
+
     @Override
     public Deck getDeck() {
         return deck;
@@ -70,48 +84,52 @@ public class GameEngineImpl implements GameEngine {
 
     @Override
     public void nextTurn() {
-        if (this.currentState == Table.State.PLAYING ){
-            currentPlayerIndex++; 
+        if (table.getCurrentState() == Table.State.PLAYING) {
+            
          if (currentPlayerIndex < players.size()) { 
             this.currentPlayer = players.get(currentPlayerIndex);
-            
+            ++currentPlayerIndex;
          } else {
             this.table.stepPassage();
-            this.currentState = this.table.getCurrentState();
          }
         } else {
             throw new IllegalStateException("impossible to play ");
         }
-       
+
     }
 
     @Override
     public void dealerTurn() {
-        if (this.currentState == Table.State.DEALER_TURN) {
-            
-            this.dealer.playTurn(deck);
-
-        } else 
-        {
+        if (this.table.getCurrentState() == Table.State.DEALER_TURN) { 
+            if (dealer != null) {
+                this.currentPlayer = dealer;
+                this.dealer.playTurn(deck);
+            } else {
+                throw new IllegalArgumentException("the dealer cannot be null.");
+            }
+        } else {
             throw new IllegalStateException("impossible to play ");
         }
     }
 
     @Override
     public List<Partecipant> getPlayers() {
-        return players;
+        return List.copyOf(players);
     }
 
-    
     @Override
     public void stand() {
-        if(table.getCurrentState() == Table.State.DEALER_TURN) {
+        if (table.getCurrentState() == Table.State.DEALER_TURN) {
             this.table.stepPassage();
         } else {
             this.nextTurn();
         }
     }
 
+    @SuppressFBWarnings(
+        value = "EI_EXPOSE_REP",
+        justification = "Returning the original Player reference is important to allow the view to stay up to date with the game state."
+    )
     @Override
     public Partecipant getCurrentPlayer() {
         return this.currentPlayer;

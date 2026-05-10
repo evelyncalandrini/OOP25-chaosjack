@@ -4,6 +4,9 @@ import it.unibo.chaosjack.model.api.SpecialRound;
 import it.unibo.chaosjack.model.api.Card;
 import java.util.List;
 
+/**
+ * this class implements the interface SpecialRound. In this round all the HEARTS cards are worth double.
+ */
 
 public class DoubleHeartsRule implements SpecialRound {
     @Override

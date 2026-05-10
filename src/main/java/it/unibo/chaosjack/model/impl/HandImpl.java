@@ -2,20 +2,18 @@ package it.unibo.chaosjack.model.impl;
 
 import it.unibo.chaosjack.model.api.Card;
 import it.unibo.chaosjack.model.api.Hand;
-
-
 import java.util.List;
 import java.util.ArrayList;
 
 /**
-* This class represents the player's or the dealer's hand
-*/
-public class HandImpl implements Hand{
+ * This class represents the player's or the dealer's hand.
+ */
+public final class HandImpl implements Hand {
 
     private static final int MAX_SCORE = 21;
     private static final int ACE_VALUE = 11;
 
-    private final List<Card> cards = new ArrayList<>();  
+    private final List<Card> cards = new ArrayList<>();
 
     @Override
     public void addCard(final Card card) {
@@ -27,12 +25,11 @@ public class HandImpl implements Hand{
         int score = 0;
         int assesCount = 0;
 
-        for (int i = 0; i < cards.size(); i++) {
-             score += cards.get(i).getValue();
-              if (cards.get(i).getValue() == ACE_VALUE) 
-            {
+        for (final Card c : cards) {
+             score += c.getValue();
+              if (c.getValue() == ACE_VALUE) {
                 assesCount++;
-            }
+              }
         }
 
         while (score > MAX_SCORE && assesCount > 0) { 
@@ -44,8 +41,8 @@ public class HandImpl implements Hand{
     }
 
     @Override
-    public boolean sameColor(final List<Card> cards) {
-       boolean firstIsRed = isRed(cards.get(0));
+    public boolean sameColor(final List<Card> finalcards) {
+       final boolean firstIsRed = isRed(cards.get(0));
         for (final Card c : cards) {
             if (isRed(c) != firstIsRed) {
                 return false;
@@ -54,12 +51,12 @@ public class HandImpl implements Hand{
         return true;
     }
 
-    private boolean isRed(Card card) {
+    private boolean isRed(final Card card) {
         return card.getName().contains("HEARTS") || card.getName().contains("DIAMONDS");
     }
 
     @Override
     public List<Card> getCards() {
-        return cards;
+        return List.copyOf(this.cards);
     }    
 }
