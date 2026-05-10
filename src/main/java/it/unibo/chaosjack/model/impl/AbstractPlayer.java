@@ -1,5 +1,6 @@
 package it.unibo.chaosjack.model.impl;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.chaosjack.model.api.Card;
 import it.unibo.chaosjack.model.api.Hand;
 import it.unibo.chaosjack.model.api.Partecipant;
@@ -8,6 +9,7 @@ import it.unibo.chaosjack.model.api.Partecipant;
  * Abstract class implementation of {@link Partecipant}.
  * It contains the shared logic for the name, management of cards an the calculation of the score
  */
+
 public abstract class AbstractPlayer implements Partecipant {
 
     private final String name;
@@ -34,6 +36,10 @@ public abstract class AbstractPlayer implements Partecipant {
         this.hand.addCard(card);
     }
 
+    @SuppressFBWarnings(
+        value = "EI_EXPOSE_REP", 
+        justification = "La View e il Controller necessitano del riferimento originale per gestire gli aggiornamenti grafici."
+    )
     @Override
     public final Hand getHand() {
         return this.hand;
