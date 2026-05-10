@@ -20,7 +20,6 @@ import it.unibo.chaosjack.model.api.Table;
 import it.unibo.chaosjack.model.api.Table.State;
 import it.unibo.chaosjack.model.api.Player;
 import it.unibo.chaosjack.model.api.Wallet;
-import it.unibo.chaosjack.model.impl.HandImpl;
 import it.unibo.chaosjack.model.impl.PlayerImpl;
 import it.unibo.chaosjack.model.impl.Rank;
 import it.unibo.chaosjack.model.impl.StandardCard;
@@ -120,6 +119,7 @@ class TableTest {
         table.placeBet(P2, STANDARD_BET);
         assertEquals(STANDARD_BET * 2, table.getPot());
         assertEquals(Table.State.PLAYING, table.getCurrentState());
+
     }
 
     @Test
@@ -158,6 +158,7 @@ class TableTest {
         final var score = Map.of(P1, SCORE_WINNING);
         final GameEngine winEngine = createEngine(score, SCORE_MID, NOT_SAMECOLOR_CARD);
         final RoundResult result = playRound(winEngine, score);
+
         assertEquals(Outcome.PLAYER_WON, result.outcome());
         assertEquals(PAYOUT_WIN_SINGLE, result.getPayOut(), "the wins must be double value of the pot");
         assertEquals(DEFAULT_INCREMENT, table.geStatistics().getWinHistory().getOrDefault(P1, 0));
@@ -165,6 +166,7 @@ class TableTest {
 
     @Test
     void testWinnerMultiplePlayersTieAndWin() {
+
         final var score = Map.of(P1, SCORE_WINNING, P2, SCORE_WINNING);
         final GameEngine winEngine = createEngine(score, SCORE_MID, NOT_SAMECOLOR_CARD); 
         final RoundResult result = playRound(winEngine, score);
@@ -176,6 +178,7 @@ class TableTest {
 
     @Test
     void testWinnerPushWithDealer() {
+
         final var score = Map.of(P1, SCORE_HIGH, P2, SCORE_HIGH);
         final GameEngine pushEngine = createEngine(score, SCORE_HIGH, NOT_SAMECOLOR_CARD);
         final RoundResult result = playRound(pushEngine, score);
@@ -187,6 +190,7 @@ class TableTest {
 
     @Test
     void testWinnerDealerWins() {
+
         final var score = Map.of(P1, SCORE_MID, P2, SCORE_MID);
         final GameEngine lossEngine = createEngine(score, SCORE_WINNING, NOT_SAMECOLOR_CARD);
         final RoundResult result = playRound(lossEngine, score);
@@ -197,6 +201,7 @@ class TableTest {
 
     @Test
     void testWinnerAllPlayerGoOut() {
+
         final var score = Map.of(P1, SCORE_BUSTED, P2, SCORE_BUSTED);
         final GameEngine outEngine = createEngine(score, SCORE_WINNING, NOT_SAMECOLOR_CARD);
         final RoundResult result = playRound(outEngine, score);
@@ -208,6 +213,7 @@ class TableTest {
 
     @Test
     void testDealerGoOut() {
+
         final var score = Map.of(P1, SCORE_WINNING, P2, SCORE_LOSING);
         final GameEngine outDealerEngine = createEngine(score, SCORE_DEALER_BUSTED, NOT_SAMECOLOR_CARD);
         final RoundResult result = playRound(outDealerEngine, score);
@@ -222,6 +228,7 @@ class TableTest {
         final var score = Map.of(P1, SCORE_LOSING, P2, SCORE_WINNING);
         final GameEngine mixEngine = createEngine(score, SCORE_MID, NOT_SAMECOLOR_CARD);
         final RoundResult result = playRound(mixEngine, score);
+
         assertEquals(Outcome.PLAYER_WON, result.outcome());
         assertEquals(PAYOUT_WIN_DOUBLE, result.getPayOut());
         assertEquals(INITIAL_POT, table.geStatistics().getWinHistory().getOrDefault(P1, 0));
@@ -230,9 +237,11 @@ class TableTest {
 
     @Test
     void testWinsPLayerWithBonus() {
+
         final var score = Map.of(P1, SCORE_WINNING, P2, SCORE_LOSING);
         final GameEngine bonusWinEngine = createEngine(score, SCORE_MID, SAMECOLOR_CARD);
         final RoundResult result = playRound(bonusWinEngine, score);
+
         assertEquals(Outcome.PLAYER_BONUS, result.outcome());
         assertEquals(PAYOUT_BONUS, result.getPayOut());
         assertEquals(DEFAULT_INCREMENT, table.geStatistics().getBonusHistory().getOrDefault(P1, 0));
@@ -244,6 +253,7 @@ class TableTest {
         final var score = Map.of(P1, SCORE_BLACKJACK, P2, SCORE_WINNING);
         final GameEngine bjEngine = createEngine(score, SCORE_MID, NOT_SAMECOLOR_CARD);
         final RoundResult result = playRound(bjEngine, score);
+
         assertEquals(Outcome.PLAYER_BLACKJACK, result.outcome());
         assertEquals(PAYOUT_BONUS, result.getPayOut());
         assertEquals(DEFAULT_INCREMENT, table.geStatistics().getBlackHistory().getOrDefault(P1, 0));
@@ -252,6 +262,7 @@ class TableTest {
 
     @Test
     void testPLayerBlackJackBonus() {
+
         final var score = Map.of(P1, SCORE_BLACKJACK, P2, SCORE_WINNING);
         final GameEngine bjEngine = createEngine(score, SCORE_MID, SAMECOLOR_CARD);
         final RoundResult result = playRound(bjEngine, score);
@@ -309,6 +320,7 @@ class TableTest {
             public Hand getDealerHand() { 
                 return new Hand() {
                     @Override
+
                     public int getScore() {
                         return dScore;
                     }
@@ -343,6 +355,7 @@ class TableTest {
                 final Player p1 = new PlayerImpl(P1, STANDARD_BET);
                 final Player p2 = new PlayerImpl(P2, STANDARD_BET);
 
+
                 final Suit p1Suit2 = p1Card ? Suit.CLUBS : Suit.HEARTS;
                 p1.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
                 p1.getHand().addCard(new StandardCard(Rank.TWO, p1Suit2));
@@ -361,7 +374,7 @@ class TableTest {
             }
 
             @Override
-            public int currentScore(final HandImpl hand) {
+            public int currentScore(final Hand hand) {
                 return 0;
             }
 
@@ -376,6 +389,7 @@ class TableTest {
             @Override
             public void setTable(final Table table) {
             }
+
         };
     }
 

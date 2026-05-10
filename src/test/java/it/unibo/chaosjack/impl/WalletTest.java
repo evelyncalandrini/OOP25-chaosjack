@@ -8,6 +8,8 @@ import it.unibo.chaosjack.model.api.Wallet;
 import it.unibo.chaosjack.model.impl.StandardWallet;
 
 class WalletTest {
+
+
     private static final int INITIAL_BALANCE = 100;
     private static final int ADD_AMOUNT = 50;
     private static final int AFTER_ADD_BALANCE = 150;
@@ -19,17 +21,21 @@ class WalletTest {
     void testInitialBalance() {
         final Wallet wallet = new StandardWallet(INITIAL_BALANCE);
         assertEquals(INITIAL_BALANCE, wallet.getBalance());
+
     }
 
     @Test
     void testAddFunds() {
+
         final Wallet wallet = new StandardWallet(INITIAL_BALANCE);
         wallet.addFunds(ADD_AMOUNT);
         assertEquals(AFTER_ADD_BALANCE, wallet.getBalance());
+
     }
 
     @Test
     void testRemoveFunds() {
+
         final Wallet wallet = new StandardWallet(INITIAL_BALANCE);
         assertTrue(wallet.removeFunds(REMOVE_AMOUNT_OK));
         assertEquals(AFTER_REMOVE_BALANCE, wallet.getBalance());

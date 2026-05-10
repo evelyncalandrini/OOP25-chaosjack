@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import it.unibo.chaosjack.model.api.Deck;
 import it.unibo.chaosjack.model.impl.StandardDeck;
 import it.unibo.chaosjack.model.impl.StandardCard;
@@ -15,9 +14,7 @@ import it.unibo.chaosjack.model.impl.Rank;
 import it.unibo.chaosjack.model.impl.RoyalFreezeTurn;
 import it.unibo.chaosjack.model.impl.Suit;
 import it.unibo.chaosjack.model.impl.YingYung;
-
 import java.util.List;
-
 import java.util.ArrayList;
 import it.unibo.chaosjack.model.api.GameEngine;
 import it.unibo.chaosjack.model.impl.GameEngineImpl;
@@ -109,6 +106,7 @@ import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
     @Test
      void testSetSpecialRoundAndCurrentScore() {
         engine.getPlayers().get(0).getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS, CardModifier.NONE));
+
         engine.setSpecialRound(specialRound);
         int score = engine.currentScore(engine.getPlayers().get(0).getHand());
         assertEquals(4, score); 

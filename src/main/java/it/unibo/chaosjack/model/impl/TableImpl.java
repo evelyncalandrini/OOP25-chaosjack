@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import it.unibo.chaosjack.model.api.GameEngine;
+import it.unibo.chaosjack.model.api.Hand;
 import it.unibo.chaosjack.model.api.RoundResult;
 import it.unibo.chaosjack.model.api.RoundResult.Outcome;
 import it.unibo.chaosjack.model.api.Table;
@@ -135,7 +136,7 @@ public final class TableImpl implements Table {
                 result = new RoundResult(Outcome.PLAYERS_PUSH, max, dealerScore, getPot() * 2);
         } else {
             final String oneWinner = bestPlayers.get(0);
-            final HandImpl winnerHand = engine.getPlayers().stream()
+            final Hand winnerHand = engine.getPlayers().stream()
                 .filter(p -> p.getName().equals(oneWinner))
                 .findFirst()
                 .get()

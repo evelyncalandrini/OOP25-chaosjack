@@ -55,7 +55,7 @@ public final class GameEngineImpl implements GameEngine {
     }
 
    @Override
-    public int currentScore(final HandImpl hand) {
+    public int currentScore(final Hand hand) {
         if (this.specialRound.isPresent()) {
             return this.specialRound.get().specialScore(hand.getCards());
         } else {

@@ -2,7 +2,6 @@ package it.unibo.chaosjack.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import it.unibo.chaosjack.model.impl.HandImpl;
 import it.unibo.chaosjack.model.api.Card;
 import it.unibo.chaosjack.model.api.CardModifier;
@@ -24,7 +23,6 @@ class HandTest {
     void testAddCard() {
         final HandImpl myHand = new HandImpl();
         final Card card1 = new StandardCard(Rank.TWO, Suit.HEARTS);
-
         myHand.addCard(card1);
         assertEquals(1, myHand.getCards().size());
 
@@ -40,11 +38,9 @@ class HandTest {
         final Card card1 = new StandardCard(Rank.TWO, Suit.HEARTS, CardModifier.NONE);
         final Card card2 = new StandardCard(Rank.JACK, Suit.SPADES, CardModifier.NONE);
         final Card card3 = new StandardCard(Rank.ACE, Suit.CLUBS, CardModifier.NONE);
-
         myHand.addCard(card1);
         myHand.addCard(card2);
         myHand.addCard(card3);
-
         assertEquals(SCORE_13, myHand.getScore());
     }
 
@@ -54,11 +50,9 @@ class HandTest {
         final Card card1 = new StandardCard(Rank.TWO, Suit.HEARTS, CardModifier.NONE);
         final Card card2 = new StandardCard(Rank.THREE, Suit.HEARTS, CardModifier.NONE);
         final Card card3 = new StandardCard(Rank.FOUR, Suit.CLUBS, CardModifier.NONE);
-
         myHand.addCard(card1);
         myHand.addCard(card2);
         myHand.addCard(card3);
-
         assertFalse(myHand.sameColor(myHand.getCards()));
     }
 
@@ -76,4 +70,5 @@ class HandTest {
         assertEquals(SCORE_20, playerHand.getScore());
 
     }
+
 }
