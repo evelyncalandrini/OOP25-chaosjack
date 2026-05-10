@@ -15,11 +15,13 @@ import it.unibo.chaosjack.model.impl.Suit;
 import it.unibo.chaosjack.model.impl.YingYung;
 
 import java.util.List;
+import java.lang.module.ModuleDescriptor.Exports.Modifier;
 import java.util.ArrayList;
 import it.unibo.chaosjack.model.api.GameEngine;
 import it.unibo.chaosjack.model.impl.GameEngineImpl;
 import it.unibo.chaosjack.model.impl.NPCimpl;
 import it.unibo.chaosjack.model.impl.PlayerImpl;
+import it.unibo.chaosjack.model.api.CardModifier;
 import it.unibo.chaosjack.model.api.Dealer;
 import it.unibo.chaosjack.model.api.Partecipant;
 import it.unibo.chaosjack.model.impl.DealerImpl;
@@ -85,8 +87,14 @@ import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
     }
 
     @Test
+    void testGetDealerHand() {
+        dealer.getHand().addCard(new StandardCard(Rank.FOUR, Suit.CLUBS, CardModifier.NONE));
+        assertEquals(1, engine.getDealerHand().getCards().size());
+    }
+
+    @Test
      void testSetSpecialRoundAndCurrentScore() {
-        engine.getPlayers().get(0).getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS));
+        engine.getPlayers().get(0).getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS, CardModifier.NONE));
         engine.setSpecialRound(specialRound);
         int score = engine.currentScore(engine.getPlayers().get(0).getHand());
         assertEquals(4, score); 
@@ -102,7 +110,7 @@ import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
         assertEquals(0, score);
 
         specialRound = new RoyalFreezeTurn();
-        engine.getPlayers().get(0).getHand().addCard(new StandardCard(Rank.JACK, Suit.HEARTS));
+        engine.getPlayers().get(0).getHand().addCard(new StandardCard(Rank.JACK, Suit.HEARTS, CardModifier.NONE));
         engine.setSpecialRound(specialRound);
         score = engine.currentScore(engine.getPlayers().get(0).getHand());
         assertEquals(2, score);
@@ -110,7 +118,7 @@ import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
 
     @Test
     void testGetPlayerScore() {
-        engine.getPlayers().get(0).getHand().addCard(new StandardCard(Rank.THREE, Suit.SPADES));
+        engine.getPlayers().get(0).getHand().addCard(new StandardCard(Rank.THREE, Suit.SPADES, CardModifier.NONE));
         final int score = engine.getPlayerScore(engine.getPlayers().get(0).getName());
         assertEquals(3, score);
     }
