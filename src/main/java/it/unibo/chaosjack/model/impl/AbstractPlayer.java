@@ -11,7 +11,7 @@ import it.unibo.chaosjack.model.api.Partecipant;
 public abstract class AbstractPlayer implements Partecipant {
 
     private final String name;
-    private final HandImpl hand;
+    private final Hand hand;
 
     /**
      * Constructor for a new Abstract Player.
