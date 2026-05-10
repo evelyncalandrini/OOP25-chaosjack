@@ -3,6 +3,9 @@ package it.unibo.chaosjack.model.impl;
 import it.unibo.chaosjack.model.api.Card;
 import it.unibo.chaosjack.model.api.Hand;
 import java.util.List;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.ArrayList;
 
 /**
@@ -55,8 +58,12 @@ public final class HandImpl implements Hand {
         return card.getName().contains("HEARTS") || card.getName().contains("DIAMONDS");
     }
 
+    @SuppressFBWarnings(
+        value = "EI_EXPOSE_REP",
+        justification = "Original list reference needed to sync the View with the game state."
+    )
     @Override
     public List<Card> getCards() {
-        return List.copyOf(this.cards);
+        return this.cards;
     }
 }
