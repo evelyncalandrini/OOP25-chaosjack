@@ -22,7 +22,7 @@ public final class GameEngineImpl implements GameEngine {
     private final Deck deck;
     private final Dealer dealer;
     private final List<Partecipant> players;
-    private int currentPlayerIndex = 0;
+    private int currentPlayerIndex;
     private Optional<SpecialRound> specialRound = Optional.empty();
     private Partecipant currentPlayer;
     private Table table;
@@ -86,7 +86,7 @@ public final class GameEngineImpl implements GameEngine {
     @Override
     public void nextTurn() {
         if (table.getCurrentState() == Table.State.PLAYING) {
-            
+
          if (currentPlayerIndex < players.size()) { 
             this.currentPlayer = players.get(currentPlayerIndex);
             ++currentPlayerIndex;
@@ -99,15 +99,15 @@ public final class GameEngineImpl implements GameEngine {
 
     }
 
+    @SuppressFBWarnings(
+        value = "EI_EXPOSE_REP",
+        justification = "Required to keep the View in sync with the real game state."
+    )
     @Override
     public void dealerTurn() {
         if (this.table.getCurrentState() == Table.State.DEALER_TURN) { 
-            if (dealer != null) {
                 this.currentPlayer = dealer;
                 this.dealer.playTurn(deck);
-            } else {
-                throw new IllegalArgumentException("the dealer cannot be null.");
-            }
         } else {
             throw new IllegalStateException("impossible to play ");
         }
@@ -129,7 +129,7 @@ public final class GameEngineImpl implements GameEngine {
 
     @SuppressFBWarnings(
         value = "EI_EXPOSE_REP",
-        justification = "Returning the original Player reference is important to allow the view to stay up to date with the game state."
+        justification = "Required to keep the View in sync with the real game state."
     )
     @Override
     public Partecipant getCurrentPlayer() {

@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import it.unibo.chaosjack.model.api.Deck;
 import it.unibo.chaosjack.model.impl.StandardDeck;
 import it.unibo.chaosjack.model.impl.StandardCard;
@@ -15,7 +17,7 @@ import it.unibo.chaosjack.model.impl.Suit;
 import it.unibo.chaosjack.model.impl.YingYung;
 
 import java.util.List;
-import java.lang.module.ModuleDescriptor.Exports.Modifier;
+
 import java.util.ArrayList;
 import it.unibo.chaosjack.model.api.GameEngine;
 import it.unibo.chaosjack.model.impl.GameEngineImpl;
@@ -29,14 +31,13 @@ import it.unibo.chaosjack.model.api.NPC;
 import it.unibo.chaosjack.model.api.SpecialRound;
 import it.unibo.chaosjack.model.api.Statistics;
 import it.unibo.chaosjack.model.api.Table;
+import it.unibo.chaosjack.model.api.Table.State;
 import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
 
  /**
   * Test for GameEngineImpl class.
   */
  class GameEngineImplTest {
-
-    private Deck deck;
     private Dealer dealer;
     private GameEngine engine;
     private SpecialRound specialRound;
@@ -48,6 +49,7 @@ import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
     void setUp() {
        final Player human1;
        final NPC bot1;
+       final Deck deck;
        nameHuman = "topolino";
        nameBot = "pippo";
        deck = new StandardDeck();
@@ -72,14 +74,26 @@ import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
 
     engine.nextTurn();
     assertEquals(nameBot, engine.getCurrentPlayer().getName());
+
+    final Table wrongTable = createTable(State.FIRST_BET);
+    engine.setTable(wrongTable);
+    assertThrows(IllegalStateException.class, () -> {
+            engine.nextTurn();
+        });
     }
 
     @Test
     void testDealerTurn() {
 
-        final Table firstTable = createTable(Table.State.DEALER_TURN);
+        final Table firstTable = createTable(Table.State.PLAYING);
         engine.setTable(firstTable);
 
+        assertThrows(IllegalStateException.class, () -> {
+            engine.dealerTurn();
+        });
+
+        final Table correctTable = createTable(State.DEALER_TURN);
+        engine.setTable(correctTable);
         engine.dealerTurn();
         assertEquals(dealer, engine.getCurrentPlayer());
         assertFalse(dealer.getHand().getCards().isEmpty());
