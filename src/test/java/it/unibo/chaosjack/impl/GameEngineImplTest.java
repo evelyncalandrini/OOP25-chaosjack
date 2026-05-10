@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import it.unibo.chaosjack.model.api.Deck;
 import it.unibo.chaosjack.model.impl.StandardDeck;
 import it.unibo.chaosjack.model.impl.StandardCard;
@@ -13,13 +14,13 @@ import it.unibo.chaosjack.model.impl.Rank;
 import it.unibo.chaosjack.model.impl.RoyalFreezeTurn;
 import it.unibo.chaosjack.model.impl.Suit;
 import it.unibo.chaosjack.model.impl.YingYung;
-
 import java.util.List;
 import java.util.ArrayList;
 import it.unibo.chaosjack.model.api.GameEngine;
 import it.unibo.chaosjack.model.impl.GameEngineImpl;
 import it.unibo.chaosjack.model.impl.NPCimpl;
 import it.unibo.chaosjack.model.impl.PlayerImpl;
+import it.unibo.chaosjack.model.api.CardModifier;
 import it.unibo.chaosjack.model.api.Dealer;
 import it.unibo.chaosjack.model.api.Partecipant;
 import it.unibo.chaosjack.model.impl.DealerImpl;
@@ -27,14 +28,13 @@ import it.unibo.chaosjack.model.api.NPC;
 import it.unibo.chaosjack.model.api.SpecialRound;
 import it.unibo.chaosjack.model.api.Statistics;
 import it.unibo.chaosjack.model.api.Table;
+import it.unibo.chaosjack.model.api.Table.State;
 import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
 
  /**
   * Test for GameEngineImpl class.
   */
  class GameEngineImplTest {
-
-    private Deck deck;
     private Dealer dealer;
     private GameEngine engine;
     private SpecialRound specialRound;
@@ -46,6 +46,7 @@ import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
     void setUp() {
        final Player human1;
        final NPC bot1;
+       final Deck deck;
        nameHuman = "topolino";
        nameBot = "pippo";
        deck = new StandardDeck();
@@ -70,14 +71,26 @@ import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
 
     engine.nextTurn();
     assertEquals(nameBot, engine.getCurrentPlayer().getName());
+
+    final Table wrongTable = createTable(State.FIRST_BET);
+    engine.setTable(wrongTable);
+    assertThrows(IllegalStateException.class, () -> {
+            engine.nextTurn();
+        });
     }
 
     @Test
     void testDealerTurn() {
 
-        final Table firstTable = createTable(Table.State.DEALER_TURN);
+        final Table firstTable = createTable(Table.State.PLAYING);
         engine.setTable(firstTable);
 
+        assertThrows(IllegalStateException.class, () -> {
+            engine.dealerTurn();
+        });
+
+        final Table correctTable = createTable(State.DEALER_TURN);
+        engine.setTable(correctTable);
         engine.dealerTurn();
         assertEquals(dealer, engine.getCurrentPlayer());
         assertFalse(dealer.getHand().getCards().isEmpty());
@@ -85,8 +98,15 @@ import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
     }
 
     @Test
+    void testGetDealerHand() {
+        dealer.getHand().addCard(new StandardCard(Rank.FOUR, Suit.CLUBS, CardModifier.NONE));
+        assertEquals(1, engine.getDealerHand().getCards().size());
+    }
+
+    @Test
      void testSetSpecialRoundAndCurrentScore() {
-        engine.getPlayers().get(0).getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS));
+        engine.getPlayers().get(0).getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS, CardModifier.NONE));
+
         engine.setSpecialRound(specialRound);
         int score = engine.currentScore(engine.getPlayers().get(0).getHand());
         assertEquals(4, score); 
@@ -102,7 +122,7 @@ import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
         assertEquals(0, score);
 
         specialRound = new RoyalFreezeTurn();
-        engine.getPlayers().get(0).getHand().addCard(new StandardCard(Rank.JACK, Suit.HEARTS));
+        engine.getPlayers().get(0).getHand().addCard(new StandardCard(Rank.JACK, Suit.HEARTS, CardModifier.NONE));
         engine.setSpecialRound(specialRound);
         score = engine.currentScore(engine.getPlayers().get(0).getHand());
         assertEquals(2, score);
@@ -110,7 +130,7 @@ import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
 
     @Test
     void testGetPlayerScore() {
-        engine.getPlayers().get(0).getHand().addCard(new StandardCard(Rank.THREE, Suit.SPADES));
+        engine.getPlayers().get(0).getHand().addCard(new StandardCard(Rank.THREE, Suit.SPADES, CardModifier.NONE));
         final int score = engine.getPlayerScore(engine.getPlayers().get(0).getName());
         assertEquals(3, score);
     }

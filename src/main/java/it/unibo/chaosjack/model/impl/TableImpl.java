@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import it.unibo.chaosjack.model.api.GameEngine;
+import it.unibo.chaosjack.model.api.Hand;
 import it.unibo.chaosjack.model.api.RoundResult;
 import it.unibo.chaosjack.model.api.RoundResult.Outcome;
 import it.unibo.chaosjack.model.api.Table;

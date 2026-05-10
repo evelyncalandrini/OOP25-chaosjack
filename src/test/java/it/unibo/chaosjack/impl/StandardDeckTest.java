@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-
 import it.unibo.chaosjack.model.api.Card;
 import it.unibo.chaosjack.model.api.CardModifier;
 import it.unibo.chaosjack.model.api.Deck;
@@ -101,3 +100,4 @@ class StandardDeckTest {
         assertEquals(EXPECTED_NORMAL_CARDS, normalCount);
     }
 }
+

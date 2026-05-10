@@ -1,20 +1,20 @@
 package it.unibo.chaosjack.model.impl;
 
 import it.unibo.chaosjack.model.api.Card;
+import it.unibo.chaosjack.model.api.Hand;
 import it.unibo.chaosjack.model.api.Partecipant;
 
 /**
  * Abstract class implementation of {@link Partecipant}.
- * It contains the shared logic for the name, management of cards an the calculation
- * of the score
+ * It contains the shared logic for the name, management of cards an the calculation of the score
  */
 public abstract class AbstractPlayer implements Partecipant {
 
     private final String name;
-    private final HandImpl hand;
+    private HandImpl hand;
 
     /**
-     * Constructor for a new Base Player.
+     * Constructor for a new Abstract Player.
      * 
      * @param name of the partecipant
      */
@@ -24,38 +24,24 @@ public abstract class AbstractPlayer implements Partecipant {
 
     }
 
-    /**
-     * @return he name of the player.
-     */
     @Override
-    public String getName() {
+    public final String getName() {
         return this.name;
     }
 
-    /**
-     * Adds a card to the player's hand.
-     */
     @Override
-    public void addCard(final Card card) {
+    public final void addCard(final Card card) {
         this.hand.addCard(card);
     }
 
-    /**
-     * returns a view of the hand that can't be modified.
-     */
     @Override
-    public HandImpl getHand() {
+    public final Hand getHand() {
         return this.hand;
     }
 
-    /**
-     * Clears the hand of the player.
-     */
     @Override
-    public void resetHand() {
-        this.hand.getCards().clear();
+    public final void resetHand() {
+        this.hand = new HandImpl();
     }
-
-    
 }
 

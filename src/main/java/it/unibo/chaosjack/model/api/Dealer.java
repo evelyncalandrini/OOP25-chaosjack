@@ -18,7 +18,7 @@ public interface Dealer extends Partecipant {
      * This method automates the process of drawing cards from the deck
      * based on the dealer's hit conditions.
      * 
-     * @param deck
+     * @param deck of the round
      */
     void playTurn(Deck deck);
 }

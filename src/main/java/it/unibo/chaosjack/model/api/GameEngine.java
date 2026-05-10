@@ -1,6 +1,5 @@
 package it.unibo.chaosjack.model.api;
 
-import it.unibo.chaosjack.model.impl.HandImpl;
 import java.util.List;
 
 /**
@@ -61,7 +60,7 @@ public interface GameEngine {
      * @param hand is the hand of the player o dealer.
      * @return the score of the hand 
      */
-    int currentScore(HandImpl hand); 
+    int currentScore(Hand hand); 
 
     /**
      * set a special round, if it's present.
