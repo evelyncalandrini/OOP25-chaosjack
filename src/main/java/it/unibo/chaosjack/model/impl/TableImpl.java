@@ -11,7 +11,6 @@ import it.unibo.chaosjack.model.api.RoundResult;
 import it.unibo.chaosjack.model.api.RoundResult.Outcome;
 import it.unibo.chaosjack.model.api.Table;
 import it.unibo.chaosjack.model.api.Wallet;
-import it.unibo.chaosjack.model.api.Hand;
 import it.unibo.chaosjack.model.api.Statistics;
 
 /**
