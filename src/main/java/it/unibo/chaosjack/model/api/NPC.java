@@ -1,9 +1,9 @@
 package it.unibo.chaosjack.model.api;
 
-    /**
-     * this interface rapresents the NPC that is a specialized player that can make autonomous decisions.
-     * without human input
-     */
+/**
+ * this interface rapresents the NPC that is a specialized player that can make autonomous decisions.
+ * without human input
+ */
 
 public interface NPC extends Player {
 

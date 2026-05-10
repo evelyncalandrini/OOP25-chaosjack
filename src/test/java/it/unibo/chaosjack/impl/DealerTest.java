@@ -12,8 +12,8 @@ import it.unibo.chaosjack.model.impl.Suit;
 import it.unibo.chaosjack.model.api.Deck;
 
  /**
- * Tests for the class DealerImpl.
- */
+  * Tests for the class DealerImpl.
+  */
  class DealerTest {
 
     private static final int MAX_SCORE = 21;

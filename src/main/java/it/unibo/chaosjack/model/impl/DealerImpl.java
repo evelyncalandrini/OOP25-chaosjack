@@ -6,14 +6,14 @@ import it.unibo.chaosjack.model.api.Deck;
 /**
  * Implementation of {@link Dealer} interface.
  */
-public class DealerImpl  extends AbstractPlayer implements Dealer {
+public final class DealerImpl extends AbstractPlayer implements Dealer {
 
-   private static final int  STAY_THRESHOLD = 17;
+   private static final int STAY_THRESHOLD = 17;
 
-  /**
-   * Constructs a new Dealer with the default name "Dealer".
-   */
-   public  DealerImpl() { //constructor
+   /**
+    * Constructs a new Dealer with the default name "Dealer".
+    */
+   public DealerImpl() { //constructor
      super("Dealer");
   }
 
@@ -24,7 +24,7 @@ public class DealerImpl  extends AbstractPlayer implements Dealer {
 
     @Override
     public void playTurn(final Deck deck) {
-       while (this.shouldHit()){
+       while (this.shouldHit()) {
          deck.draw().ifPresent(this :: addCard);
        }
     }

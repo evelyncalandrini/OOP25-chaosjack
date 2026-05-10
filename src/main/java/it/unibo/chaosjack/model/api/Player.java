@@ -1,9 +1,9 @@
 package it.unibo.chaosjack.model.api;
 
-    /**
-    * This interface represents the player in the Blackjack game where it can bet money.
-    */
-public interface Player extends Partecipant{ 
+/**
+ * This interface represents the player in the Blackjack game where it can bet money.
+ */
+public interface Player extends Partecipant { 
 
     /**
      * Sets the amount of money the player wants to wager on the current hand.
@@ -36,6 +36,6 @@ public interface Player extends Partecipant{
     /**
      * It doubles the amount of the current bet.
      */
-    void doubleDown(); 
+    void doubleDown();
 
 }

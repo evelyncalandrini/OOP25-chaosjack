@@ -28,7 +28,7 @@ public class PlayerImpl extends AbstractPlayer implements Player {
     }
 
     @Override
-    public void setBet(final int amount) {
+    public final void setBet(final int amount) {
         if (amount > 0 && amount <= this.getWallet()) {
             this.currentBet = amount;
         } else {

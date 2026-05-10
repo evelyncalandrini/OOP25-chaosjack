@@ -10,9 +10,9 @@ import it.unibo.chaosjack.model.impl.Rank;
 import it.unibo.chaosjack.model.impl.StandardCard;
 import it.unibo.chaosjack.model.impl.Suit;
 
-/**
- * Tests for class PlayerImpl.
- */
+ /**
+  * Tests for class PlayerImpl.
+  */
  class PlayerTest { 
 
     @Test

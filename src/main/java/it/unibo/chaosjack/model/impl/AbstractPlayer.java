@@ -5,8 +5,7 @@ import it.unibo.chaosjack.model.api.Partecipant;
 
 /**
  * Abstract class implementation of {@link Partecipant}.
- * It contains the shared logic for the name, management of cards an the calculation
- * of the score
+ * It contains the shared logic for the name, management of cards an the calculation of the score
  */
 public abstract class AbstractPlayer implements Partecipant {
 
@@ -25,25 +24,23 @@ public abstract class AbstractPlayer implements Partecipant {
     }
 
     @Override
-    public String getName() {
+    public final String getName() {
         return this.name;
     }
 
     @Override
-    public void addCard(final Card card) {
+    public final void addCard(final Card card) {
         this.hand.addCard(card);
     }
 
     @Override
-    public Hand getHand() { //devo controllare questo,fare in modo che 
+    public final Hand getHand() { //devo controllare questo,fare in modo che 
         return this.hand;
     }
 
     @Override
-    public void resetHand() {
+    public final void resetHand() {
         this.hand.getCards().clear();
     }
-
-    
 }
 

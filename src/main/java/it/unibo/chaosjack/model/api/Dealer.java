@@ -1,8 +1,8 @@
 package it.unibo.chaosjack.model.api;
 
-     /**
-     * This interface represents the Dealer in the Blackjack game.
-     */
+/**
+ * This interface represents the Dealer in the Blackjack game.
+ */
 public interface Dealer extends Partecipant {
 
     /**

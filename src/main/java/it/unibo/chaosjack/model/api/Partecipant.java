@@ -1,11 +1,10 @@
 package it.unibo.chaosjack.model.api;
 
-
 import it.unibo.chaosjack.model.impl.Hand;
 
-    /**
-    * This interface represents a generic player in Blackjack.
-    */
+/**
+ * This interface represents a generic player in Blackjack.
+ */
 
 public interface Partecipant {
 
