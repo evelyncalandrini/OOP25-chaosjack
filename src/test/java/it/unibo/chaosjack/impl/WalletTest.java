@@ -9,7 +9,6 @@ import it.unibo.chaosjack.model.impl.StandardWallet;
 
 class WalletTest {
 
-
     private static final int INITIAL_BALANCE = 100;
     private static final int ADD_AMOUNT = 50;
     private static final int AFTER_ADD_BALANCE = 150;

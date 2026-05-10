@@ -336,7 +336,7 @@ class TableTest {
 
                     @Override
                     public List<Card> getCards() {
-                        return null;
+                    return List.of();
                     }
                 };
             }
