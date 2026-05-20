@@ -1,5 +1,6 @@
 package it.unibo.chaosjack.view.api;
 
+import it.unibo.chaosjack.model.api.Table;
 import javafx.scene.Parent;
 
 /**
@@ -13,6 +14,12 @@ public interface GameTableView {
     Parent getRootNode();
 
     /**
+     * The current table state.
+     * @param state .
+     */
+    void setGameState(Table.State state);
+
+    /**
      * @param amount shows the amount of fish in the pot.
      */
     void updatePot(int amount);
@@ -21,7 +28,7 @@ public interface GameTableView {
      * The action of click the button "Hit".
      * @param handler the action.
      */
-    void setHitHandlew(Runnable handler);
+    void setHitHandler(Runnable handler);
 
     /**
      * The action of click the button "Stand".

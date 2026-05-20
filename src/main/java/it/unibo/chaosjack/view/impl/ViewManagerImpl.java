@@ -1,6 +1,7 @@
 package it.unibo.chaosjack.view.impl;
 
 import it.unibo.chaosjack.view.api.GameTableView;
+import it.unibo.chaosjack.view.api.MainMenuView;
 import it.unibo.chaosjack.view.api.ViewManager;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -22,21 +23,28 @@ public class ViewManagerImpl implements ViewManager{
 
     @Override
     public void showMainMenu() {
+        final MainMenuView menuView = new MainMenuViewImpl();
+        menuView.setPlayHandler(() -> this.showGameTable());
+        menuView.setStatsHandler(() -> this.showStatistics());
+        menuView.setExitHandler(() -> System.exit(0));
+
+        this.scene.setRoot(menuView.getRootNode());
+        this.stage.setTitle("ChaosJack - Main Menu");
         this.stage.show();
     }
 
     @Override
     public void showGameTable() {
         final GameTableView gameTable = new GameTableViewImpl();
-
         this.scene.setRoot(gameTable.getRootNode());
+        this.stage.setTitle("ChaosJack - Table of Game");
         this.stage.show();
     }
 
     @Override
     public void showStatistics() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showStatistics'");
+        this.stage.setTitle("ChaosJack - Statistics");
+        this.stage.show();
     }
     
 }

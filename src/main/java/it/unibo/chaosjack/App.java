@@ -10,7 +10,7 @@ public class App extends Application {
     @Override
     public void start(final Stage primaryStage) {
         final ViewManager viewManager = new ViewManagerImpl(primaryStage);
-        viewManager.showGameTable();
+        viewManager.showMainMenu();
     }
 
     
