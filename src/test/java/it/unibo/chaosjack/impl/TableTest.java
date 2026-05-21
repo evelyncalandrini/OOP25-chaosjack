@@ -106,7 +106,7 @@ class TableTest {
     void testBettingLogic() {
         table.placeBet(P1, HIGH_BET);
         assertEquals(HIGH_BET, table.getPot());
-        assertEquals(BALANCE_AFTER_HIGH_BET, wallet.getBalance(), "the account holder balance must decrease");
+        assertEquals(BALANCE_AFTER_HIGH_BET, table.getWalletBalance(P1), "the account holder balance must decrease");
         assertThrows(IllegalArgumentException.class, () -> table.placeBet(P1, NEGATIVE_BET));
     }
 
@@ -336,7 +336,7 @@ class TableTest {
 
                     @Override
                     public List<Card> getCards() {
-                        return null;
+                    return List.of();
                     }
                 };
             }
@@ -354,7 +354,6 @@ class TableTest {
             public List<Partecipant> getPlayers() {
                 final Player p1 = new PlayerImpl(P1, STANDARD_BET);
                 final Player p2 = new PlayerImpl(P2, STANDARD_BET);
-
 
                 final Suit p1Suit2 = p1Card ? Suit.CLUBS : Suit.HEARTS;
                 p1.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));

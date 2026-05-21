@@ -38,7 +38,7 @@ public abstract class AbstractPlayer implements Partecipant {
 
     @SuppressFBWarnings(
         value = "EI_EXPOSE_REP", 
-        justification = "The View and Controller require the original reference to handle graphical updates and state synchronization."
+        justification = "Required for View/Controller state sync."
     )
     @Override
     public final Hand getHand() {
