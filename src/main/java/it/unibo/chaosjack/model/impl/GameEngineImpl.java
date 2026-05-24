@@ -127,6 +127,11 @@ public final class GameEngineImpl implements GameEngine {
         }
     }
 
+    @Override
+    public void hit() {
+        this.deck.draw().ifPresent(this.currentPlayer::addCard);
+    }
+
     @SuppressFBWarnings(
         value = "EI_EXPOSE_REP",
         justification = "Required to keep the View in sync with the real game state."
