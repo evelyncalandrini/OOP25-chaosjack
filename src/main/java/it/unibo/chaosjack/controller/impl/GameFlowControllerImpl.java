@@ -2,6 +2,7 @@ package it.unibo.chaosjack.controller.impl;
 
 
 
+import it.unibo.chaosjack.controller.api.ActionController;
 import it.unibo.chaosjack.controller.api.GameFlowController;
 import it.unibo.chaosjack.model.api.Dealer;
 import it.unibo.chaosjack.model.api.GameEngine;
@@ -43,9 +44,9 @@ public class GameFlowControllerImpl implements GameFlowController {
         PauseTransition pausa = new PauseTransition(Duration.seconds(1));
         pausa.setOnFinished ( event -> {
             if (gameEngine.getCurrentPlayer() instanceof NPC) {
-                actionController.playNPC(); // lo andrò a sostituire con i metodi giusti
+                 ActionController. // lo andrò a sostituire con i metodi giusti
             } else if (gameEngine.getCurrentPlayer() instanceof Dealer) {
-                actionController.playDealer(); // lo andrò a sostituire con i metodi giusti
+                ActionController.playDealer(); // lo andrò a sostituire con i metodi giusti
             }
 
             this.automaticShift();// richiamo questo metodo per far avanzare il turno
