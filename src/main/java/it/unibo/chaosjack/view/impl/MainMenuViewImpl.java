@@ -1,8 +1,6 @@
 package it.unibo.chaosjack.view.impl;
 
 import it.unibo.chaosjack.view.api.MainMenuView;
-import javafx.fxml.FXML;
-import it.unibo.chaosjack.view.api.MainMenuView;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

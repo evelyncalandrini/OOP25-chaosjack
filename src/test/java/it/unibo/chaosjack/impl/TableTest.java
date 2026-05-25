@@ -389,6 +389,15 @@ class TableTest {
             public void setTable(final Table table) {
             }
 
+            @Override
+            public void hit() {
+            }
+
+            @Override
+            public boolean isGameOver() {
+                
+            }
+
         };
     }
 

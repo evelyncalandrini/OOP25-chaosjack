@@ -81,4 +81,14 @@ public interface GameEngine {
      */
     void setTable(Table table);
 
+    /**
+     * allow the players to draw a card from the deck.
+     */
+    void hit();
+
+    /**
+     * @return true if the game is over, false otherwise.
+     */
+    boolean isGameOver();
+
 }

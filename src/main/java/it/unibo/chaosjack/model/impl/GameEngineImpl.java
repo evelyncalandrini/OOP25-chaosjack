@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.chaosjack.model.api.Table;
+import it.unibo.chaosjack.model.api.Table.State;
 import it.unibo.chaosjack.model.api.SpecialRound;
 
 import it.unibo.chaosjack.model.api.Dealer;
@@ -26,6 +27,7 @@ public final class GameEngineImpl implements GameEngine {
     private Optional<SpecialRound> specialRound = Optional.empty();
     private Partecipant currentPlayer;
     private Table table;
+    private boolean gameOver = false;
 
     /**
      * constructor for the GameEngineImpl class.
@@ -127,6 +129,11 @@ public final class GameEngineImpl implements GameEngine {
         }
     }
 
+    @Override
+    public void hit() {
+        this.deck.draw().ifPresent(this.currentPlayer::addCard);
+    }
+
     @SuppressFBWarnings(
         value = "EI_EXPOSE_REP",
         justification = "Required to keep the View in sync with the real game state."
@@ -134,5 +141,15 @@ public final class GameEngineImpl implements GameEngine {
     @Override
     public Partecipant getCurrentPlayer() {
         return this.currentPlayer;
+    }
+
+    @Override
+    public boolean isGameOver(){
+        if (this.table.getCurrentState() == State.RESULTS) {
+            this.gameOver = true;
+            return this.gameOver;
+        } else {
+            return this.gameOver;
+        }
     }
    }
