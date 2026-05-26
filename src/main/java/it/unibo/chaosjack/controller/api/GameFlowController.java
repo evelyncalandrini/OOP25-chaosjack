@@ -10,4 +10,14 @@ public interface GameFlowController {
      * gestisce le fasi del gioco, ad esempio se è il turno del dealer o dei npc, se è il momento di mostrare i risultati eccetera
      */
     void phaseOfGame();
+
+    /**
+     * inizializza una nuova partita
+     */
+    void newGame();
+
+    /**
+     * faccio scommettere gli npc in maniera utomatica
+     */
+    void automaticBet();
 }

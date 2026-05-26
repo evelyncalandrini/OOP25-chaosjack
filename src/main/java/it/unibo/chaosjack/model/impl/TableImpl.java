@@ -179,7 +179,7 @@ public final class TableImpl implements Table {
 
     @Override
     public int getDealerScore() {
-        return engine.getDealerHand().getScore();
+        return engine.currentScore(engine.getDealerHand());
     }
 
     @Override

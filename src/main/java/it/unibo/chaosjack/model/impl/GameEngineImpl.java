@@ -28,7 +28,7 @@ public final class GameEngineImpl implements GameEngine {
     private Partecipant currentPlayer;
     private Table table;
     private boolean gameOver = false;
-
+    
     /**
      * constructor for the GameEngineImpl class.
      * 
@@ -79,7 +79,7 @@ public final class GameEngineImpl implements GameEngine {
     public int getPlayerScore(final String name) { 
         for (final Partecipant p : players) {
            if (p.getName().equals(name)) {
-             return p.getHand().getScore();
+             return this.currentScore(p.getHand());
             }
         }
         return 0; 
@@ -152,4 +152,28 @@ public final class GameEngineImpl implements GameEngine {
             return this.gameOver;
         }
     }
+
+    public void resetGame() {
+        for (final Partecipant p : players) {
+            p.getHand().getCards().clear();
+        }
+        
+        this.dealer.getHand().getCards().clear();
+        this.currentPlayerIndex = 0;
+        this.gameOver = false;
+        this.table.reset();
+        this.deck.reset();
+        this.deck.shuffle();
+    }
+
+    public void initialCards() {
+        for (Partecipant p : this.players) {
+           this.deck.draw().ifPresent(p::addCard);
+           this.deck.draw().ifPresent(p::addCard);
+        }
+
+        this.deck.draw().ifPresent(this.dealer::addCard);
+        this.deck.draw().ifPresent(this.dealer::addCard);
+    }
+
    }

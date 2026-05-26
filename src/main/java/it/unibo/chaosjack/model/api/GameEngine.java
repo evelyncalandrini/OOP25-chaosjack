@@ -92,4 +92,8 @@ public interface GameEngine {
      */
     boolean isGameOver();
 
+    void resetGame();
+
+    void initialCards();
+
 }
