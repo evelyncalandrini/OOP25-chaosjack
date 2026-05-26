@@ -1,7 +1,5 @@
 package it.unibo.chaosjack.controller.impl;
 
-
-
 import java.util.Random;
 
 import it.unibo.chaosjack.controller.api.ActionController;
@@ -79,7 +77,7 @@ public class GameFlowControllerImpl implements GameFlowController {
         PauseTransition pausa = new PauseTransition(Duration.seconds(1));
         pausa.setOnFinished(event -> {
             if (gameEngine.getCurrentPlayer() instanceof NPC) {
-                // chiamo il metodo di giulia
+                actionController.playAutomatedBet();
             }
             this.phaseOfGame();
         });
@@ -92,12 +90,12 @@ public class GameFlowControllerImpl implements GameFlowController {
         PauseTransition pausa = new PauseTransition(Duration.seconds(1));
         pausa.setOnFinished ( event -> {
             if (gameEngine.getCurrentPlayer() instanceof NPC) {
-                 // chiamo il metodo di giulia
+                actionController.playAutomatedTurns();
             } else if (gameEngine.getCurrentPlayer() instanceof Dealer) {
-                // chiamo il metodo di giulia
+                actionController.playDealerTurns();
             }
 
-            this.automaticShift();// richiamo questo metodo per far avanzare il turno
+            this.phaseOfGame();// richiamo questo metodo per far avanzare il turno
             // alla giuli devo dire di cambiare il while con un semplice if 
         } );
         pausa.play();
