@@ -50,7 +50,7 @@ public class GameTableViewImpl implements GameTableView {
 
         final VBox dealerArea = new VBox(10, dealerTitle, dealerCardsBox);
         dealerArea.setAlignment(Pos.CENTER);
-        menuButton.setStyle("-fx-background-color: #8B0000; -fx-text-fill: white; -fx-font-size: 14px;");
+        menuButton.setStyle("-fx-background-color: #d92811; -fx-text-fill: white; -fx-font-size: 14px;");
         final HBox topBar = new HBox(menuButton);
         topBar.setAlignment(Pos.TOP_LEFT);
         final VBox topContainer = new VBox(10, topBar, dealerArea);
@@ -117,22 +117,25 @@ public class GameTableViewImpl implements GameTableView {
     public void setGameState(Table.State state) {
         this.statusLabel.setText("Current phase: " + state.name());
 
-        if (state == Table.State.PLAYING) {
+        if (state == Table.State.PLAYING ) {
             this.setBetButton(true);
-            this.hitButton.setDisable(false);
-            this.standButton.setDisable(false);
-            this.doubleButton.setDisable(false);
+            this.setPlayerButtons(false);
         } else if (state == Table.State.FIRST_BET) {
             this.setBetButton(false);
-            this.hitButton.setDisable(true);
-            this.standButton.setDisable(true);
-            this.doubleButton.setDisable(false);
-        } else {
+            this.setPlayerButtons(true);
+        } else if (state == Table.State.FINAL_BET) {
             this.setBetButton(true);
-            this.hitButton.setDisable(true);
-            this.standButton.setDisable(true);
-            this.doubleButton.setDisable(true);
+            this.setPlayerButtons(true);
+        } else {
+            this.setBetButton(false);
+            this.setPlayerButtons(false);
         }
+    }
+
+    private void setPlayerButtons(final boolean disable) {
+        this.hitButton.setDisable(disable);
+        this.standButton.setDisable(disable);
+        this.doubleButton.setDisable(disable);
     }
 
     private void setBetButton(final boolean disable) {
