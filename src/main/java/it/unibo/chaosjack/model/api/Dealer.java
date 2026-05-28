@@ -12,13 +12,4 @@ public interface Dealer extends Partecipant {
      * @return true if the dealer should hit
      */
     boolean shouldHit();
-
-    /**
-     * Manages the dealer's entire turn.
-     * This method automates the process of drawing cards from the deck
-     * based on the dealer's hit conditions.
-     * 
-     * @param deck of the round
-     */
-    void playTurn(Deck deck);
 }

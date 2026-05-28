@@ -32,7 +32,7 @@ public class ActionControllerImpl implements ActionController{
         if (human.isBusted() || human.getHand().getScore()>= Partecipant.MAX_SCORE) {
             return;
         }
-        engine.getDeck().draw().ifPresent(card -> human.getHand().addCard(card));
+        engine.hit();
 
         if(human.isBusted() || human.getHand().getScore()>= Partecipant.MAX_SCORE) {
             this.stand();
@@ -51,26 +51,21 @@ public class ActionControllerImpl implements ActionController{
         }
         
         engine.stand(); //faccio effettivamente stand
-        this.playAutomatedTurns();
     }
 
     @Override
-    public void bet(int amount) {
-        if(table.getCurrentState() != Table.State.FIRST_BET && table.getCurrentState() != Table.State.FINAL_BET) {
-            return; //se non siamo in una delle due fasi di scommese non le posso fare
-        }
-
+    public void bet(int amount) { //devo sistemare questo
         Player human = getCurrentHumanPlayer();
         if (human == null) {
             return;
         }
-        if(human.getWallet() < amount) {
+        try {
+           table.placeBet(human.getName(),amount);
+           human.setBet(amount);
+           engine.stand();
+        } catch (IllegalStateException | IllegalArgumentException e) {
             return;
         }
-        human.setBet(amount);
-        engine.stand();
-        this.playAutomatedBet(); //passo alle scommesse dell'NPC
-        
     }
 
     @Override
@@ -90,7 +85,7 @@ public class ActionControllerImpl implements ActionController{
             return;
         }
         human.doubleDown();
-        engine.getDeck().draw().ifPresent(card -> human.getHand().addCard(card));
+        engine.hit();
         this.stand();
 
     }
@@ -99,15 +94,18 @@ public class ActionControllerImpl implements ActionController{
         return p instanceof Player && !(p instanceof NPC);
     }
 
-     //metodi privati per NPC e Dealer
+     //metodi  per NPC e Dealer
 
     @Override
     public void playAutomatedBet() { 
-         while(engine.getCurrentPlayer() instanceof NPC) {
-            NPC bot = (NPC) engine.getCurrentPlayer();
-
+         Partecipant p = engine.getCurrentPlayer();
+        if (p instanceof NPC) {
+            NPC bot = (NPC) p;
             bot.makeBet();
+
+            table.placeBet(bot.getName(),bot.getCurrentBet());
             engine.stand();
+            this.playAutomatedBet();
             
         }
 
@@ -115,20 +113,19 @@ public class ActionControllerImpl implements ActionController{
     @Override
     public void playAutomatedTurns() {
 
-        while(engine.getCurrentPlayer() instanceof NPC) {
+        if(engine.getCurrentPlayer() instanceof NPC) {
             NPC bot = (NPC) engine.getCurrentPlayer();
 
             if (bot.wantsToDouble()) {
                 bot.doubleDown();
-                engine.getDeck().draw().ifPresent(card -> bot.getHand().addCard(card));
+                engine.hit();
                 engine.stand();
-                continue;
+            } else if(bot.wantsToHit()) {
+                engine.hit();
+            } else {
+                engine.stand();
             }
-            while(bot.wantsToHit()) {
-                engine.getDeck().draw().ifPresent(card -> bot.getHand().addCard(card));
-            }
-
-            engine.stand();
+            this.playAutomatedTurns();
         }
 
     }
@@ -137,7 +134,8 @@ public class ActionControllerImpl implements ActionController{
 
        Dealer dealer = (Dealer) engine.getCurrentPlayer();
        if (dealer.shouldHit()) {
-           engine.hit();  
+           engine.hit(); 
+           this.playDealerTurns(); 
        } else {
            engine.stand();
        }

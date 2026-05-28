@@ -1,11 +1,12 @@
 package it.unibo.chaosjack.model.impl;
 
 import it.unibo.chaosjack.model.api.Dealer;
-import it.unibo.chaosjack.model.api.Deck;
+
 
 /**
  * Implementation of {@link Dealer} interface.
  */
+
 public final class DealerImpl extends AbstractPlayer implements Dealer {
 
    private static final int STAY_THRESHOLD = 17;
@@ -20,13 +21,6 @@ public final class DealerImpl extends AbstractPlayer implements Dealer {
     @Override
     public boolean shouldHit() {
          return this.getHand().getScore() < STAY_THRESHOLD; 
-    }
-
-    @Override
-    public void playTurn(final Deck deck) {
-       while (this.shouldHit()) {
-         deck.draw().ifPresent(this :: addCard);
-       }
     }
 }
 
