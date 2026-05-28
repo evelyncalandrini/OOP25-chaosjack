@@ -92,8 +92,7 @@ public class GameFlowControllerImpl implements GameFlowController {
         Table.State state = table.getCurrentState();
 // NELLE DIVERSE FASI DEL GIOCO NON DEVO AGGIORNARE LA IL SETGAMESTATE?
         switch(state) {
-            case FIRST_BET:
-            case FINAL_BET:
+            case FIRST_BET, FINAL_BET:
                 tableView.setGameState(state);
 
                 if (gameEngine.getCurrentPlayer() instanceof Player) {

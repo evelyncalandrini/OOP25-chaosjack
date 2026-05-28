@@ -67,7 +67,7 @@ public class ActionControllerImpl implements ActionController{
         if(human.getWallet() < amount) {
             return;
         }
-        human.setBet(amount);
+        table.placeBet(human.getName(), amount);
         engine.stand();
         this.playAutomatedBet(); //passo alle scommesse dell'NPC
         
