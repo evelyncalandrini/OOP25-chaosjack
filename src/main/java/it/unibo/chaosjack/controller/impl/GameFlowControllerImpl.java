@@ -70,6 +70,7 @@ public class GameFlowControllerImpl implements GameFlowController {
 
     public void newGame() {
         gameEngine.resetGame();
+        gameEngine.nextTurn();
         gameEngine.initialCards();
         tableView.setGameState(Table.State.FIRST_BET);
 
@@ -99,7 +100,7 @@ public class GameFlowControllerImpl implements GameFlowController {
             case FINAL_BET:
                 tableView.setGameState(state);
 
-                if (gameEngine.getCurrentPlayer() instanceof Player) {
+                if (gameEngine.getCurrentPlayer() instanceof Player && !(gameEngine.getCurrentPlayer() instanceof NPC)) {
                     return;
                 } else {
 
@@ -125,7 +126,7 @@ public class GameFlowControllerImpl implements GameFlowController {
     public void automaticBet() {
         PauseTransition pausa = new PauseTransition(Duration.seconds(1));
         pausa.setOnFinished(event -> {
-            if (gameEngine.getCurrentPlayer() instanceof NPC) {
+            if (gameEngine.getCurrentPlayer() instanceof NPC && !(gameEngine.getCurrentPlayer() instanceof Player)) {
 
                 actionController.playAutomatedBet();
             }
@@ -136,7 +137,7 @@ public class GameFlowControllerImpl implements GameFlowController {
 
     @Override // gestisco il timer per far pescare le carte 
     public void automaticShift() {
-        if (gameEngine.getCurrentPlayer() instanceof Player) {
+        if (gameEngine.getCurrentPlayer() instanceof Player && !(gameEngine.getCurrentPlayer() instanceof NPC)) {
             tableView.setGameState(Table.State.PLAYING);
             return;
         } 
