@@ -29,6 +29,7 @@ public final class GameEngineImpl implements GameEngine {
     private Table table;
     private boolean gameOver = false;
     
+    
     /**
      * constructor for the GameEngineImpl class.
      * 
@@ -87,12 +88,13 @@ public final class GameEngineImpl implements GameEngine {
 
     @Override
     public void nextTurn() {
-        if (table.getCurrentState() == Table.State.PLAYING) {
+        if (table.getCurrentState() == Table.State.PLAYING || table.getCurrentState() == Table.State.FINAL_BET || table.getCurrentState() == Table.State.FIRST_BET) {
 
          if (currentPlayerIndex < players.size()) { 
             this.currentPlayer = players.get(currentPlayerIndex);
             ++currentPlayerIndex;
          } else {
+            this.currentPlayerIndex = 0;
             this.table.stepPassage();
          }
         } else {

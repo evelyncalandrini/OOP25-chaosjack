@@ -3,11 +3,9 @@ package it.unibo.chaosjack.controller.impl;
 import java.util.Random;
 import it.unibo.chaosjack.controller.api.ActionController;
 import it.unibo.chaosjack.controller.api.GameFlowController;
-import it.unibo.chaosjack.model.api.Card;
 import it.unibo.chaosjack.model.api.Dealer;
 import it.unibo.chaosjack.model.api.GameEngine;
 import it.unibo.chaosjack.model.api.NPC;
-import it.unibo.chaosjack.model.api.Partecipant;
 import it.unibo.chaosjack.model.api.Player;
 import it.unibo.chaosjack.model.api.SpecialRound;
 import it.unibo.chaosjack.model.api.Table;
@@ -41,6 +39,7 @@ public class GameFlowControllerImpl implements GameFlowController {
     }
 
     private void connectButtons() {
+
         mainMenuView.setPlayHandler(() -> {
             viewManager.showGameTable();
             this.newGame();
@@ -63,8 +62,7 @@ public class GameFlowControllerImpl implements GameFlowController {
             this.phaseOfGame();
         });
 
-       
-       
+    
     }
 
     public void newGame() {
@@ -97,9 +95,11 @@ public class GameFlowControllerImpl implements GameFlowController {
             case FIRST_BET:
             case FINAL_BET:
                 tableView.setGameState(state);
+
                 if (gameEngine.getCurrentPlayer() instanceof Player) {
                     return;
                 } else {
+
                     this.automaticBet(); // se è il turno di un npc faccio fare la puntata automatica
                 }
                 break;
@@ -123,6 +123,7 @@ public class GameFlowControllerImpl implements GameFlowController {
         PauseTransition pausa = new PauseTransition(Duration.seconds(1));
         pausa.setOnFinished(event -> {
             if (gameEngine.getCurrentPlayer() instanceof NPC) {
+
                 actionController.playAutomatedBet();
             }
             this.phaseOfGame();
@@ -146,7 +147,7 @@ public class GameFlowControllerImpl implements GameFlowController {
                 actionController.playDealerTurns();
             }
 
-            String name = this.lastCard(gameEngine.getCurrentPlayer()).getName(); // qui gli dovrei passare il seme e il valore 
+            //String name = this.lastCard(gameEngine.getCurrentPlayer()).getName(); // qui gli dovrei passare il seme e il valore 
             // qui l'evelyn dovrebbe crearmi un metodo in modo tle che poi io lo vada a richiamare per dirgli di aggiornare la view
 
             this.phaseOfGame();// richiamo questo metodo per far avanzare il turno
@@ -174,8 +175,8 @@ public class GameFlowControllerImpl implements GameFlowController {
         return specialRound;
     }
 
-    private Card lastCard(Partecipant p) {
+    /*private Card lastCard(Partecipant p) {
         return p.getHand().getCards().get(p.getHand().getCards().size() - 1);
-    }
+    }*/
 
 }
