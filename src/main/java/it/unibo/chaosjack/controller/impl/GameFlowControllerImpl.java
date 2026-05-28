@@ -28,14 +28,16 @@ public class GameFlowControllerImpl implements GameFlowController {
     private ViewManager viewManager;
 
     public GameFlowControllerImpl(final GameEngine gameEngine, final ActionController actionController, final GameTableView tableView,
-        final MainMenuView mainMenuView, final ViewManager viewManager) {
+        final MainMenuView mainMenuView, final ViewManager viewManager, final Table table) {
         this.gameEngine = gameEngine;
         this.actionController = actionController;
         this.tableView = tableView;
         this.mainMenuView = mainMenuView;
         this.viewManager = viewManager;
+        this.table = table;
 
         this.connectButtons();
+        
     }
 
     private void connectButtons() {
@@ -70,8 +72,8 @@ public class GameFlowControllerImpl implements GameFlowController {
 
     public void newGame() {
         gameEngine.resetGame();
-        gameEngine.nextTurn();
-        gameEngine.initialCards();
+        gameEngine.setTable(table);
+        //gameEngine.initialCards();
         tableView.setGameState(Table.State.FIRST_BET);
 
         Random random = new Random();

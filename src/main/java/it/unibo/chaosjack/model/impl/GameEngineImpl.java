@@ -167,6 +167,8 @@ public final class GameEngineImpl implements GameEngine {
         this.table.reset();
         this.deck.reset();
         this.deck.shuffle();
+        this.table.stepPassage();
+        
     }
 
     public void initialCards() {
@@ -177,6 +179,7 @@ public final class GameEngineImpl implements GameEngine {
 
         this.deck.draw().ifPresent(this.dealer::addCard);
         this.deck.draw().ifPresent(this.dealer::addCard);
+        
     }
 
    }
