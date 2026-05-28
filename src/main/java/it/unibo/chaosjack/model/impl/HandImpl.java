@@ -57,6 +57,6 @@ public final class HandImpl implements Hand {
 
     @Override
     public List<Card> getCards() {
-        return List.copyOf(this.cards);
+        return this.cards;
     }
 }
