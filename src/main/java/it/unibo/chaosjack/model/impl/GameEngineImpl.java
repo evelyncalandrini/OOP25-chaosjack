@@ -111,7 +111,7 @@ public final class GameEngineImpl implements GameEngine {
     public void dealerTurn() {
         if (this.table.getCurrentState() == Table.State.DEALER_TURN) { 
                 this.currentPlayer = dealer;
-                this.dealer.playTurn(deck);
+                //this.dealer.playTurn(deck);
         } else {
             throw new IllegalStateException("impossible to play ");
         }
