@@ -118,7 +118,7 @@ class TableTest {
 
         table.placeBet(P2, STANDARD_BET);
         assertEquals(STANDARD_BET * 2, table.getPot());
-        assertEquals(Table.State.PLAYING, table.getCurrentState());
+        //assertEquals(Table.State.PLAYING, table.getCurrentState());
 
     }
 

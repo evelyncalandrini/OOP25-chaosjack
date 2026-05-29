@@ -28,7 +28,11 @@ java {
 
 val javaFXModules = listOf("base", "controls", "fxml", "swing", "graphics")
 
+<<<<<<< HEAD
 val supportedPlatforms = listOf( "linux", "mac-aarch64", "mac", "win") // All required for OOP
+=======
+val supportedPlatforms = listOf("mac-aarch64", "linux", "mac", "win") // All required for OOP
+>>>>>>> origin/feat-table
 
 dependencies {
     // Suppressions for SpotBugs

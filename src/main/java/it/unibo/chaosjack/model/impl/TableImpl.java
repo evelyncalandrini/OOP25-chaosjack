@@ -101,10 +101,10 @@ public final class TableImpl implements Table {
                 playerPots.put(playerName, currentPot + amount);
             }
         }
-
+        /* 
         if (haveAllPlayersBet()) {
             this.stepPassage();
-        }
+        }*/
     }
 
     @Override
@@ -192,8 +192,8 @@ public final class TableImpl implements Table {
         return this.statistics;
     }
 
-    private boolean haveAllPlayersBet() {
+    /*private boolean haveAllPlayersBet() {
         return players.stream().allMatch(playerPots::containsKey);
-    }
+    }*/
 
 }

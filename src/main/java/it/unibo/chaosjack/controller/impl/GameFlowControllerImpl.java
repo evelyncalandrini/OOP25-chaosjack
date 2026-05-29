@@ -34,8 +34,11 @@ public class GameFlowControllerImpl implements GameFlowController {
         this.tableView = tableView;
         this.mainMenuView = mainMenuView;
         this.viewManager = viewManager;
+<<<<<<< HEAD
         this.table = table;
 
+=======
+>>>>>>> origin/feat-table
         this.connectButtons();
         
     }
@@ -72,8 +75,13 @@ public class GameFlowControllerImpl implements GameFlowController {
     public void newGame() {
         
         gameEngine.resetGame();
+<<<<<<< HEAD
         System.out.println("stato attuale:" + this.table.getCurrentState()); // Debug log
         gameEngine.nextTurn(); // faccio partire il gioco e faccio avanzare il turno in modo che arrivi al primo giocatore
+=======
+        gameEngine.nextTurn();
+        //gameEngine.initialCards();
+>>>>>>> origin/feat-table
         tableView.setGameState(Table.State.FIRST_BET);
 
         Random random = new Random();
