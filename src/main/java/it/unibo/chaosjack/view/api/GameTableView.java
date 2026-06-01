@@ -1,7 +1,9 @@
 package it.unibo.chaosjack.view.api;
 
+import java.util.List;
 import java.util.function.Consumer;
 
+import it.unibo.chaosjack.model.api.Card;
 import it.unibo.chaosjack.model.api.Table;
 import javafx.scene.Parent;
 
@@ -55,4 +57,29 @@ public interface GameTableView {
      * @param handler .
      */
     void setMenuHandler(Runnable handler);
+
+    /**
+     * Update grafic of dealer's cards.
+     * @param cards .
+     */
+    void updateDealerCard(final List<Card> cards);
+
+    /**
+     * Update grafic of first player's  cards.
+     * @param cards .
+     */
+    void updatePlayer1Cards(final List<Card> cards);
+
+    /**
+     * Update grafic of second player's cards.
+     * @param cards
+     */
+    void updatePlayer2Cards(final List<Card> cards);
+
+    /**
+     * Dynamically assigns names to players.
+     * @param name1 first player.
+     * @param name2 second player.
+     */
+    void setPlayerNames(final String name1, final String name2);
 }

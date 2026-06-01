@@ -1,9 +1,13 @@
 package it.unibo.chaosjack.view.impl;
 
+import java.util.List;
 import java.util.function.Consumer;
 
+import it.unibo.chaosjack.model.api.Card;
 import it.unibo.chaosjack.model.api.Table;
 import it.unibo.chaosjack.view.api.GameTableView;
+import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -35,6 +39,9 @@ public class GameTableViewImpl implements GameTableView {
     private final HBox dealerCardsBox = new HBox(15);
     private final HBox player1CardsBox = new HBox(15);
     private final HBox player2CardsBox = new HBox(15);
+
+    private final Label player1Title = new Label("GIOCATORE 1");
+    private final Label player2Title = new Label("GIOCATORE 2");
 
     public GameTableViewImpl() {
         this.root = new BorderPane();
@@ -85,9 +92,7 @@ public class GameTableViewImpl implements GameTableView {
         player2CardsBox.setAlignment(Pos.CENTER);
         player2CardsBox.setMinHeight(150);
 
-        final Label player1Title = new Label("GIOCATORE 1");
         player1Title.setStyle("-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;");
-        final Label player2Title = new Label("GIOCATORE 2");
         player2Title.setStyle("-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;");
 
         final VBox player1Area = new VBox(10, player1Title, player1CardsBox);
@@ -124,7 +129,7 @@ public class GameTableViewImpl implements GameTableView {
             this.setBetButton(false);
             this.setPlayerButtons(true);
         } else if (state == Table.State.FINAL_BET) {
-            this.setBetButton(true);
+            this.setBetButton(false);
             this.setPlayerButtons(true);
         } else {
             this.setBetButton(false);
@@ -171,16 +176,55 @@ public class GameTableViewImpl implements GameTableView {
         this.menuButton.setOnAction(e -> handler.run());
     }
 
-    public HBox getDealerCardBox() {
+    @FXML
+    private HBox getDealerCardBox() {
         return this.dealerCardsBox;
     }
 
-    public HBox getPlayer1CardBox() {
+    @FXML
+    private HBox getPlayer1CardBox() {
         return this.player1CardsBox;
     }
 
-    public HBox getPlayer2CardBox() {
+    @FXML
+    private HBox getPlayer2CardBox() {
         return this.player2CardsBox;
+    }
+
+    @Override
+    public void updateDealerCard(final List<Card> cards) {
+        Platform.runLater(() -> {
+            this.dealerCardsBox.getChildren().clear();
+            for (final Card c : cards) {
+                this.dealerCardsBox.getChildren().add(new CardViewImpl(c));
+            }
+        });
+    }
+
+    @Override
+    public void updatePlayer1Cards(final List<Card> cards) {
+        Platform.runLater(() -> {
+            this.player1CardsBox.getChildren().clear();
+            for (final Card c : cards) {
+                this.player1CardsBox.getChildren().add(new CardViewImpl(c));
+            }
+        });
+    }
+
+    @Override
+    public void updatePlayer2Cards(final List<Card> cards) {
+        Platform.runLater(() -> {
+            this.player2CardsBox.getChildren().clear();
+            for (final Card c : cards) {
+                this.player2CardsBox.getChildren().add(new CardViewImpl(c));
+            }
+        });
+    }
+
+    @Override
+    public void setPlayerNames(String name1, String name2) {
+       this.player1Title.setText(name1.toUpperCase());
+       this.player2Title.setText(name2.toUpperCase());
     }
     
 }
