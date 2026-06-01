@@ -3,8 +3,6 @@ package it.unibo.chaosjack;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.Action;
-
 import it.unibo.chaosjack.controller.api.GameFlowController;
 import it.unibo.chaosjack.controller.impl.ActionControllerImpl;
 import it.unibo.chaosjack.controller.impl.GameFlowControllerImpl;
