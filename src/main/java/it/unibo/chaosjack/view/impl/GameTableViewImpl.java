@@ -193,32 +193,32 @@ public class GameTableViewImpl implements GameTableView {
 
     @Override
     public void updateDealerCard(final List<Card> cards) {
-        Platform.runLater(() -> {
+        
             this.dealerCardsBox.getChildren().clear();
             for (final Card c : cards) {
                 this.dealerCardsBox.getChildren().add(new CardViewImpl(c));
             }
-        });
+        
     }
 
     @Override
     public void updatePlayer1Cards(final List<Card> cards) {
-        Platform.runLater(() -> {
+        
             this.player1CardsBox.getChildren().clear();
             for (final Card c : cards) {
                 this.player1CardsBox.getChildren().add(new CardViewImpl(c));
             }
-        });
+       
     }
 
     @Override
     public void updatePlayer2Cards(final List<Card> cards) {
-        Platform.runLater(() -> {
+        
             this.player2CardsBox.getChildren().clear();
             for (final Card c : cards) {
                 this.player2CardsBox.getChildren().add(new CardViewImpl(c));
             }
-        });
+       
     }
 
     @Override

@@ -70,7 +70,7 @@ public class GameFlowControllerImpl implements GameFlowController {
     }
 
     public void newGame() {
-        System.err.println("new game");
+        
         gameEngine.resetGame();
         gameEngine.nextTurn(); // faccio partire il gioco e faccio avanzare il turno in modo che arrivi al primo giocatore
         tableView.setGameState(Table.State.FIRST_BET);

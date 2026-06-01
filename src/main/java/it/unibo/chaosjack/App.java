@@ -5,6 +5,7 @@ import it.unibo.chaosjack.view.impl.ViewManagerImpl;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+
 public class App extends Application {
 
     @Override
