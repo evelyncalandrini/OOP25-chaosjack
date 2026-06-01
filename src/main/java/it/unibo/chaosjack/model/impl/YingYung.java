@@ -28,4 +28,9 @@ public final class YingYung implements SpecialRound {
             }
             return score;
         }
+
+    @Override
+    public String getDescription() {
+        return "Ying Yung";
+    }
 }

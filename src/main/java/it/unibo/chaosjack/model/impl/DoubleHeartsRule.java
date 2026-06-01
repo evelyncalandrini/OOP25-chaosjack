@@ -22,4 +22,10 @@ public class DoubleHeartsRule implements SpecialRound {
         return score;
     }
 
+    @Override
+    public String getDescription() {
+        return "Double Hearts Rule";
+    }
+
+
 }

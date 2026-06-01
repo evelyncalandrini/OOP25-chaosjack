@@ -96,9 +96,10 @@ public final class GameEngineImpl implements GameEngine {
             ++currentPlayerIndex;
          } else {
             this.currentPlayerIndex = 0;
-            if (this.table.getCurrentState() == this.stateStartOfGame) {
+            /*if (this.table.getCurrentState() == this.stateStartOfGame) {
                 this.table.stepPassage();
-            }
+            }*/
+            this.table.stepPassage();
             this.stateStartOfGame = this.table.getCurrentState();
         
          }
@@ -183,6 +184,11 @@ public final class GameEngineImpl implements GameEngine {
         this.deck.draw().ifPresent(this.dealer::addCard);
         this.deck.draw().ifPresent(this.dealer::addCard);
         
+    }
+
+    @Override
+    public SpecialRound getSpecialRound() {
+        return this.specialRound.orElse(null);
     }
 
    }

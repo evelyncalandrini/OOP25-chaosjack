@@ -96,4 +96,6 @@ public interface GameEngine {
 
     void initialCards();
 
+    SpecialRound getSpecialRound();
+
 }

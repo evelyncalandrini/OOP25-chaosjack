@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public final class HandImpl implements Hand {
 
     private static final int MAX_SCORE = 21;
-    private static final int ACE_VALUE = 11;
+    //private static final int ACE_VALUE = 11;
 
     private final List<Card> cards = new ArrayList<>();
 
@@ -27,7 +27,7 @@ public final class HandImpl implements Hand {
 
         for (final Card c : cards) {
              score += c.getValue();
-              if (c.getValue() == ACE_VALUE) {
+              if (c.getName().contains("ACE")) {
                 assesCount++;
               }
         }

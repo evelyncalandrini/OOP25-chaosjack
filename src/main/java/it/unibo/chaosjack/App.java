@@ -12,6 +12,7 @@ import it.unibo.chaosjack.model.api.GameEngine;
 import it.unibo.chaosjack.model.api.Partecipant;
 import it.unibo.chaosjack.model.impl.DealerImpl;
 import it.unibo.chaosjack.model.impl.GameEngineImpl;
+import it.unibo.chaosjack.model.impl.NPCimpl;
 import it.unibo.chaosjack.model.impl.PlayerImpl;
 import it.unibo.chaosjack.model.impl.StandardDeck;
 import it.unibo.chaosjack.model.impl.StandardWallet;
