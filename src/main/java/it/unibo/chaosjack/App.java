@@ -3,8 +3,6 @@ package it.unibo.chaosjack;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.Action;
-
 import it.unibo.chaosjack.controller.api.GameFlowController;
 import it.unibo.chaosjack.controller.impl.ActionControllerImpl;
 import it.unibo.chaosjack.controller.impl.GameFlowControllerImpl;
@@ -14,6 +12,7 @@ import it.unibo.chaosjack.model.api.GameEngine;
 import it.unibo.chaosjack.model.api.Partecipant;
 import it.unibo.chaosjack.model.impl.DealerImpl;
 import it.unibo.chaosjack.model.impl.GameEngineImpl;
+import it.unibo.chaosjack.model.impl.NPCimpl;
 import it.unibo.chaosjack.model.impl.PlayerImpl;
 import it.unibo.chaosjack.model.impl.StandardDeck;
 import it.unibo.chaosjack.model.impl.StandardWallet;
@@ -26,6 +25,7 @@ import it.unibo.chaosjack.view.api.ViewManager;
 import it.unibo.chaosjack.view.impl.ViewManagerImpl;
 import javafx.application.Application;
 import javafx.stage.Stage;
+
 
 public class App extends Application {
 

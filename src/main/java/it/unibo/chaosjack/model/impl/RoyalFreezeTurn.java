@@ -24,4 +24,9 @@ public final class RoyalFreezeTurn implements SpecialRound {
          }
          return score;
         } 
+
+    @Override
+    public String getDescription() {
+        return "Royal Freeze turn";
+    }
 }
