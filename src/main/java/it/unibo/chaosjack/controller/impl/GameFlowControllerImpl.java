@@ -60,7 +60,7 @@ public class GameFlowControllerImpl implements GameFlowController {
         });
 
         tableView.setBetHandler(amount -> {
-             
+             //tableView.setBetButton(false)
             this.actionController.bet(amount);
             
             this.phaseOfGame();
@@ -70,6 +70,7 @@ public class GameFlowControllerImpl implements GameFlowController {
 
     public void newGame() {
         
+        this.upDateView();
         gameEngine.resetGame();
         gameEngine.nextTurn(); 
         tableView.setGameState(Table.State.FIRST_BET);
@@ -88,8 +89,8 @@ public class GameFlowControllerImpl implements GameFlowController {
 
     @Override
     public void phaseOfGame() {
-        this.tableView.setActiveTurn(gameEngine.getCurrentPlayer().getName());
         this.upDateView();
+        this.tableView.setActiveTurn(gameEngine.getCurrentPlayer().getName());
         this.tableView.updatePot(this.table.getPot());
 
         if ( gameEngine.isGameOver()) { // da rivedere
@@ -118,7 +119,7 @@ public class GameFlowControllerImpl implements GameFlowController {
 
             case PLAYING:
                 tableView.setGameState(Table.State.PLAYING);
-
+                
                 if (gameEngine.getDealerHand().getCards().isEmpty()) {
                     gameEngine.initialCards();
                     this.upDateView();
@@ -159,7 +160,7 @@ public class GameFlowControllerImpl implements GameFlowController {
             && !(gameEngine.getCurrentPlayer() instanceof Dealer)) {
 
             tableView.setPlayerButtons(false);
-            tableView.setBetButton(false);
+            tableView.setBetButton(true);
             return;
         } 
 

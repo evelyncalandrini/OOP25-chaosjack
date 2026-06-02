@@ -96,11 +96,13 @@ public final class GameEngineImpl implements GameEngine {
             ++currentPlayerIndex;
          } else {
             this.currentPlayerIndex = 0;
-            /*if (this.table.getCurrentState() == this.stateStartOfGame) {
-                this.table.stepPassage();
-            }*/
+        
+           this.currentPlayer = players.get(currentPlayerIndex);
+           ++currentPlayerIndex;
+           
             this.table.stepPassage();
             this.stateStartOfGame = this.table.getCurrentState();
+            
         
          }
         } else {
