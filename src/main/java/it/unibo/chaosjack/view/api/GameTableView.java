@@ -10,7 +10,7 @@ import javafx.scene.Parent;
 /**
  * Represents the visual interface of the game table.
  */
-public interface GameTableView {
+public interface GameTableView extends GameScoreDisplay {
 
     /**
      * @return the root node.
