@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -67,6 +68,7 @@ public class GameTableViewImpl implements GameTableView {
         floattingTopBar.setPadding(new Insets(10));
         floattingTopBar.setPickOnBounds(false);
 
+        floattingTopBar.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         this.initLayout();
 
         this.mainRoot.getChildren().addAll(
