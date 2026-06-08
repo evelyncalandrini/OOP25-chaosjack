@@ -112,6 +112,11 @@ public interface GameTableView extends GameScoreDisplay {
     void updatePlayer2Cards(final List<Card> cards);
 
     /**
+     * Reset tablew view for new game.
+     */
+    void resetTable();
+    
+    /**
      * Dynamically assigns names to players.
      * @param name1 first player.
      * @param name2 second player.

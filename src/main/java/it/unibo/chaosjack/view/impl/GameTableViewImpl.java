@@ -14,9 +14,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -26,7 +27,7 @@ import javafx.scene.layout.VBox;
  */
 public class GameTableViewImpl implements GameTableView {
     private final StackPane mainRoot;
-    private final BorderPane root;
+    private final BorderPane gameTable;
     private final PauseMenuView pauseMenu;
     private final Label statusLabel = new Label("Phase: FIRST BET");
     private final Label potLabel = new Label("Pot: 0 fishes");
@@ -42,9 +43,12 @@ public class GameTableViewImpl implements GameTableView {
     private final Button bet50Button = new Button("50");
     private final Button bet100Button = new Button("100");
 
-    private final FlowPane dealerCardsBox = new FlowPane(17, 17);
+    /*private final FlowPane dealerCardsBox = new FlowPane(17, 17);
     private final FlowPane player1CardsBox = new FlowPane(17, 17);
-    private final FlowPane player2CardsBox = new FlowPane(17,17);
+    private final FlowPane player2CardsBox = new FlowPane(17,17);*/
+    private final HBox dealerCardsBox = new HBox(-40);
+    private final HBox player1CardsBox = new HBox(-40);
+    private final HBox player2CardsBox = new HBox(-40);
 
     private final Label specialRoundLabel = new Label("");
     private final Label player1Title = new Label("");
@@ -57,8 +61,8 @@ public class GameTableViewImpl implements GameTableView {
 
     public GameTableViewImpl() {
         this.mainRoot = new StackPane();
-        this.root = new BorderPane();
-        this.root.setStyle("-fx-background-color: #2E8B57;");
+        this.gameTable = new BorderPane();
+        this.gameTable.setStyle("-fx-background-color: #2E8B57;");
         this.pauseMenu = new PauseMenuViewImpl();
 
         menuButton.setStyle("-fx-background-color: #d92811; -fx-text-fill: white; -fx-font-size: 14px;");
@@ -72,10 +76,14 @@ public class GameTableViewImpl implements GameTableView {
         this.initLayout();
 
         this.mainRoot.getChildren().addAll(
-            this.root,
+            this.gameTable,
             floattingTopBar,
             this.pauseMenu.getRootNode()
         );
+
+        this.mainRoot.widthProperty().addListener((obs, oldVal, newVal) -> {
+            this.gameTable.requestLayout();
+        });
 
         StackPane.setAlignment(floattingTopBar, Pos.TOP_LEFT);
     }
@@ -92,14 +100,15 @@ public class GameTableViewImpl implements GameTableView {
 
         final VBox dealerArea = new VBox(10, dealerTitle, dealerScoreLabel, dealerCardsBox);
         dealerArea.setAlignment(Pos.CENTER);
-        dealerArea.setPadding(new Insets(20, 0, 0, 0));
+        dealerArea.setPadding(new Insets(10, 0, 0, 0));
         //menuButton.setStyle("-fx-background-color: #d92811; -fx-text-fill: white; -fx-font-size: 14px;");
         //pauseButton.setStyle("-fx-background-color: #ffaa00; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
+        //this.gameTable.setTop(dealerArea);
 
-        final HBox topBar = new HBox(10, menuButton, pauseButton);
+        /*final HBox topBar = new HBox(10, menuButton, pauseButton);
         topBar.setAlignment(Pos.TOP_LEFT);
         final VBox topContainer = new VBox(10, topBar, dealerArea);
-        this.root.setTop(topContainer);
+        this.root.setTop(topContainer);*/
 
         statusLabel.setStyle("-fx-text-fill: white; -fx-font-size: 24px;");
         potLabel.setStyle("-fx-text-fill: #FFD700; -fx-font-size: 20px;");
@@ -125,7 +134,7 @@ public class GameTableViewImpl implements GameTableView {
 
         final VBox centerArea = new VBox(20, specialRoundLabel, statusLabel, potLabel, buttonsBox, bettingBox);
         centerArea.setAlignment(Pos.CENTER);
-        this.root.setCenter(centerArea);    
+        //this.gameTable.setCenter(centerArea);    
 
         player1CardsBox.setAlignment(Pos.CENTER);
         player1CardsBox.setMinHeight(150);
@@ -138,23 +147,44 @@ public class GameTableViewImpl implements GameTableView {
 
         final VBox player1Area = new VBox(10, player1Title, player1ScoreLabel, player1CardsBox);
         player1Area.setAlignment(Pos.CENTER);
+        player1Area.setMinWidth(250);
 
         final VBox player2Area = new VBox(10, player2Title, player2ScoreLabel, player2CardsBox);
         player2Area.setAlignment(Pos.CENTER);
+        player1Area.setMinWidth(250);
 
-        final HBox playerContainer = new HBox(20, player1Area, player2Area);
+        final HBox playerContainer = new HBox(50, player1Area, player2Area);
         playerContainer.setAlignment(Pos.CENTER);
-
+        playerContainer.setFillHeight(true);
+        /* 
         BorderPane.setMargin(playerContainer, new Insets(0, 0, 60, 0));
-        this.root.setBottom(playerContainer);
+        this.gameTable.setBottom(playerContainer);*/
+        final ScrollPane scrollPane = new ScrollPane(playerContainer);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setMinHeight(200);
+        scrollPane.setStyle("-fx-background-color: transparent; -fx-background: #2E8B57; -fx-border-color: transparent;");
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        this.gameTable.setBottom(scrollPane);
+        BorderPane.setAlignment(scrollPane, Pos.BOTTOM_CENTER);
 
-        player1Area.maxWidthProperty().bind(root.widthProperty().divide(2).subtract(20));
-        player2Area.maxWidthProperty().bind(root.widthProperty().divide(2).subtract(20));
+        //player1Area.maxWidthProperty().bind(scrollPane.widthProperty().divide(2).subtract(20));
+        //player2Area.maxWidthProperty().bind(scrollPane.widthProperty().divide(2).subtract(20));
         
-        dealerCardsBox.prefWrapLengthProperty().bind(root.widthProperty().subtract(100));
-        player1CardsBox.prefWrapLengthProperty().bind(root.widthProperty().divide(2).subtract(20));
-        player2CardsBox.prefWrapLengthProperty().bind(root.widthProperty().divide(2).subtract(20));
+        //dealerCardsBox.prefWrapLengthProperty().bind(this.gameTable.widthProperty().subtract(100));
+        //player1CardsBox.prefWrapLengthProperty().bind(scrollPane.widthProperty().divide(2).subtract(20));
+        //player2CardsBox.prefWrapLengthProperty().bind(scrollPane.widthProperty().divide(2).subtract(20));
 
+        final VBox mainTableLayout = new VBox(0);
+        mainTableLayout.setFillWidth(true);
+        mainTableLayout.getChildren().addAll(dealerArea, centerArea, scrollPane);
+        
+        VBox.setVgrow(dealerArea, Priority.NEVER);
+        VBox.setVgrow(centerArea, Priority.ALWAYS);
+        VBox.setVgrow(scrollPane, Priority.NEVER);
+
+        this.gameTable.setCenter(mainTableLayout);
         this.setGameState(Table.State.FIRST_BET);
     }
     
@@ -260,17 +290,17 @@ public class GameTableViewImpl implements GameTableView {
     }
 
     @FXML
-    private FlowPane getDealerCardBox() {
+    private HBox getDealerCardBox() {
         return this.dealerCardsBox;
     }
 
     @FXML
-    private FlowPane getPlayer1CardBox() {
+    private HBox getPlayer1CardBox() {
         return this.player1CardsBox;
     }
 
     @FXML
-    private FlowPane getPlayer2CardBox() {
+    private HBox getPlayer2CardBox() {
         return this.player2CardsBox;
     }
 
@@ -329,6 +359,22 @@ public class GameTableViewImpl implements GameTableView {
         Platform.runLater(() -> 
             this.dealerScoreLabel.setText("Score : " + score)
         );
+    }
+
+    @Override
+    public void resetTable() {
+        Platform.runLater(() -> {
+            this.dealerCardsBox.getChildren().clear();
+            this.player1CardsBox.getChildren().clear();
+            this.player2CardsBox.getChildren().clear();
+
+            this.player1ScoreLabel.setText("Score: 0");
+            this.player2ScoreLabel.setText("Score: 0");
+            this.dealerScoreLabel.setText("Score: 0");
+
+            this.setActiveTurn(null);
+            this.setSpecialRound(null);
+        });
     }
     
 }

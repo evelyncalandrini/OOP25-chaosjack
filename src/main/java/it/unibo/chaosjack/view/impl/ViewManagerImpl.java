@@ -47,6 +47,7 @@ public class ViewManagerImpl implements ViewManager{
         menuView.setStatsHandler(() -> this.showStatistics());
         menuView.setExitHandler(() -> System.exit(0));*/
         //this.mainMenu.setPlayHandler(() -> this.showGameTable());
+        
         this.mainMenu.setStatsHandler(() -> this.showStatistics());
         this.mainMenu.setExitHandler(() -> System.exit(0));
         

@@ -6,15 +6,26 @@ import java.util.List;
  * Rapresents the game table for the players.
  */
 public interface Table {
+
     /**
      * Rapresents the game phases managed by the table.
      */
-    enum State {
+    public enum State {
         FIRST_BET,
         PLAYING,
         FINAL_BET,
         DEALER_TURN,
-        RESULTS
+        RESULTS;
+
+        public State next() {
+            return switch (this) {
+                case FIRST_BET -> PLAYING;
+                case PLAYING -> FINAL_BET;
+                case FINAL_BET -> DEALER_TURN;
+                case DEALER_TURN -> RESULTS;
+                case RESULTS -> throw new IllegalStateException("The game is end");
+            };
+        }
     }
 
     /**

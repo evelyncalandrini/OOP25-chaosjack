@@ -51,17 +51,11 @@ public final class TableImpl implements Table {
 
     @Override
     public void stepPassage() {
-        if (this.currentState == State.FIRST_BET && getPot() > 0) {
-            this.currentState = State.PLAYING;
-        } else if (this.currentState == State.PLAYING) {
-            this.currentState = State.FINAL_BET;
-        } else if (this.currentState == State.FINAL_BET) {
-            this.currentState = State.DEALER_TURN;
-        } else if (this.currentState == State.DEALER_TURN) {
-            this.currentState = State.RESULTS;
-        } else {
-            throw new IllegalStateException("impossible step the phases");
-        }
+       if (this.currentState == State.FIRST_BET && getPot() <= 0){
+            throw new IllegalStateException();
+       }
+
+       this.currentState = this.currentState.next();
     }
 
     @Override
