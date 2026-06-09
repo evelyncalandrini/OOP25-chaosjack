@@ -268,10 +268,12 @@ public class GameTableViewImpl implements GameTableView {
             boolean isSpecial = ruleName != null && !ruleName.isEmpty();
 
             this.specialRoundLabel.setVisible(isSpecial);
-            this.specialRoundLabel.setManaged(isSpecial);
+            //this.specialRoundLabel.setManaged(isSpecial);
 
             if (isSpecial) {
                 this.specialRoundLabel.setText("SPECIAL ROUND: " + ruleName.toUpperCase());
+            } else {
+                this.specialRoundLabel.setText("SPECIAL ROUND: ");
             }
         });
     }
