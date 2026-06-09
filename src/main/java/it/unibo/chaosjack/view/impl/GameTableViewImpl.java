@@ -17,7 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -43,9 +42,6 @@ public class GameTableViewImpl implements GameTableView {
     private final Button bet50Button = new Button("50");
     private final Button bet100Button = new Button("100");
 
-    /*private final FlowPane dealerCardsBox = new FlowPane(17, 17);
-    private final FlowPane player1CardsBox = new FlowPane(17, 17);
-    private final FlowPane player2CardsBox = new FlowPane(17,17);*/
     private final HBox dealerCardsBox = new HBox(-40);
     private final HBox player1CardsBox = new HBox(-40);
     private final HBox player2CardsBox = new HBox(-40);
@@ -73,11 +69,15 @@ public class GameTableViewImpl implements GameTableView {
         floattingTopBar.setPickOnBounds(false);
 
         floattingTopBar.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        
+        this.specialRoundLabel.setPadding(new Insets(15));
+        
         this.initLayout();
 
         this.mainRoot.getChildren().addAll(
             this.gameTable,
             floattingTopBar,
+            this.specialRoundLabel,
             this.pauseMenu.getRootNode()
         );
 
@@ -86,6 +86,7 @@ public class GameTableViewImpl implements GameTableView {
         });
 
         StackPane.setAlignment(floattingTopBar, Pos.TOP_LEFT);
+        StackPane.setAlignment(this.specialRoundLabel, Pos.TOP_RIGHT);
     }
 
     private void initLayout() {
@@ -101,14 +102,6 @@ public class GameTableViewImpl implements GameTableView {
         final VBox dealerArea = new VBox(10, dealerTitle, dealerScoreLabel, dealerCardsBox);
         dealerArea.setAlignment(Pos.CENTER);
         dealerArea.setPadding(new Insets(10, 0, 0, 0));
-        //menuButton.setStyle("-fx-background-color: #d92811; -fx-text-fill: white; -fx-font-size: 14px;");
-        //pauseButton.setStyle("-fx-background-color: #ffaa00; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
-        //this.gameTable.setTop(dealerArea);
-
-        /*final HBox topBar = new HBox(10, menuButton, pauseButton);
-        topBar.setAlignment(Pos.TOP_LEFT);
-        final VBox topContainer = new VBox(10, topBar, dealerArea);
-        this.root.setTop(topContainer);*/
 
         statusLabel.setStyle("-fx-text-fill: white; -fx-font-size: 24px;");
         potLabel.setStyle("-fx-text-fill: #FFD700; -fx-font-size: 20px;");
@@ -130,11 +123,9 @@ public class GameTableViewImpl implements GameTableView {
 
         specialRoundLabel.setStyle("-fx-text-fill: #FF4500; -fx-font-size: 26px; -fx-font-weight: bold; -fx-effect: dropshodow(gaussian, black, 4, 1, 0, 0);");
         specialRoundLabel.setVisible(false);
-        specialRoundLabel.setManaged(false);
 
-        final VBox centerArea = new VBox(20, specialRoundLabel, statusLabel, potLabel, buttonsBox, bettingBox);
-        centerArea.setAlignment(Pos.CENTER);
-        //this.gameTable.setCenter(centerArea);    
+        final VBox centerArea = new VBox(20, statusLabel, potLabel, buttonsBox, bettingBox);
+        centerArea.setAlignment(Pos.CENTER);    
 
         player1CardsBox.setAlignment(Pos.CENTER);
         player1CardsBox.setMinHeight(150);
@@ -156,9 +147,7 @@ public class GameTableViewImpl implements GameTableView {
         final HBox playerContainer = new HBox(50, player1Area, player2Area);
         playerContainer.setAlignment(Pos.CENTER);
         playerContainer.setFillHeight(true);
-        /* 
-        BorderPane.setMargin(playerContainer, new Insets(0, 0, 60, 0));
-        this.gameTable.setBottom(playerContainer);*/
+        
         final ScrollPane scrollPane = new ScrollPane(playerContainer);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
@@ -166,25 +155,13 @@ public class GameTableViewImpl implements GameTableView {
         scrollPane.setStyle("-fx-background-color: transparent; -fx-background: #2E8B57; -fx-border-color: transparent;");
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        
+        this.gameTable.setTop(dealerArea);
+        this.gameTable.setCenter(centerArea);
+        
         this.gameTable.setBottom(scrollPane);
         BorderPane.setAlignment(scrollPane, Pos.BOTTOM_CENTER);
 
-        //player1Area.maxWidthProperty().bind(scrollPane.widthProperty().divide(2).subtract(20));
-        //player2Area.maxWidthProperty().bind(scrollPane.widthProperty().divide(2).subtract(20));
-        
-        //dealerCardsBox.prefWrapLengthProperty().bind(this.gameTable.widthProperty().subtract(100));
-        //player1CardsBox.prefWrapLengthProperty().bind(scrollPane.widthProperty().divide(2).subtract(20));
-        //player2CardsBox.prefWrapLengthProperty().bind(scrollPane.widthProperty().divide(2).subtract(20));
-
-        final VBox mainTableLayout = new VBox(0);
-        mainTableLayout.setFillWidth(true);
-        mainTableLayout.getChildren().addAll(dealerArea, centerArea, scrollPane);
-        
-        VBox.setVgrow(dealerArea, Priority.NEVER);
-        VBox.setVgrow(centerArea, Priority.ALWAYS);
-        VBox.setVgrow(scrollPane, Priority.NEVER);
-
-        this.gameTable.setCenter(mainTableLayout);
         this.setGameState(Table.State.FIRST_BET);
     }
     
@@ -268,7 +245,6 @@ public class GameTableViewImpl implements GameTableView {
             boolean isSpecial = ruleName != null && !ruleName.isEmpty();
 
             this.specialRoundLabel.setVisible(isSpecial);
-            //this.specialRoundLabel.setManaged(isSpecial);
 
             if (isSpecial) {
                 this.specialRoundLabel.setText("SPECIAL ROUND: " + ruleName.toUpperCase());
