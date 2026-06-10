@@ -83,49 +83,25 @@ public final class TableImpl implements Table {
         if (amount <= 0) {
             throw new IllegalArgumentException("The amount must be positive");
         }
-        if (!(currentState == State.FIRST_BET || currentState == State.FINAL_BET)) {
+        
+        if (!(currentState == State.FIRST_BET || currentState == State.FINAL_BET || currentState == State.PLAYING)) {
             throw new IllegalStateException("Betting is not allowed during the " + currentState + " phase");
         }
-        /* 
-        final var player = engine.getPlayers().stream()
-            .filter(p -> p.getName().equals(playerName))
-            .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("Player not found"));
 
-        try {
-            player.setBet(amount);
-            this.wallet.addFunds(amount);
+        if (!players.contains(playerName)) {
+          throw new IllegalArgumentException("Player not found at the table" + playerName); 
+        }
 
-            final int currentPot = playerPots.getOrDefault(playerName, 0);
-            playerPots.put(playerName, currentPot + amount);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Insufficient founds to place this bet");
+        if (!wallet.removeFunds(amount)) {
+            throw new IllegalArgumentException("Insufficient funds");
         }
-        /*if(!players.contains(playerName)) {
-            throw new IllegalArgumentException("Player non found at the table: " + playerName);
-        }*/
-        for (final String name : players) {
-            if (name.equals(playerName)) {
-                if (!wallet.removeFunds(amount)) {
-                    throw new IllegalArgumentException("insufficient founds");
-                }
-                final int currentPot = playerPots.getOrDefault(playerName, 0);
-                playerPots.put(playerName, currentPot + amount);
-            }
-        }
-        //wallet.addFunds(amount);
-        /*inal int currentPot = playerPots.getOrDefault(playerName, 0);
-        playerPots.put(playerName, currentPot + amount);*/
-        
-        /*if (haveAllPlayersBet()) {
-            this.stepPassage();
-        }*/
+
+        playerPots.merge(playerName, amount, Integer::sum);
     }
 
     @Override
     public int getPot() {
         return playerPots.values().stream().mapToInt(Integer::intValue).sum();
-        //return this.wallet.getBalance();
     }
 
     @Override

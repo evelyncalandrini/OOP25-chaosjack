@@ -144,6 +144,8 @@ class TableTest {
     void testBettingInWrongState() {
         table.placeBet(P2, STANDARD_BET);
         table.stepPassage();
+        table.stepPassage();
+        table.stepPassage();
         assertThrows(IllegalStateException.class, () -> table.placeBet(P1, POSITIVE_BET));
     }
 
