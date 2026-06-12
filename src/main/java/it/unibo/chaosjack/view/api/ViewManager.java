@@ -1,5 +1,7 @@
 package it.unibo.chaosjack.view.api;
 
+import it.unibo.chaosjack.model.api.Statistics;
+
 /**
  * The interface for managing game navigation.
  */
@@ -30,5 +32,5 @@ public interface ViewManager {
     /**
      * Statistics and scores.
      */
-    void showStatistics();
+    void showStatistics(Statistics stats);
 }

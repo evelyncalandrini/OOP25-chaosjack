@@ -1,7 +1,10 @@
 package it.unibo.chaosjack.view.impl;
 
+import it.unibo.chaosjack.model.api.Statistics;
+import it.unibo.chaosjack.model.impl.StatisticsImpl;
 import it.unibo.chaosjack.view.api.GameTableView;
 import it.unibo.chaosjack.view.api.MainMenuView;
+import it.unibo.chaosjack.view.api.StatisticsView;
 import it.unibo.chaosjack.view.api.ViewManager;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -9,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.transform.Scale;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -49,8 +53,11 @@ public class ViewManagerImpl implements ViewManager{
 
     @Override
     public void showMainMenu() {
-        this.mainMenu.setStatsHandler(() -> this.showStatistics());
-        this.mainMenu.setExitHandler(() -> System.exit(0));
+        /*this.mainMenu.setStatsHandler(() -> {
+            StatisticsImpl stats = new StatisticsImpl();
+            this.showStatistics(stats);
+        });
+        this.mainMenu.setExitHandler(() -> System.exit(0));*/
 
         switchView(this.mainMenu.getRootNode(), "#1a1a1a");
         this.stage.setTitle("ChaosJack - Main Menu");
@@ -70,9 +77,22 @@ public class ViewManagerImpl implements ViewManager{
     }
 
     @Override
-    public void showStatistics() {
-        this.stage.setTitle("ChaosJack - Statistics");
-        this.stage.show();
+    public void showStatistics(Statistics stats) {
+        final StatisticsView statsView = new StatisticsViewImpl();
+        Parent statsRoot = statsView.createRoot(stats, () -> {
+            this.showMainMenu();
+        });
+
+        stage.setTitle("ChaosJack - Statistics");
+
+        
+        /*final Scene scene = new Scene(statsView.createRoot(stats, ), 800, 500);
+        
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        this.stage.show();*/
+        switchView(statsRoot, "#2b2b2b");
     }
 
     private void switchView(Parent rootContent, String backgroundColor) {

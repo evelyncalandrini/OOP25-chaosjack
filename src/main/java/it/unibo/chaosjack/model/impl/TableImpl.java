@@ -68,7 +68,6 @@ public final class TableImpl implements Table {
         this.playerPots.clear();
         this.statistics.resetStats();
         this.currentState = State.FIRST_BET;
-        this.statistics.incrementTotalRound();
     }
 
     @Override
@@ -89,10 +88,6 @@ public final class TableImpl implements Table {
         if (!players.contains(playerName)) {
           throw new IllegalArgumentException("Player not found at the table" + playerName); 
         }
-
-        /*if (!wallet.removeFunds(amount)) {
-            throw new IllegalArgumentException("Insufficient funds");
-        }*/
 
         playerPots.merge(playerName, amount, Integer::sum);
     }
@@ -139,7 +134,6 @@ public final class TableImpl implements Table {
 
     @Override
     public int getWalletBalance(final String playerName) {
-        //return wallet.getBalance();
         return engine.getPlayers().stream()
             .filter(p -> p.getName().equals(playerName))
             .findFirst()
