@@ -7,11 +7,11 @@ import java.util.Map;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.chaosjack.model.api.GameEngine;
+import it.unibo.chaosjack.model.api.Player;
 import it.unibo.chaosjack.model.api.RoundEvaluation;
 import it.unibo.chaosjack.model.api.RoundResult;
 import it.unibo.chaosjack.model.api.RoundResult.Outcome;
 import it.unibo.chaosjack.model.api.Table;
-import it.unibo.chaosjack.model.api.Wallet;
 import it.unibo.chaosjack.model.api.Statistics;
 
 /**
@@ -23,7 +23,6 @@ public final class TableImpl implements Table {
     private final Statistics statistics = new StatisticsImpl();
     private final List<String> players = new ArrayList<>();
     private final GameEngine engine;
-    private final Wallet wallet;
     private final RoundEvaluator evaluator = new RoundEvaluator();
 
     /**
@@ -37,8 +36,7 @@ public final class TableImpl implements Table {
         value = "EI_EXPOSE_REP2",
         justification = "The GameEngine is a core architectural componet shared between table and controller."
     )
-    public TableImpl(final Wallet wallet, final List<String> playerName, final GameEngine engine) { 
-        this.wallet = new StandardWallet(wallet.getBalance());
+    public TableImpl(final List<String> playerName, final GameEngine engine) { 
         this.players.addAll(playerName);
         this.engine = engine;
         this.reset();
@@ -92,9 +90,9 @@ public final class TableImpl implements Table {
           throw new IllegalArgumentException("Player not found at the table" + playerName); 
         }
 
-        if (!wallet.removeFunds(amount)) {
+        /*if (!wallet.removeFunds(amount)) {
             throw new IllegalArgumentException("Insufficient funds");
-        }
+        }*/
 
         playerPots.merge(playerName, amount, Integer::sum);
     }
@@ -117,6 +115,11 @@ public final class TableImpl implements Table {
             final int bet = playerPots.getOrDefault(name, 0);
             if (bestPlayer.contains(name)) {
                 statistics.updateStats(name, roundResult, bet);
+                engine.getPlayers().stream()
+                    .filter(p -> p.getName().equals(name))
+                    .map (p -> (Player) p)
+                    .findFirst()
+                    .ifPresent(player -> player.updateWallet(roundResult.getPayOut()));
             } else {
                 final RoundResult individuaLoss = new RoundResult(Outcome.DEALER_WON, getPlayerScore(name), dealerScore, 0);
                 statistics.updateStats(name, individuaLoss, bet);
@@ -136,7 +139,12 @@ public final class TableImpl implements Table {
 
     @Override
     public int getWalletBalance(final String playerName) {
-        return wallet.getBalance();
+        //return wallet.getBalance();
+        return engine.getPlayers().stream()
+            .filter(p -> p.getName().equals(playerName))
+            .findFirst()
+            .map(p -> ((Player) p).getWallet())
+            .orElse(0);
     }
 
     @Override

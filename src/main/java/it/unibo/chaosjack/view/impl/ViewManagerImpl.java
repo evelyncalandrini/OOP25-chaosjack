@@ -62,7 +62,7 @@ public class ViewManagerImpl implements ViewManager{
     @Override
     public void showGameTable() {
         this.gameTable.setMenuHandler(() -> this.showMainMenu());
-        switchView(this.gameTable.getRootNode(), "#2e8b57");
+        switchView(this.gameTable.getRootNode(), "#2E8B57");
         this.stage.setTitle("ChaosJack - Table of Game");
         if (!this.stage.isShowing()) {
             this.stage.show();

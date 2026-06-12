@@ -55,6 +55,9 @@ public class GameTableViewImpl implements GameTableView {
     private final Label player2ScoreLabel = new Label("");
     private final Label dealerScoreLabel = new Label("");
 
+    private final Label player1WalletLabel = new Label("");
+    private final Label player2WalletLabel = new Label("");
+
     public GameTableViewImpl() {
         this.mainRoot = new StackPane();
         this.gameTable = new BorderPane();
@@ -107,7 +110,7 @@ public class GameTableViewImpl implements GameTableView {
         potLabel.setStyle("-fx-text-fill: #FFD700; -fx-font-size: 20px;");
         
         bet10Button.setStyle("-fx-font-size: 14px; -fx-base: #B0CA;");
-        bet50Button.setStyle("-fx-font-size: 14px; -fx-base: #FF69B4;");
+        bet50Button.setStyle("-fx-font-size: 14px; -fx-base: #8f1150;");
         bet100Button.setStyle("-fx-font-size: 14px; -fx-base: #000000; -fx-text-fill: white;");
         final HBox bettingBox = new HBox(15, bet10Button, bet50Button, bet100Button);
         bettingBox.setAlignment(Pos.BASELINE_CENTER);
@@ -121,7 +124,7 @@ public class GameTableViewImpl implements GameTableView {
         buttonsBox.setAlignment(Pos.CENTER);
         buttonsBox.setPadding(new Insets(20, 0, 0, 0));
 
-        specialRoundLabel.setStyle("-fx-text-fill: #FF4500; -fx-font-size: 26px; -fx-font-weight: bold; -fx-effect: dropshodow(gaussian, black, 4, 1, 0, 0);");
+        specialRoundLabel.setStyle("-fx-text-fill: #ffaa00; -fx-font-size: 26px; -fx-font-weight: bold; -fx-effect: dropshodow(gaussian, black, 4, 1, 0, 0);");
         specialRoundLabel.setVisible(false);
 
         final VBox centerArea = new VBox(20, statusLabel, potLabel, buttonsBox, bettingBox);
@@ -136,11 +139,15 @@ public class GameTableViewImpl implements GameTableView {
         player1Title.setStyle("-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;");
         player2Title.setStyle("-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;");
 
-        final VBox player1Area = new VBox(10, player1Title, player1ScoreLabel, player1CardsBox);
+        String walletStyle = "-fx-text-fill: #900676; -fx-font-size: 14px; -fx-font-weight: bold;";
+        player1WalletLabel.setStyle(walletStyle);
+        player2WalletLabel.setStyle(walletStyle);
+
+        final VBox player1Area = new VBox(10, player1Title, player1ScoreLabel, player1WalletLabel, player1CardsBox);
         player1Area.setAlignment(Pos.CENTER);
         player1Area.setMinWidth(250);
 
-        final VBox player2Area = new VBox(10, player2Title, player2ScoreLabel, player2CardsBox);
+        final VBox player2Area = new VBox(10, player2Title, player2ScoreLabel, player2WalletLabel, player2CardsBox);
         player2Area.setAlignment(Pos.CENTER);
         player1Area.setMinWidth(250);
 
@@ -179,6 +186,7 @@ public class GameTableViewImpl implements GameTableView {
     public void setGameState(Table.State state) {
         Platform.runLater(() -> {
            this.statusLabel.setText("Current phase: " + state.name());
+           this.statusLabel.setStyle("-fx-text-fill: white; -fx-font-size: 24px;");
         });
     }
 
@@ -340,6 +348,20 @@ public class GameTableViewImpl implements GameTableView {
     }
 
     @Override
+    public void setPlayer1Wallet(int balance) {
+        Platform.runLater(() -> 
+            this.player1WalletLabel.setText("Wallet : " + balance + " fishes")
+        );
+    }
+
+    @Override
+    public void setPlayer2Wallet(int balance) {
+        Platform.runLater(() -> 
+            this.player2WalletLabel.setText("Wallet : " + balance + " fishes")
+        );
+    }
+
+    @Override
     public void resetTable() {
         Platform.runLater(() -> {
             this.dealerCardsBox.getChildren().clear();
@@ -350,8 +372,19 @@ public class GameTableViewImpl implements GameTableView {
             this.player2ScoreLabel.setText("Score: 0");
             this.dealerScoreLabel.setText("Score: 0");
 
+            this.player1ScoreLabel.setText("Wallet: 1000 fishes");
+            this.player2ScoreLabel.setText("Wallet 1000 fishes");
+
             this.setActiveTurn(null);
             this.setSpecialRound(null);
+        });
+    }
+
+    @Override
+    public void showResult(String resultMessage) {
+        Platform.runLater(() -> {
+           this.statusLabel.setText(resultMessage);
+           this.statusLabel.setStyle("-fx-text-fill: #FFD700; -fx-font-size: 28px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 3, 1, 0, 0);");
         });
     }
     

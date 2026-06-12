@@ -44,7 +44,7 @@ public class App extends Application {
 
         GameEngineImpl gameEngine = new GameEngineImpl(deck, players, dealer);
         Wallet wallet = new StandardWallet(1000);
-        Table table = new TableImpl(wallet, List.of("giocatore1", "giocatore2"), gameEngine);
+        Table table = new TableImpl(List.of("giocatore1", "giocatore2"), gameEngine);
         gameEngine.setTable(table);
 
         ActionControllerImpl actionController = new ActionControllerImpl(table, gameEngine);
