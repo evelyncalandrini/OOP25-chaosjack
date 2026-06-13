@@ -15,8 +15,11 @@ import it.unibo.chaosjack.model.impl.YingYung;
 import it.unibo.chaosjack.view.api.GameTableView;
 import it.unibo.chaosjack.view.api.MainMenuView;
 import it.unibo.chaosjack.view.api.ViewManager;
+import it.unibo.chaosjack.view.api.PauseMenuView;
+import it.unibo.chaosjack.view.api.GameScoreDisplay;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
+
 
 public class GameFlowControllerImpl implements GameFlowController {
 
@@ -26,15 +29,19 @@ public class GameFlowControllerImpl implements GameFlowController {
     private GameTableView tableView;
     private MainMenuView mainMenuView;
     private ViewManager viewManager;
+    private PauseMenuView pauseMenu;
+    
 
     public GameFlowControllerImpl(final GameEngine gameEngine, final ActionController actionController, final GameTableView tableView,
-        final MainMenuView mainMenuView, final ViewManager viewManager, final Table table) {
+        final MainMenuView mainMenuView, final ViewManager viewManager, final Table table, final PauseMenuView pause) {
         this.gameEngine = gameEngine;
         this.actionController = actionController;
         this.tableView = tableView;
         this.mainMenuView = mainMenuView;
         this.viewManager = viewManager;
         this.table = table;
+        this.pauseMenu = pause;
+       
 
         this.connectButtons();
         
@@ -45,6 +52,24 @@ public class GameFlowControllerImpl implements GameFlowController {
         mainMenuView.setPlayHandler(() -> {
             this.viewManager.showGameTable();
             this.newGame();
+        });
+
+        tableView.setPauseHandler(() -> {
+            tableView.getPauseMenu().setVisible(true);
+        });
+
+        tableView.getPauseMenu().setResumeHandler(() -> {
+            tableView.getPauseMenu().setVisible(false);
+        });
+
+        tableView.getPauseMenu().setRestartHanlder(() -> {
+            tableView.getPauseMenu().setVisible(false);
+            this.newGame();
+        });
+
+        tableView.getPauseMenu().setExitHandler(() -> {
+            tableView.getPauseMenu().setVisible(false);
+            this.viewManager.showMainMenu();
         });
 
         tableView.setHitHandler(() -> {
@@ -72,12 +97,17 @@ public class GameFlowControllerImpl implements GameFlowController {
         
         this.upDateView();
         gameEngine.resetGame();
+        this.reset_score();
+        tableView.setDealerScore(0);
+        this.tableView.updatePot(0);
         gameEngine.nextTurn(); 
         tableView.setGameState(Table.State.FIRST_BET);
+        this.tableView.setBetButton(false);
+        this.tableView.setPlayerButtons(true);
 
         Random random = new Random();
         if (random.nextInt(100) < 20) {
-            gameEngine.setSpecialRound(this.chooseSpecialRound());
+            gameEngine.setSpecialRound(this.chooseSpecialRound()); //this.chooseSpecialRound()
         } else {
             gameEngine.setSpecialRound(null);
         }
@@ -224,7 +254,26 @@ public class GameFlowControllerImpl implements GameFlowController {
             tableView.updatePlayer2Cards(gameEngine.getPlayers().get(1).getHand().getCards());
         }
 
+        for (int i = 0; i < gameEngine.getPlayers().size(); i++) {
+            if (i==0) {
+                tableView.setPlayer1Score(gameEngine.currentScore(gameEngine.getPlayers().get(i).getHand()));
+            } else if (i==1) {
+                tableView.setPlayer2Score(gameEngine.currentScore(gameEngine.getPlayers().get(1).getHand()));
+            }
+        }
 
+        tableView.setDealerScore(gameEngine.currentScore(gameEngine.getDealerHand()));
+
+
+    }
+
+    private void reset_score() {
+        if (gameEngine.getPlayers().size() >= 2) {
+            tableView.setPlayer1Score(0);
+            tableView.setPlayer2Score(0);
+        } else {
+            tableView.setPlayer1Score(0);
+        }
     }
 
 }

@@ -30,6 +30,9 @@ public final class HandImpl implements Hand {
               if (c.getName().contains("ACE")) {
                 assesCount++;
               }
+              if (score < 0) {
+            score = 0;
+        }
         }
 
         while (score > MAX_SCORE && assesCount > 0) { 
