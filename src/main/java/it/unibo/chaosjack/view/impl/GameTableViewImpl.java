@@ -14,8 +14,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -26,7 +26,7 @@ import javafx.scene.layout.VBox;
  */
 public class GameTableViewImpl implements GameTableView {
     private final StackPane mainRoot;
-    private final BorderPane root;
+    private final BorderPane gameTable;
     private final PauseMenuView pauseMenu;
     private final Label statusLabel = new Label("Phase: FIRST BET");
     private final Label potLabel = new Label("Pot: 0 fishes");
@@ -42,9 +42,9 @@ public class GameTableViewImpl implements GameTableView {
     private final Button bet50Button = new Button("50");
     private final Button bet100Button = new Button("100");
 
-    private final FlowPane dealerCardsBox = new FlowPane(17, 17);
-    private final FlowPane player1CardsBox = new FlowPane(17, 17);
-    private final FlowPane player2CardsBox = new FlowPane(17,17);
+    private final HBox dealerCardsBox = new HBox(-40);
+    private final HBox player1CardsBox = new HBox(-40);
+    private final HBox player2CardsBox = new HBox(-40);
 
     private final Label specialRoundLabel = new Label("");
     private final Label player1Title = new Label("");
@@ -55,10 +55,13 @@ public class GameTableViewImpl implements GameTableView {
     private final Label player2ScoreLabel = new Label("");
     private final Label dealerScoreLabel = new Label("");
 
+    private final Label player1WalletLabel = new Label("");
+    private final Label player2WalletLabel = new Label("");
+
     public GameTableViewImpl() {
         this.mainRoot = new StackPane();
-        this.root = new BorderPane();
-        this.root.setStyle("-fx-background-color: #2E8B57;");
+        this.gameTable = new BorderPane();
+        this.gameTable.setStyle("-fx-background-color: #2E8B57;");
         this.pauseMenu = new PauseMenuViewImpl();
 
         menuButton.setStyle("-fx-background-color: #d92811; -fx-text-fill: white; -fx-font-size: 14px;");
@@ -69,15 +72,24 @@ public class GameTableViewImpl implements GameTableView {
         floattingTopBar.setPickOnBounds(false);
 
         floattingTopBar.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        
+        this.specialRoundLabel.setPadding(new Insets(15));
+        
         this.initLayout();
 
         this.mainRoot.getChildren().addAll(
-            this.root,
+            this.gameTable,
             floattingTopBar,
+            this.specialRoundLabel,
             this.pauseMenu.getRootNode()
         );
 
+        this.mainRoot.widthProperty().addListener((obs, oldVal, newVal) -> {
+            this.gameTable.requestLayout();
+        });
+
         StackPane.setAlignment(floattingTopBar, Pos.TOP_LEFT);
+        StackPane.setAlignment(this.specialRoundLabel, Pos.TOP_RIGHT);
     }
 
     private void initLayout() {
@@ -92,20 +104,13 @@ public class GameTableViewImpl implements GameTableView {
 
         final VBox dealerArea = new VBox(10, dealerTitle, dealerScoreLabel, dealerCardsBox);
         dealerArea.setAlignment(Pos.CENTER);
-        dealerArea.setPadding(new Insets(20, 0, 0, 0));
-        //menuButton.setStyle("-fx-background-color: #d92811; -fx-text-fill: white; -fx-font-size: 14px;");
-        //pauseButton.setStyle("-fx-background-color: #ffaa00; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
-
-        final HBox topBar = new HBox(10, menuButton, pauseButton);
-        topBar.setAlignment(Pos.TOP_LEFT);
-        final VBox topContainer = new VBox(10, topBar, dealerArea);
-        this.root.setTop(topContainer);
+        dealerArea.setPadding(new Insets(10, 0, 0, 0));
 
         statusLabel.setStyle("-fx-text-fill: white; -fx-font-size: 24px;");
         potLabel.setStyle("-fx-text-fill: #FFD700; -fx-font-size: 20px;");
         
         bet10Button.setStyle("-fx-font-size: 14px; -fx-base: #B0CA;");
-        bet50Button.setStyle("-fx-font-size: 14px; -fx-base: #FF69B4;");
+        bet50Button.setStyle("-fx-font-size: 14px; -fx-base: #8f1150;");
         bet100Button.setStyle("-fx-font-size: 14px; -fx-base: #000000; -fx-text-fill: white;");
         final HBox bettingBox = new HBox(15, bet10Button, bet50Button, bet100Button);
         bettingBox.setAlignment(Pos.BASELINE_CENTER);
@@ -119,13 +124,11 @@ public class GameTableViewImpl implements GameTableView {
         buttonsBox.setAlignment(Pos.CENTER);
         buttonsBox.setPadding(new Insets(20, 0, 0, 0));
 
-        specialRoundLabel.setStyle("-fx-text-fill: #FF4500; -fx-font-size: 26px; -fx-font-weight: bold; -fx-effect: dropshodow(gaussian, black, 4, 1, 0, 0);");
+        specialRoundLabel.setStyle("-fx-text-fill: #ffaa00; -fx-font-size: 26px; -fx-font-weight: bold; -fx-effect: dropshodow(gaussian, black, 4, 1, 0, 0);");
         specialRoundLabel.setVisible(false);
-        specialRoundLabel.setManaged(false);
 
-        final VBox centerArea = new VBox(20, specialRoundLabel, statusLabel, potLabel, buttonsBox, bettingBox);
-        centerArea.setAlignment(Pos.CENTER);
-        this.root.setCenter(centerArea);    
+        final VBox centerArea = new VBox(20, statusLabel, potLabel, buttonsBox, bettingBox);
+        centerArea.setAlignment(Pos.CENTER);    
 
         player1CardsBox.setAlignment(Pos.CENTER);
         player1CardsBox.setMinHeight(150);
@@ -136,24 +139,35 @@ public class GameTableViewImpl implements GameTableView {
         player1Title.setStyle("-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;");
         player2Title.setStyle("-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;");
 
-        final VBox player1Area = new VBox(10, player1Title, player1ScoreLabel, player1CardsBox);
+        String walletStyle = "-fx-text-fill: #900676; -fx-font-size: 14px; -fx-font-weight: bold;";
+        player1WalletLabel.setStyle(walletStyle);
+        player2WalletLabel.setStyle(walletStyle);
+
+        final VBox player1Area = new VBox(10, player1Title, player1ScoreLabel, player1WalletLabel, player1CardsBox);
         player1Area.setAlignment(Pos.CENTER);
+        player1Area.setMinWidth(250);
 
-        final VBox player2Area = new VBox(10, player2Title, player2ScoreLabel, player2CardsBox);
+        final VBox player2Area = new VBox(10, player2Title, player2ScoreLabel, player2WalletLabel, player2CardsBox);
         player2Area.setAlignment(Pos.CENTER);
+        player1Area.setMinWidth(250);
 
-        final HBox playerContainer = new HBox(20, player1Area, player2Area);
+        final HBox playerContainer = new HBox(50, player1Area, player2Area);
         playerContainer.setAlignment(Pos.CENTER);
-
-        BorderPane.setMargin(playerContainer, new Insets(0, 0, 60, 0));
-        this.root.setBottom(playerContainer);
-
-        player1Area.maxWidthProperty().bind(root.widthProperty().divide(2).subtract(20));
-        player2Area.maxWidthProperty().bind(root.widthProperty().divide(2).subtract(20));
+        playerContainer.setFillHeight(true);
         
-        dealerCardsBox.prefWrapLengthProperty().bind(root.widthProperty().subtract(100));
-        player1CardsBox.prefWrapLengthProperty().bind(root.widthProperty().divide(2).subtract(20));
-        player2CardsBox.prefWrapLengthProperty().bind(root.widthProperty().divide(2).subtract(20));
+        final ScrollPane scrollPane = new ScrollPane(playerContainer);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setMinHeight(200);
+        scrollPane.setStyle("-fx-background-color: transparent; -fx-background: #2E8B57; -fx-border-color: transparent;");
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        
+        this.gameTable.setTop(dealerArea);
+        this.gameTable.setCenter(centerArea);
+        
+        this.gameTable.setBottom(scrollPane);
+        BorderPane.setAlignment(scrollPane, Pos.BOTTOM_CENTER);
 
         this.setGameState(Table.State.FIRST_BET);
     }
@@ -172,6 +186,7 @@ public class GameTableViewImpl implements GameTableView {
     public void setGameState(Table.State state) {
         Platform.runLater(() -> {
            this.statusLabel.setText("Current phase: " + state.name());
+           this.statusLabel.setStyle("-fx-text-fill: white; -fx-font-size: 24px;");
         });
     }
 
@@ -238,10 +253,11 @@ public class GameTableViewImpl implements GameTableView {
             boolean isSpecial = ruleName != null && !ruleName.isEmpty();
 
             this.specialRoundLabel.setVisible(isSpecial);
-            this.specialRoundLabel.setManaged(isSpecial);
 
             if (isSpecial) {
                 this.specialRoundLabel.setText("SPECIAL ROUND: " + ruleName.toUpperCase());
+            } else {
+                this.specialRoundLabel.setText("SPECIAL ROUND: ");
             }
         });
     }
@@ -260,17 +276,17 @@ public class GameTableViewImpl implements GameTableView {
     }
 
     @FXML
-    private FlowPane getDealerCardBox() {
+    private HBox getDealerCardBox() {
         return this.dealerCardsBox;
     }
 
     @FXML
-    private FlowPane getPlayer1CardBox() {
+    private HBox getPlayer1CardBox() {
         return this.player1CardsBox;
     }
 
     @FXML
-    private FlowPane getPlayer2CardBox() {
+    private HBox getPlayer2CardBox() {
         return this.player2CardsBox;
     }
 
@@ -329,6 +345,47 @@ public class GameTableViewImpl implements GameTableView {
         Platform.runLater(() -> 
             this.dealerScoreLabel.setText("Score : " + score)
         );
+    }
+
+    @Override
+    public void setPlayer1Wallet(int balance) {
+        Platform.runLater(() -> 
+            this.player1WalletLabel.setText("Wallet : " + balance + " fishes")
+        );
+    }
+
+    @Override
+    public void setPlayer2Wallet(int balance) {
+        Platform.runLater(() -> 
+            this.player2WalletLabel.setText("Wallet : " + balance + " fishes")
+        );
+    }
+
+    @Override
+    public void resetTable() {
+        Platform.runLater(() -> {
+            this.dealerCardsBox.getChildren().clear();
+            this.player1CardsBox.getChildren().clear();
+            this.player2CardsBox.getChildren().clear();
+
+            this.player1ScoreLabel.setText("Score: 0");
+            this.player2ScoreLabel.setText("Score: 0");
+            this.dealerScoreLabel.setText("Score: 0");
+
+            this.player1ScoreLabel.setText("Wallet: 1000 fishes");
+            this.player2ScoreLabel.setText("Wallet 1000 fishes");
+
+            this.setActiveTurn(null);
+            this.setSpecialRound(null);
+        });
+    }
+
+    @Override
+    public void showResult(String resultMessage) {
+        Platform.runLater(() -> {
+           this.statusLabel.setText(resultMessage);
+           this.statusLabel.setStyle("-fx-text-fill: #FFD700; -fx-font-size: 28px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, black, 3, 1, 0, 0);");
+        });
     }
     
 }

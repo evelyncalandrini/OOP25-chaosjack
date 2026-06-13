@@ -8,7 +8,6 @@ import it.unibo.chaosjack.controller.impl.ActionControllerImpl;
 import it.unibo.chaosjack.controller.impl.GameFlowControllerImpl;
 import it.unibo.chaosjack.model.api.Dealer;
 import it.unibo.chaosjack.model.api.Deck;
-import it.unibo.chaosjack.model.api.GameEngine;
 import it.unibo.chaosjack.model.api.Partecipant;
 import it.unibo.chaosjack.model.impl.DealerImpl;
 import it.unibo.chaosjack.model.impl.GameEngineImpl;
@@ -46,7 +45,7 @@ public class App extends Application {
 
         GameEngineImpl gameEngine = new GameEngineImpl(deck, players, dealer);
         Wallet wallet = new StandardWallet(1000);
-        Table table = new TableImpl(wallet, List.of("giocatore1", "giocatore2"), gameEngine);
+        Table table = new TableImpl(List.of("giocatore1", "giocatore2"), gameEngine);
         gameEngine.setTable(table);
 
         ActionControllerImpl actionController = new ActionControllerImpl(table, gameEngine);

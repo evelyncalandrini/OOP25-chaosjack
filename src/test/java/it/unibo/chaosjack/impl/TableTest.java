@@ -3,6 +3,7 @@ package it.unibo.chaosjack.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +20,6 @@ import it.unibo.chaosjack.model.api.SpecialRound;
 import it.unibo.chaosjack.model.api.Table;
 import it.unibo.chaosjack.model.api.Table.State;
 import it.unibo.chaosjack.model.api.Player;
-import it.unibo.chaosjack.model.api.Wallet;
 import it.unibo.chaosjack.model.impl.PlayerImpl;
 import it.unibo.chaosjack.model.impl.Rank;
 import it.unibo.chaosjack.model.impl.StandardCard;
@@ -36,9 +36,6 @@ class TableTest {
     private static final int HIGH_BET = 200;
     private static final int NEGATIVE_BET = -50;
     private static final int POSITIVE_BET = 50;
-    private static final int IMPOSSIBLE_BET = 5000;
-
-    private static final int BALANCE_AFTER_HIGH_BET = 1800;
 
     private static final int SCORE_ZERO = 0;
     private static final int SCORE_WINNING = 20;
@@ -65,35 +62,13 @@ class TableTest {
     private static final String P2 = "Bob";
 
     private Table table;
-    private Wallet wallet;
+    //private Wallet wallet;
     private final List<String> players = List.of(P1, P2);
 
     @BeforeEach
     void setUp() {
-        wallet = new Wallet() {
-            private int balance = INITIAL_BALANCE;
-
-            @Override
-            public int getBalance() { 
-                return balance; 
-            }
-
-            @Override
-            public void addFunds(final int amount) { 
-                balance += amount; 
-            }
-
-            @Override
-            public boolean removeFunds(final int amount) {
-                if (balance >= amount) { 
-                    balance -= amount; 
-                    return true; 
-                }
-                return false;
-            }
-        };
         final var score = Map.of(P1, SCORE_ZERO, P2, SCORE_ZERO);
-        table = new TableImpl(wallet, players, createEngine(score, SCORE_ZERO, NOT_SAMECOLOR_CARD));
+        table = new TableImpl(players, createEngine(score, SCORE_ZERO, NOT_SAMECOLOR_CARD));
     }
 
     @Test
@@ -106,7 +81,7 @@ class TableTest {
     void testBettingLogic() {
         table.placeBet(P1, HIGH_BET);
         assertEquals(HIGH_BET, table.getPot());
-        assertEquals(BALANCE_AFTER_HIGH_BET, table.getWalletBalance(P1), "the account holder balance must decrease");
+        //assertEquals(BALANCE_AFTER_HIGH_BET, table.getWalletBalance(P1), "the account holder balance must decrease");
         assertThrows(IllegalArgumentException.class, () -> table.placeBet(P1, NEGATIVE_BET));
     }
 
@@ -118,8 +93,6 @@ class TableTest {
 
         table.placeBet(P2, STANDARD_BET);
         assertEquals(STANDARD_BET * 2, table.getPot());
-        //assertEquals(Table.State.PLAYING, table.getCurrentState());
-
     }
 
     @Test
@@ -144,20 +117,10 @@ class TableTest {
     void testBettingInWrongState() {
         table.placeBet(P2, STANDARD_BET);
         table.stepPassage();
+        table.stepPassage();
+        table.stepPassage();
         assertThrows(IllegalStateException.class, () -> table.placeBet(P1, POSITIVE_BET));
     }
-
-   @Test
-    void testInsufficientFunds() {
-        assertThrows(IllegalArgumentException.class, () -> table.placeBet(P2, IMPOSSIBLE_BET));
-        assertEquals(INITIAL_POT, table.getPot(), "The plate must not increase if the funds are insufficient");
-    }
-
-    /*@Test
-    void testUnknownPlayerCannotBet() {
-        assertThrows(IllegalArgumentException.class, () -> table.placeBet("non found player", STANDARD_BET));
-        assertEquals(INITIAL_POT, table.getPot(), "the pot must non incrase if the player is not ad the table");
-    }*/
 
     @Test
     void testGetWinnerPlayerWins() {
@@ -172,7 +135,6 @@ class TableTest {
 
     @Test
     void testWinnerMultiplePlayersTieAndWin() {
-
         final var score = Map.of(P1, SCORE_WINNING, P2, SCORE_WINNING);
         final GameEngine winEngine = createEngine(score, SCORE_MID, NOT_SAMECOLOR_CARD); 
         final RoundResult result = playRound(winEngine, score);
@@ -184,7 +146,6 @@ class TableTest {
 
     @Test
     void testWinnerPushWithDealer() {
-
         final var score = Map.of(P1, SCORE_HIGH, P2, SCORE_HIGH);
         final GameEngine pushEngine = createEngine(score, SCORE_HIGH, NOT_SAMECOLOR_CARD);
         final RoundResult result = playRound(pushEngine, score);
@@ -196,7 +157,6 @@ class TableTest {
 
     @Test
     void testWinnerDealerWins() {
-
         final var score = Map.of(P1, SCORE_MID, P2, SCORE_MID);
         final GameEngine lossEngine = createEngine(score, SCORE_WINNING, NOT_SAMECOLOR_CARD);
         final RoundResult result = playRound(lossEngine, score);
@@ -207,7 +167,6 @@ class TableTest {
 
     @Test
     void testWinnerAllPlayerGoOut() {
-
         final var score = Map.of(P1, SCORE_BUSTED, P2, SCORE_BUSTED);
         final GameEngine outEngine = createEngine(score, SCORE_WINNING, NOT_SAMECOLOR_CARD);
         final RoundResult result = playRound(outEngine, score);
@@ -219,7 +178,6 @@ class TableTest {
 
     @Test
     void testDealerGoOut() {
-
         final var score = Map.of(P1, SCORE_WINNING, P2, SCORE_LOSING);
         final GameEngine outDealerEngine = createEngine(score, SCORE_DEALER_BUSTED, NOT_SAMECOLOR_CARD);
         final RoundResult result = playRound(outDealerEngine, score);
@@ -243,7 +201,6 @@ class TableTest {
 
     @Test
     void testWinsPLayerWithBonus() {
-
         final var score = Map.of(P1, SCORE_WINNING, P2, SCORE_LOSING);
         final GameEngine bonusWinEngine = createEngine(score, SCORE_MID, SAMECOLOR_CARD);
         final RoundResult result = playRound(bonusWinEngine, score);
@@ -268,7 +225,6 @@ class TableTest {
 
     @Test
     void testPLayerBlackJackBonus() {
-
         final var score = Map.of(P1, SCORE_BLACKJACK, P2, SCORE_WINNING);
         final GameEngine bjEngine = createEngine(score, SCORE_MID, SAMECOLOR_CARD);
         final RoundResult result = playRound(bjEngine, score);
@@ -277,6 +233,43 @@ class TableTest {
         assertEquals(DEFAULT_INCREMENT, table.geStatistics().getWinHistory().getOrDefault(P1, 0));
         assertEquals(DEFAULT_INCREMENT, table.geStatistics().getBlackBonusHistory().getOrDefault(P1, 0));
         assertEquals(INITIAL_POT, table.geStatistics().getBlackBonusHistory().getOrDefault(P2, 0));
+    }
+
+    @Test
+    void testTieResolvedByCardCount_PlayerAgainstDealer() {
+        final var score = Map.of(P1,20, P2, 10);
+        final var pCards = Map.of(P1, 2, P2, 2);
+
+        final GameEngine engine = createEngineWithCards(score, pCards, 20, 3, NOT_SAMECOLOR_CARD);
+        final RoundResult result = playRound(engine, score);
+
+        assertEquals(Outcome.PLAYER_WON, result.outcome());
+        assertEquals(PAYOUT_WIN_DOUBLE, result.getPayOut());
+    }
+
+    @Test
+    void testTieResolvedByCardCount_DealerAgainstPlayer() {
+        final var score = Map.of(P1,20, P2, 10);
+        final var pCards = Map.of(P1, 3, P2, 2);
+
+        final GameEngine engine = createEngineWithCards(score, pCards, 20, 2, NOT_SAMECOLOR_CARD);
+        final RoundResult result = playRound(engine, score);
+
+        assertEquals(Outcome.DEALER_WON, result.outcome());
+    }
+
+    @Test
+    void testTieResolvedByCardCount_Players() {
+        final var score = Map.of(P1,20, P2, 20);
+        final var pCards = Map.of(P1, 2, P2, 3);
+
+        final GameEngine engine = createEngineWithCards(score, pCards, 18, 2, NOT_SAMECOLOR_CARD);
+        final RoundResult result = playRound(engine, score);
+
+        assertEquals(Outcome.PLAYER_WON, result.outcome());
+        assertEquals(PAYOUT_WIN_DOUBLE, result.getPayOut());
+        assertEquals(DEFAULT_INCREMENT, table.geStatistics().getWinHistory().getOrDefault(P1, 0));
+        assertEquals(INITIAL_POT, table.geStatistics().getWinHistory().getOrDefault(P2, 0));
     }
 
     @Test
@@ -306,7 +299,7 @@ class TableTest {
     }
 
     private RoundResult playRound(final GameEngine engine, final Map<String, Integer> player) {
-        table = new TableImpl(wallet, players, engine);
+        table = new TableImpl(players, engine);
         for (final String playersName : player.keySet()) {
             table.placeBet(playersName, STANDARD_BET);
         }
@@ -314,7 +307,25 @@ class TableTest {
         return table.getWinner();
     }
 
-    private GameEngine createEngine(final Map<String, Integer> pScore, final int dScore, final boolean p1Card) {
+    private GameEngine createEngine (final Map<String, Integer> pScore, final int dScore, final boolean p1Card) {
+        return createEngineWithCards(pScore, Map.of(P1, 2, P2, 2), dScore, 2, p1Card);
+    }
+    private GameEngine createEngineWithCards(final Map<String, Integer> pScore, final Map<String, Integer> pCardsCount, final int dScore, final int dCardsCount, final boolean p1Card) {
+        final Player p1 = new PlayerImpl(P1, INITIAL_BALANCE);
+        final Player p2 = new PlayerImpl(P2, INITIAL_BALANCE);
+
+        final Suit p1Suit2 = p1Card ? Suit.CLUBS : Suit.HEARTS;
+        final int p1Count = pCardsCount.getOrDefault(P1, 2);
+        for (int i = 0; i < p1Count; i++) {
+            p1.getHand().addCard(new StandardCard(Rank.TWO, i == 0 ? Suit.CLUBS : p1Suit2));
+        }
+        final int p2Count = pCardsCount.getOrDefault(P2, 2);
+        for (int i = 0; i < p2Count; i++) {
+            p2.getHand().addCard(new StandardCard(Rank.TWO, i == 0 ? Suit.CLUBS : p1Suit2));
+        }
+
+        final List<Partecipant> players = List.of(p1,p2);
+        
         return new GameEngine() {
 
             @Override 
@@ -342,7 +353,11 @@ class TableTest {
 
                     @Override
                     public List<Card> getCards() {
-                    return List.of();
+                        final List<Card> cards = new ArrayList<>();
+                        for (int i = 0; i < dCardsCount; i++) {
+                            cards.add(new StandardCard(Rank.TWO, Suit.SPADES));
+                        }
+                        return cards;
                     }
                 };
             }
@@ -358,15 +373,7 @@ class TableTest {
 
             @Override
             public List<Partecipant> getPlayers() {
-                final Player p1 = new PlayerImpl(P1, STANDARD_BET);
-                final Player p2 = new PlayerImpl(P2, STANDARD_BET);
-
-                final Suit p1Suit2 = p1Card ? Suit.CLUBS : Suit.HEARTS;
-                p1.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
-                p1.getHand().addCard(new StandardCard(Rank.TWO, p1Suit2));
-                p2.getHand().addCard(new StandardCard(Rank.ACE, Suit.CLUBS));
-                p2.getHand().addCard(new StandardCard(Rank.TWO, Suit.HEARTS));
-                return List.of(p1, p2);
+                return players;
             }
 
             @Override

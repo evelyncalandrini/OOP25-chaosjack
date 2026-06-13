@@ -27,6 +27,7 @@ public class MainMenuViewImpl implements MainMenuView {
 
     private void initLayout() {
         this.root.setAlignment(Pos.CENTER);
+        this.root.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         this.root.setStyle("-fx-background-color: #1a1a1a;");
 
         final Label title = new Label("CHAOS JACK");

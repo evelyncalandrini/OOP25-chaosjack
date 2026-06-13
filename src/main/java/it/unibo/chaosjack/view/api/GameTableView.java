@@ -107,10 +107,21 @@ public interface GameTableView extends GameScoreDisplay {
 
     /**
      * Update grafic of second player's cards.
-     * @param cards
+     * @param cards .
      */
     void updatePlayer2Cards(final List<Card> cards);
 
+    /**
+     * Show the result of game.
+     * @param resultMessage .
+     */
+    void showResult(String resultMessage);
+
+    /**
+     * Reset tablew view for new game.
+     */
+    void resetTable();
+    
     /**
      * Dynamically assigns names to players.
      * @param name1 first player.

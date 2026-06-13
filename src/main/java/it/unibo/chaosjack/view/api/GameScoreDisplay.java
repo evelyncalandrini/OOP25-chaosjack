@@ -22,5 +22,17 @@ public interface GameScoreDisplay {
      * @param score of the hand.
      */
     void setDealerScore(int score);
+
+    /**
+     * Show player's wallet in the game.
+     * @param balance current balance.
+     */
+    void setPlayer1Wallet(int balance);
+
+    /**
+     * Show NPC player's wallet in the game.
+     * @param balance current balance.
+     */
+    void setPlayer2Wallet(int balance);
     
 }
