@@ -10,7 +10,7 @@ import javafx.scene.Parent;
 /**
  * Represents the visual interface of the game table.
  */
-public interface GameTableView {
+public interface GameTableView extends GameScoreDisplay {
 
     /**
      * @return the root node.
@@ -71,6 +71,17 @@ public interface GameTableView {
     void setMenuHandler(Runnable handler);
 
     /**
+     * 
+     */
+    PauseMenuView getPauseMenu();
+    
+    /**
+     * 
+     * @param handler
+     */
+    void setPauseHandler(final Runnable handler);
+    
+    /**
      * To see if we are in a special round.
      * @param ruleName name of round.
      */
@@ -96,10 +107,21 @@ public interface GameTableView {
 
     /**
      * Update grafic of second player's cards.
-     * @param cards
+     * @param cards .
      */
     void updatePlayer2Cards(final List<Card> cards);
 
+    /**
+     * Show the result of game.
+     * @param resultMessage .
+     */
+    void showResult(String resultMessage);
+
+    /**
+     * Reset tablew view for new game.
+     */
+    void resetTable();
+    
     /**
      * Dynamically assigns names to players.
      * @param name1 first player.

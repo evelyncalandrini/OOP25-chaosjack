@@ -12,7 +12,7 @@ import it.unibo.chaosjack.model.api.Statistics;
  */
 public final class StatisticsImpl implements Statistics {
 
-    private int totalRounds;
+    private int totalRounds = 0;
     private final Map<String, Integer> wins = new HashMap<>();
     private final Map<String, Integer> black = new HashMap<>();
     private final Map<String, Integer> bonusWin = new HashMap<>();
@@ -97,7 +97,7 @@ public final class StatisticsImpl implements Statistics {
 
     @Override
     public void resetStats() {
-        this.totalRounds = 0;
+        this.totalRounds = 1;
         wins.clear();
         losses.clear();
         pushes.clear();

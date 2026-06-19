@@ -20,7 +20,7 @@ class ActionControllerTest {
 
     @BeforeEach
     public void setUp() { //prima di ogni test devo fare  questo set up
-        table = new TableImpl(null, null, engine);
+        table = new TableImpl(null, engine);
         engine = new GameEngineImpl(null, null, null);
         controller = new ActionControllerImpl(table, engine);
     }
