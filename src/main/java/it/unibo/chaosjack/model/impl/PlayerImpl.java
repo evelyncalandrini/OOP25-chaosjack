@@ -31,6 +31,7 @@ public class PlayerImpl extends AbstractPlayer implements Player {
     public final void setBet(final int amount) {
         if (amount > 0 && amount <= this.getWallet()) {
             this.currentBet = amount;
+            this.updateWallet(-amount);
         } else {
             throw new IllegalArgumentException("Insufficient funds for the bet");
         }
