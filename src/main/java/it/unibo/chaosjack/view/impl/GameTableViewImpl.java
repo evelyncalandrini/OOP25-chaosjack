@@ -7,6 +7,7 @@ import it.unibo.chaosjack.model.api.Card;
 import it.unibo.chaosjack.model.api.Table;
 import it.unibo.chaosjack.view.api.GameTableView;
 import it.unibo.chaosjack.view.api.PauseMenuView;
+import it.unibo.chaosjack.view.api.PlayerWalletView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -55,10 +56,8 @@ public class GameTableViewImpl implements GameTableView {
     private final Label player2ScoreLabel = new Label("");
     private final Label dealerScoreLabel = new Label("");
 
-    //private final Label player1WalletLabel = new Label("");
-    //private final Label player2WalletLabel = new Label("");
-    private final PlayerWalletView player1WalletView = new PlayerWalletView();
-    private final PlayerWalletView player2WalletView = new PlayerWalletView();
+    private final PlayerWalletView player1WalletView = new PlayerWalletViewImpl();
+    private final PlayerWalletView player2WalletView = new PlayerWalletViewImpl();
 
 
     public GameTableViewImpl() {
@@ -142,17 +141,25 @@ public class GameTableViewImpl implements GameTableView {
         player1Title.setStyle("-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;");
         player2Title.setStyle("-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;");
 
-        /*String walletStyle = "-fx-text-fill: #900676; -fx-font-size: 14px; -fx-font-weight: bold;";
-        player1WalletLabel.setStyle(walletStyle);
-        player2WalletLabel.setStyle(walletStyle);*/
+        final VBox p1LabelsBox = new VBox(5, player1Title, player1ScoreLabel);
+        p1LabelsBox.setAlignment(Pos.CENTER);
 
-        final VBox player1Area = new VBox(10, player1Title, player1ScoreLabel, player1WalletView, player1CardsBox);
+        final HBox p1TopBox = new HBox(20, p1LabelsBox, (javafx.scene.Node) player1WalletView);
+        p1TopBox.setAlignment(Pos.CENTER);
+
+        final VBox player1Area = new VBox(10, player1Title, p1TopBox, player1CardsBox);
         player1Area.setAlignment(Pos.CENTER);
-        player1Area.setMinWidth(250);
+        player1Area.setMinWidth(350);
 
-        final VBox player2Area = new VBox(10, player2Title, player2WalletView, player2WalletView, player2ScoreLabel, player2CardsBox);
+        final VBox p2LabelsBox = new VBox(5, player2Title, player2ScoreLabel);
+        p2LabelsBox.setAlignment(Pos.CENTER);
+
+        final HBox p2TopBox = new HBox(20, p2LabelsBox, (javafx.scene.Node) player2WalletView);
+        p2TopBox.setAlignment(Pos.CENTER);
+
+        final VBox player2Area = new VBox(10, player2Title, p2TopBox, player2CardsBox);
         player2Area.setAlignment(Pos.CENTER);
-        player1Area.setMinWidth(250);
+        player2Area.setMinWidth(350);
 
         final HBox playerContainer = new HBox(50, player1Area, player2Area);
         playerContainer.setAlignment(Pos.CENTER);
@@ -275,15 +282,6 @@ public class GameTableViewImpl implements GameTableView {
             .forEach(label -> label.setStyle(
                 (activeName != null && activeName.equalsIgnoreCase(label.getText())) ? activeStyle : normalStyle
             ));
-            /*this.dealerTitle.setStyle(
-                (activeName != null && activeName.equalsIgnoreCase(this.dealerTitle.getText())) ? activeStyle : normalStyle
-            );
-            boolean isP1Active = activeName != null && activeName.equalsIgnoreCase(player1WalletView.getDisplayedName());
-            this.player1WalletView.setActive(isP1Active);
-            
-            boolean isP2Active = activeName != null && activeName.equalsIgnoreCase(player2WalletView.getDisplayedName());
-            this.player1WalletView.setActive(isP2Active);*/
-
         });
     }
 
@@ -334,10 +332,8 @@ public class GameTableViewImpl implements GameTableView {
 
     @Override
     public void setPlayerNames(String name1, String name2) {
-       //this.player1Title.setText(name1.toUpperCase());
-       //this.player2Title.setText(name2.toUpperCase());
-       this.player1WalletView.setPlayerName(name1);
-       this.player1WalletView.setPlayerName(name2);
+       this.player1Title.setText(name1.toUpperCase());
+       this.player2Title.setText(name2.toUpperCase());
     }
 
     @Override
@@ -364,7 +360,6 @@ public class GameTableViewImpl implements GameTableView {
     @Override
     public void setPlayer1Wallet(int balance) {
         Platform.runLater(() -> 
-           //this.player1WalletLabel.setText("Wallet : " + balance + " fishes")
            this.player1WalletView.updateBalance(balance)
         );
     }
@@ -372,7 +367,6 @@ public class GameTableViewImpl implements GameTableView {
     @Override
     public void setPlayer2Wallet(int balance) {
         Platform.runLater(() -> 
-            //this.player2WalletLabel.setText("Wallet : " + balance + " fishes")
             this.player2WalletView.updateBalance(balance)
         );
     }
@@ -387,9 +381,7 @@ public class GameTableViewImpl implements GameTableView {
             this.player1ScoreLabel.setText("Score: 0");
             this.player2ScoreLabel.setText("Score: 0");
             this.dealerScoreLabel.setText("Score: 0");
-
-            //this.player1ScoreLabel.setText("Wallet: 1000 fishes");
-            //this.player2ScoreLabel.setText("Wallet 1000 fishes");
+            
             this.player1WalletView.updateBalance(1000);
             this.player2WalletView.updateBalance(1000);
 
