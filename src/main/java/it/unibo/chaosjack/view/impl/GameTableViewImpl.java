@@ -144,7 +144,7 @@ public class GameTableViewImpl implements GameTableView {
         final VBox p1LabelsBox = new VBox(5, player1Title, player1ScoreLabel);
         p1LabelsBox.setAlignment(Pos.CENTER);
 
-        final HBox p1TopBox = new HBox(20, p1LabelsBox, (javafx.scene.Node) player1WalletView);
+        final HBox p1TopBox = new HBox(20, p1LabelsBox, player1WalletView.getRootNode());
         p1TopBox.setAlignment(Pos.CENTER);
 
         final VBox player1Area = new VBox(10, player1Title, p1TopBox, player1CardsBox);
@@ -154,7 +154,7 @@ public class GameTableViewImpl implements GameTableView {
         final VBox p2LabelsBox = new VBox(5, player2Title, player2ScoreLabel);
         p2LabelsBox.setAlignment(Pos.CENTER);
 
-        final HBox p2TopBox = new HBox(20, p2LabelsBox, (javafx.scene.Node) player2WalletView);
+        final HBox p2TopBox = new HBox(20, p2LabelsBox, player2WalletView.getRootNode());
         p2TopBox.setAlignment(Pos.CENTER);
 
         final VBox player2Area = new VBox(10, player2Title, p2TopBox, player2CardsBox);
@@ -381,7 +381,7 @@ public class GameTableViewImpl implements GameTableView {
             this.player1ScoreLabel.setText("Score: 0");
             this.player2ScoreLabel.setText("Score: 0");
             this.dealerScoreLabel.setText("Score: 0");
-            
+
             this.player1WalletView.updateBalance(1000);
             this.player2WalletView.updateBalance(1000);
 
