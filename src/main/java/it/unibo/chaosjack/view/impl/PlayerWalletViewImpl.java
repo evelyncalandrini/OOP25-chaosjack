@@ -14,10 +14,9 @@ import javafx.scene.text.FontWeight;
  * Implementation of {@link PlayerWalletView}.
  */
 public final class PlayerWalletViewImpl extends VBox implements PlayerWalletView {
-    private static final double PREF_WIDTH = 200;
+    private static final double PREF_WIDTH = 150;
     private static final double PADDING = 14;
-    private static final int CORNER_RADIUS = 16;
-    private static final double NAME_FONT_SIZE = 14;
+    private static final int CORNER_RADIUS = 6;
     private static final double BALANCE_FONT_SIZE = 22;
     private static final double SPACING = 6;
     private static final double SHADOW_RADIUS = 15;
@@ -26,7 +25,6 @@ public final class PlayerWalletViewImpl extends VBox implements PlayerWalletView
     private static final String GOLD_BORDER_HEX = "#C9A227";
     private static final String CHIP_EMOJI = "\uD83D\uDCB0";
 
-    private final Label nameLabel;
     private final Label balanceLabel;
 
     public PlayerWalletViewImpl() {
@@ -50,21 +48,11 @@ public final class PlayerWalletViewImpl extends VBox implements PlayerWalletView
         shadow.setOffsetY(3);
         this.setEffect(shadow);
 
-        nameLabel = new Label("GIOCATORE");
-        nameLabel.setFont(Font.font("System", FontWeight.BOLD, NAME_FONT_SIZE));
-        nameLabel.setTextFill(Color.web("#CCCCCC"));
-        nameLabel.setStyle("-fx-letter-spacing: 2;");
-
-        balanceLabel = new Label(CHIP_EMOJI + " 0 fiches");
+        balanceLabel = new Label("");
         balanceLabel.setFont(Font.font("System", FontWeight.EXTRA_BOLD, BALANCE_FONT_SIZE));
         balanceLabel.setTextFill(Color.web(GOLD_HEX));
 
-        this.getChildren().addAll(nameLabel, balanceLabel);
-    }
-
-    @Override
-    public void setPlayerName(final String name) {
-        nameLabel.setText(name.toUpperCase(java.util.Locale.ROOT));
+        this.getChildren().add(balanceLabel);
     }
 
     @Override
@@ -75,10 +63,5 @@ public final class PlayerWalletViewImpl extends VBox implements PlayerWalletView
     @Override
     public String getDisplayedBalance() {
         return balanceLabel.getText();
-    }
-
-    @Override
-    public String getDisplayedName() {
-        return nameLabel.getText();
     }
 }

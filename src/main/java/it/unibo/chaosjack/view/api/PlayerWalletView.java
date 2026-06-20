@@ -9,13 +9,6 @@ package it.unibo.chaosjack.view.api;
 public interface PlayerWalletView {
 
     /**
-     * Sets the player name displayed in the wallet.
-     *
-     * @param name the player's name (will be converted to uppercase).
-     */
-    void setPlayerName(String name);
-
-    /**
      * Updates the chip balance displayed in the wallet.
      *
      * @param newBalance the new chip balance.
@@ -28,11 +21,4 @@ public interface PlayerWalletView {
      * @return the full balance string.
      */
     String getDisplayedBalance();
-
-    /**
-     * Returns the currently displayed player name.
-     *
-     * @return the name string (uppercase).
-     */
-    String getDisplayedName();
 }
