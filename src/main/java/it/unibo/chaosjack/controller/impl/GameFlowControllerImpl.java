@@ -136,7 +136,7 @@ public class GameFlowControllerImpl implements GameFlowController {
         this.tableView.updatePot(this.table.getPot());
 
         if ( gameEngine.isGameOver()) { // da rivedere
-            this.table.getWinner();
+            
             RoundEvaluation evaluation = this.table.getWinner();
             
             
@@ -254,7 +254,7 @@ public class GameFlowControllerImpl implements GameFlowController {
 
     private void setRound() {
         Random random = new Random();
-        if (random.nextInt(100) < 20) {
+        if (random.nextInt(100) < 100) {
             gameEngine.setSpecialRound(this.chooseSpecialRound()); //this.chooseSpecialRound()
         } else {
             gameEngine.setSpecialRound(null);
@@ -310,7 +310,7 @@ public class GameFlowControllerImpl implements GameFlowController {
                 tableView.setPlayer2Score(score);
                 if (p instanceof Player) {
                 tableView.setPlayer2Wallet(((Player)p).getWallet());
-                
+
                }
                 
             }

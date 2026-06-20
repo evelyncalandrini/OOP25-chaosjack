@@ -21,9 +21,7 @@ public class DoubleHeartsRule implements SpecialRound {
                 score += c.getValue();
             }
         }
-        if (score < 0) {
-            score = 0 ;
-        }
+        
         return score;
     }
 

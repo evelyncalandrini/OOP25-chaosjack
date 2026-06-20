@@ -28,9 +28,7 @@ public final class YingYung implements SpecialRound {
                 score += c.getValue();
             }
 
-            if (score <0) {
-                score = 0;
-            }
+            
 
             /*if (c.getName().contains("HEARTS") || c.getName().contains("DIAMONDS") ) {
                 if (c.getModifier() == CardModifier.NONE) {
