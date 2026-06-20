@@ -8,6 +8,7 @@ import it.unibo.chaosjack.model.api.GameEngine;
 import it.unibo.chaosjack.model.api.NPC;
 import it.unibo.chaosjack.model.api.Partecipant;
 import it.unibo.chaosjack.model.api.Player;
+import it.unibo.chaosjack.model.api.RoundEvaluation;
 import it.unibo.chaosjack.model.api.RoundResult;
 import it.unibo.chaosjack.model.api.SpecialRound;
 import it.unibo.chaosjack.model.api.Table;
@@ -120,7 +121,6 @@ public class GameFlowControllerImpl implements GameFlowController {
         this.tableView.setPlayerButtons(true);
         //Player p1 = (Player) gameEngine.getPlayers().get(0);
         //tableView.setPlayer1Wallet(p1.getWallet());
-
         gameEngine.nextTurn(); 
 
         this.setRound();
@@ -137,13 +137,20 @@ public class GameFlowControllerImpl implements GameFlowController {
 
         if ( gameEngine.isGameOver()) { // da rivedere
             this.table.getWinner();
-            RoundResult result = this.table.getWinner();
+            RoundEvaluation evaluation = this.table.getWinner();
             
             
             this.tableView.setGameState(Table.State.RESULTS);
-
-            String final_message = result.outcome().getMessage() +"Vincita:" + result.payOut() + "fiches";
-            this.tableView.showResult(final_message);
+            String messageToShow;
+            RoundResult.Outcome outcome = evaluation.result().outcome();
+            if (evaluation.winners().isEmpty() || outcome == RoundResult.Outcome.DEALER_WON) {
+                messageToShow = outcome.getMessage();
+            } else {
+                String winnersList = String.join("&",evaluation.winners());
+                messageToShow = winnersList.toUpperCase()+""+outcome.getMessage();
+            }
+            
+            this.tableView.showResult(messageToShow);
         }
 
         Table.State state = this.table.getCurrentState();

@@ -29,12 +29,12 @@ public class ActionControllerImpl implements ActionController{
         if (human == null) {
             return;
         }
-        if (human.isBusted() || human.getHand().getScore()>= Partecipant.MAX_SCORE) {
+        if (human.isBusted() || engine.currentScore(human.getHand())>= Partecipant.MAX_SCORE) {
             return;
         }
         engine.hit();
 
-        if(human.isBusted() || human.getHand().getScore()>= Partecipant.MAX_SCORE) {
+        if(human.isBusted() || engine.currentScore(human.getHand())>= Partecipant.MAX_SCORE) {
             this.stand();
         }
     }
@@ -50,7 +50,7 @@ public class ActionControllerImpl implements ActionController{
             return;
         }
         
-        engine.stand(); //faccio effettivamente stand
+        engine.stand(); 
     }
 
     @Override
@@ -69,28 +69,32 @@ public class ActionControllerImpl implements ActionController{
     }
 
     @Override
-    public void doubleDown() {
-        if(table.getCurrentState() != Table.State.PLAYING) {
-            return;
+     public void doubleDown() {
+       if(table.getCurrentState() != Table.State.PLAYING) {
+           return;
         }
         Player human = getCurrentHumanPlayer();
         if (human == null) {
             return;
         }
         if(human.getHand().getCards().size() != 2) {
-            return;
+           return;
         }
         int currentBet = human.getCurrentBet();
         if(human.getWallet() < currentBet) {
-            return;
+          return;
         }
         table.placeBet(human.getName(), currentBet);
         human.doubleDown();
-        //engine.hit();
+        try {
+            table.placeBet(human.getName(), currentBet);
+        } catch (IllegalStateException | IllegalArgumentException e) {
+            return;
+        }
+        engine.hit();
         this.stand();
-
     }
-
+    
     private boolean isHumanPlayer(Partecipant p) { //mi serve nei vari metodi per dire sepuò usare i bottoni
         return p instanceof Player && !(p instanceof NPC);
     }
@@ -126,7 +130,7 @@ public class ActionControllerImpl implements ActionController{
             } else {
                 engine.stand();
             }
-            //this.playAutomatedTurns();
+        
         }
 
     }
