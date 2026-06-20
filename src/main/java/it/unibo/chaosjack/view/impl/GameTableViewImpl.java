@@ -95,7 +95,7 @@ public class GameTableViewImpl implements GameTableView {
     }
 
     private void initLayout() {
-        String scoreStyle= "-fx-text-fill : lightgray; -fx-font-size: 16px; -fx-font-style: italic;";
+        String scoreStyle= "-fx-text-fill : #FFD700; -fx-font-size: 16px; -fx-font-weight: bold;";
         dealerScoreLabel.setStyle(scoreStyle);
         player1ScoreLabel.setStyle(scoreStyle);
         player2ScoreLabel.setStyle(scoreStyle);
@@ -104,7 +104,9 @@ public class GameTableViewImpl implements GameTableView {
         dealerCardsBox.setMinHeight(150);
         dealerTitle.setStyle("-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;");
 
-        final VBox dealerArea = new VBox(10, dealerTitle, dealerScoreLabel, dealerCardsBox);
+        final HBox dealerTopBox = new HBox(15, dealerScoreLabel, dealerTitle);
+        dealerTopBox.setAlignment(Pos.CENTER);
+        final VBox dealerArea = new VBox(10, dealerTopBox, dealerCardsBox);
         dealerArea.setAlignment(Pos.CENTER);
         dealerArea.setPadding(new Insets(10, 0, 0, 0));
 

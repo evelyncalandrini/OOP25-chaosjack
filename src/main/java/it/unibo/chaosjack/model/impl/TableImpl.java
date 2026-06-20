@@ -24,6 +24,7 @@ public final class TableImpl implements Table {
     private final List<String> players = new ArrayList<>();
     private final GameEngine engine;
     private final RoundEvaluator evaluator = new RoundEvaluator();
+    private boolean doUpdate = true;
 
     /**
      * Constructs a new TableImpl with the specified wallet, playerName and engine.
@@ -61,6 +62,7 @@ public final class TableImpl implements Table {
         this.playerPots.clear();
         this.currentState = State.FIRST_BET;
         this.statistics.incrementTotalRound();
+        this.doUpdate = true;
     }
 
     @Override
@@ -68,6 +70,7 @@ public final class TableImpl implements Table {
         this.playerPots.clear();
         this.statistics.resetStats();
         this.currentState = State.FIRST_BET;
+        this.doUpdate = true;
     }
 
     @Override
@@ -100,7 +103,10 @@ public final class TableImpl implements Table {
     @Override
     public RoundEvaluation getWinner() {
         final RoundEvaluation evaluation = evaluator.evaluate(this.engine, getPlayers(), getPot());
-        updatePlayersStatistics(evaluation.winners(), evaluation.result(), getDealerScore());
+        if (this.doUpdate) {
+            updatePlayersStatistics(evaluation.winners(), evaluation.result(), getDealerScore());
+            this.doUpdate = false;
+        }
         
         return evaluation;
     }
