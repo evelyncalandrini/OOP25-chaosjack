@@ -296,16 +296,19 @@ public class GameFlowControllerImpl implements GameFlowController {
         }
 
         for ( int i = 0; i < gameEngine.getPlayers().size(); i++ ) {
-            Player p = (Player) gameEngine.getPlayers().get(i);
+            final var p = gameEngine.getPlayers().get(i);
             int score = gameEngine.currentScore(p.getHand());
             if (i==0) {
                tableView.updatePlayer1Cards(gameEngine.getPlayers().get(i).getHand().getCards()); 
                tableView.setPlayer1Score(score);
-               tableView.setPlayer1Wallet(p.getWallet());
+               if (p instanceof Player) {
+                //completare
+               }
+               
             } else if (i==1) {
                 tableView.updatePlayer2Cards(gameEngine.getPlayers().get(i).getHand().getCards());
                 tableView.setPlayer2Score(score);
-                tableView.setPlayer1Wallet(p.getWallet());
+                
             }
         }
 
