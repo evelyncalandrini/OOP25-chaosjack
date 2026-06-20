@@ -55,8 +55,11 @@ public class GameTableViewImpl implements GameTableView {
     private final Label player2ScoreLabel = new Label("");
     private final Label dealerScoreLabel = new Label("");
 
-    private final Label player1WalletLabel = new Label("");
-    private final Label player2WalletLabel = new Label("");
+    //private final Label player1WalletLabel = new Label("");
+    //private final Label player2WalletLabel = new Label("");
+    private final PlayerWalletView player1WalletView = new PlayerWalletView();
+    private final PlayerWalletView player2WalletView = new PlayerWalletView();
+
 
     public GameTableViewImpl() {
         this.mainRoot = new StackPane();
@@ -139,15 +142,15 @@ public class GameTableViewImpl implements GameTableView {
         player1Title.setStyle("-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;");
         player2Title.setStyle("-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;");
 
-        String walletStyle = "-fx-text-fill: #900676; -fx-font-size: 14px; -fx-font-weight: bold;";
+        /*String walletStyle = "-fx-text-fill: #900676; -fx-font-size: 14px; -fx-font-weight: bold;";
         player1WalletLabel.setStyle(walletStyle);
-        player2WalletLabel.setStyle(walletStyle);
+        player2WalletLabel.setStyle(walletStyle);*/
 
-        final VBox player1Area = new VBox(10, player1Title, player1ScoreLabel, player1WalletLabel, player1CardsBox);
+        final VBox player1Area = new VBox(10, player1Title, player1ScoreLabel, player1WalletView, player1CardsBox);
         player1Area.setAlignment(Pos.CENTER);
         player1Area.setMinWidth(250);
 
-        final VBox player2Area = new VBox(10, player2Title, player2ScoreLabel, player2WalletLabel, player2CardsBox);
+        final VBox player2Area = new VBox(10, player2Title, player2WalletView, player2WalletView, player2ScoreLabel, player2CardsBox);
         player2Area.setAlignment(Pos.CENTER);
         player1Area.setMinWidth(250);
 
@@ -268,10 +271,19 @@ public class GameTableViewImpl implements GameTableView {
            String normalStyle = "-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;";
            String activeStyle = "-fx-text-fill: #FFD700; -fx-font-size: 20px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(255, 215, 0, 0,8), 10, 0.5, 0, 0);";
 
-           List.of(this.dealerTitle, this.player1Title, this.player2Title)
+            List.of(this.dealerTitle, this.player1Title, this.player2Title)
             .forEach(label -> label.setStyle(
                 (activeName != null && activeName.equalsIgnoreCase(label.getText())) ? activeStyle : normalStyle
             ));
+            /*this.dealerTitle.setStyle(
+                (activeName != null && activeName.equalsIgnoreCase(this.dealerTitle.getText())) ? activeStyle : normalStyle
+            );
+            boolean isP1Active = activeName != null && activeName.equalsIgnoreCase(player1WalletView.getDisplayedName());
+            this.player1WalletView.setActive(isP1Active);
+            
+            boolean isP2Active = activeName != null && activeName.equalsIgnoreCase(player2WalletView.getDisplayedName());
+            this.player1WalletView.setActive(isP2Active);*/
+
         });
     }
 
@@ -322,8 +334,10 @@ public class GameTableViewImpl implements GameTableView {
 
     @Override
     public void setPlayerNames(String name1, String name2) {
-       this.player1Title.setText(name1.toUpperCase());
-       this.player2Title.setText(name2.toUpperCase());
+       //this.player1Title.setText(name1.toUpperCase());
+       //this.player2Title.setText(name2.toUpperCase());
+       this.player1WalletView.setPlayerName(name1);
+       this.player1WalletView.setPlayerName(name2);
     }
 
     @Override
@@ -350,14 +364,16 @@ public class GameTableViewImpl implements GameTableView {
     @Override
     public void setPlayer1Wallet(int balance) {
         Platform.runLater(() -> 
-            this.player1WalletLabel.setText("Wallet : " + balance + " fishes")
+           //this.player1WalletLabel.setText("Wallet : " + balance + " fishes")
+           this.player1WalletView.updateBalance(balance)
         );
     }
 
     @Override
     public void setPlayer2Wallet(int balance) {
         Platform.runLater(() -> 
-            this.player2WalletLabel.setText("Wallet : " + balance + " fishes")
+            //this.player2WalletLabel.setText("Wallet : " + balance + " fishes")
+            this.player2WalletView.updateBalance(balance)
         );
     }
 
@@ -372,8 +388,10 @@ public class GameTableViewImpl implements GameTableView {
             this.player2ScoreLabel.setText("Score: 0");
             this.dealerScoreLabel.setText("Score: 0");
 
-            this.player1ScoreLabel.setText("Wallet: 1000 fishes");
-            this.player2ScoreLabel.setText("Wallet 1000 fishes");
+            //this.player1ScoreLabel.setText("Wallet: 1000 fishes");
+            //this.player2ScoreLabel.setText("Wallet 1000 fishes");
+            this.player1WalletView.updateBalance(1000);
+            this.player2WalletView.updateBalance(1000);
 
             this.setActiveTurn(null);
             this.setSpecialRound(null);
