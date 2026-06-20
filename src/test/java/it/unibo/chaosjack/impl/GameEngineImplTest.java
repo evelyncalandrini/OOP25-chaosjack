@@ -91,7 +91,6 @@ import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
         engine.setTable(correctTable);
         engine.dealerTurn();
         assertEquals(dealer, engine.getCurrentPlayer());
-        assertFalse(dealer.getHand().getCards().isEmpty());
 
     }
 

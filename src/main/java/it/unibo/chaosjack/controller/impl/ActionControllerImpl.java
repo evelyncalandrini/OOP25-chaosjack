@@ -84,8 +84,9 @@ public class ActionControllerImpl implements ActionController{
         if(human.getWallet() < currentBet) {
             return;
         }
+        table.placeBet(human.getName(), currentBet);
         human.doubleDown();
-        engine.hit();
+        //engine.hit();
         this.stand();
 
     }
