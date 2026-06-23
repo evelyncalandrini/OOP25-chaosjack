@@ -123,7 +123,7 @@ public class ActionControllerImpl implements ActionController{
             NPC bot = (NPC) engine.getCurrentPlayer();
 
             int botscore = engine.currentScore(bot.getHand());
-            if (bot.wantsToDouble(botscore)) {
+            if (bot.wantsToDouble(botscore)) { 
                 bot.doubleDown();
                 engine.hit();
                 engine.stand();
