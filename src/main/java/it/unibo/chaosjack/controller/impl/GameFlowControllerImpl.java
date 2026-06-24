@@ -161,7 +161,7 @@ public class GameFlowControllerImpl implements GameFlowController {
              this.tableView.setGameState(state);
                
                 if (this.humanPlayer(gameEngine.getCurrentPlayer()) && (table.getCurrentState() == State.FINAL_BET) ) {
-                    if (gameEngine.currentScore(gameEngine.getCurrentPlayer().getHand()) >= 21) { 
+                    if (gameEngine.currentScore(gameEngine.getCurrentPlayer().getHand()) > 21) { 
                         this.gameEngine.stand();
                         this.phaseOfGame();
                     } else {
@@ -172,11 +172,11 @@ public class GameFlowControllerImpl implements GameFlowController {
 
                 } else {
 
-                    if (gameEngine.currentScore(gameEngine.getCurrentPlayer().getHand()) >= 21) {
+                    if (gameEngine.currentScore(gameEngine.getCurrentPlayer().getHand()) > 21) {
                         gameEngine.stand();
                         this.phaseOfGame();
                     } else {
-                    this.tableView.setBetButton(false); // chiedere
+                    this.tableView.setBetButton(false); 
                     this.tableView.setPlayerButtons(true);
                     this.automaticBet(); 
                     }
@@ -223,10 +223,16 @@ public class GameFlowControllerImpl implements GameFlowController {
     public void automaticShift() {
 
         if (this.humanPlayer(this.gameEngine.getCurrentPlayer())) {
-
-            tableView.setPlayerButtons(false);
-            tableView.setBetButton(true);
-            return;
+            if (gameEngine.currentScore(gameEngine.getCurrentPlayer().getHand())<=21) {
+                tableView.setPlayerButtons(false);
+                tableView.setBetButton(true);
+            
+            } else {
+                gameEngine.stand();
+                this.phaseOfGame();
+                
+            }
+            
         } 
 
          PauseTransition pausa = new PauseTransition(Duration.seconds(1));
@@ -254,8 +260,8 @@ public class GameFlowControllerImpl implements GameFlowController {
 
     private void setRound() {
         Random random = new Random();
-        if (random.nextInt(100) < 100) {
-            gameEngine.setSpecialRound(this.chooseSpecialRound()); //this.chooseSpecialRound()
+        if (random.nextInt(100) < 20) {
+            gameEngine.setSpecialRound(this.chooseSpecialRound()); 
         } else {
             gameEngine.setSpecialRound(null);
             this.tableView.setSpecialRound("");
