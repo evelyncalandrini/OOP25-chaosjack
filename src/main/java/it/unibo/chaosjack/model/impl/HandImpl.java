@@ -27,7 +27,7 @@ public final class HandImpl implements Hand {
 
         for (final Card c : cards) {
             int value = c.getValue();
-             score += c.getValue();
+             
 
              if (score + value < 0){
                 value = value / 2;
