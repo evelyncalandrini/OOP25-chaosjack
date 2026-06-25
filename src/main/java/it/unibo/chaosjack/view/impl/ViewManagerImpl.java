@@ -51,12 +51,6 @@ public class ViewManagerImpl implements ViewManager{
 
     @Override
     public void showMainMenu() {
-        /*this.mainMenu.setStatsHandler(() -> {
-            StatisticsImpl stats = new StatisticsImpl();
-            this.showStatistics(stats);
-        });
-        this.mainMenu.setExitHandler(() -> System.exit(0));*/
-
         switchView(this.mainMenu.getRootNode(), "#1a1a1a");
         this.stage.setTitle("ChaosJack - Main Menu");
         if (!this.stage.isShowing()) {
@@ -68,6 +62,7 @@ public class ViewManagerImpl implements ViewManager{
     public void showGameTable() {
         this.gameTable.setMenuHandler(() -> this.showMainMenu());
         switchView(this.gameTable.getRootNode(), "#2E8B57");
+        this.rootContainer.getChildren().add(this.gameTable.getPauseMenu().getRootNode());
         this.stage.setTitle("ChaosJack - Table of Game");
         if (!this.stage.isShowing()) {
             this.stage.show();

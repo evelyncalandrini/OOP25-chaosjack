@@ -82,8 +82,7 @@ public class GameTableViewImpl implements GameTableView {
         this.mainRoot.getChildren().addAll(
             this.gameTable,
             floattingTopBar,
-            this.specialRoundLabel,
-            this.pauseMenu.getRootNode()
+            this.specialRoundLabel
         );
 
         this.mainRoot.widthProperty().addListener((obs, oldVal, newVal) -> {
