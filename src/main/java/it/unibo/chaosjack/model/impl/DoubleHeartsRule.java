@@ -16,18 +16,12 @@ public class DoubleHeartsRule implements SpecialRound {
         int score = 0;
         
         for (final Card c : playersCards) {
-            int value = 0;
             if (c.getName().contains("HEARTS") && (c.getModifier() == CardModifier.NONE)) {
-                value += c.getValue() * 2;
+                score += c.getValue() * 2;
             } else {
-                value += c.getValue();
+                score += c.getValue();
             }
 
-            if (score + value < 0) {
-                value = value /2;
-            }
-
-            score += value;
         }
         
         return score;

@@ -17,25 +17,16 @@ public final class YingYung implements SpecialRound {
     public int specialScore(final List<Card> playersCards) {
         int score = 0;
         for (final Card c: playersCards) {
-            int value = 0;
             if (c.getModifier() == CardModifier.NONE) {
                 if (c.getName().contains("HEARTS") || c.getName().contains("DIAMONDS") ) {
-                    value -= c.getValue();
+                    score -= c.getValue();
                 
                 } else {
-                    value += c.getValue();
+                    score += c.getValue();
                 }
             } else {
-                value += c.getValue();
-            }
-
-            if (score + value < 0){
-                value = value / 2;
-             }
-
-             score += value;
-
-        
+                score += c.getValue();
+            }        
         }
         return score;
     }

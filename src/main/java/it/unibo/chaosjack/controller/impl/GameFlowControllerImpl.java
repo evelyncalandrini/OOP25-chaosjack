@@ -32,6 +32,8 @@ public class GameFlowControllerImpl implements GameFlowController {
     private GameTableView tableView;
     private MainMenuView mainMenuView;
     private ViewManager viewManager;
+    private PauseTransition currentPause;
+    private boolean isPaused = false;
 
     
 
@@ -68,15 +70,27 @@ public class GameFlowControllerImpl implements GameFlowController {
         });
 
         tableView.setPauseHandler(() -> {
+            this.isPaused = true;
             tableView.getPauseMenu().setVisible(true);
+            if(this.currentPause != null){
+                this.currentPause.pause();
+            }
         });
 
         tableView.getPauseMenu().setResumeHandler(() -> {
+            this.isPaused = false;
             tableView.getPauseMenu().setVisible(false);
+            if(this.currentPause != null){
+                this.currentPause.play();
+            }
         });
 
         tableView.getPauseMenu().setRestartHanlder(() -> {
+            this.isPaused = false;
             tableView.getPauseMenu().setVisible(false);
+            if(this.currentPause != null){
+                this.currentPause.stop();
+            }
             this.newGame();
         });
 
@@ -109,6 +123,7 @@ public class GameFlowControllerImpl implements GameFlowController {
     }
 
     public void newGame() {
+        this.isPaused = false;
         gameEngine.resetGame();
         this.upDateView();
         this.reset_score();
@@ -119,8 +134,6 @@ public class GameFlowControllerImpl implements GameFlowController {
 
         this.tableView.setBetButton(false);
         this.tableView.setPlayerButtons(true);
-        //Player p1 = (Player) gameEngine.getPlayers().get(0);
-        //tableView.setPlayer1Wallet(p1.getWallet());
         gameEngine.nextTurn(); 
 
         this.setRound();
@@ -135,7 +148,7 @@ public class GameFlowControllerImpl implements GameFlowController {
         this.tableView.setActiveTurn(gameEngine.getCurrentPlayer().getName());
         this.tableView.updatePot(this.table.getPot());
 
-        if ( gameEngine.isGameOver()) { // da rivedere
+        if ( gameEngine.isGameOver()) { 
             
             RoundEvaluation evaluation = this.table.getWinner();
             
@@ -194,6 +207,9 @@ public class GameFlowControllerImpl implements GameFlowController {
                 break;
 
             case DEALER_TURN:
+                this.tableView.setBetButton(true);
+                this.tableView.setPlayerButtons(true);
+
                 gameEngine.dealerTurn();
                 this.tableView.setActiveTurn("dealer");
                 this.tableView.setGameState(state);
@@ -207,8 +223,8 @@ public class GameFlowControllerImpl implements GameFlowController {
     @Override
     public void automaticBet() {
 
-        PauseTransition pausa = new PauseTransition(Duration.seconds(1));
-        pausa.setOnFinished(event -> {
+        this.currentPause = new PauseTransition(Duration.seconds(1));
+        this.currentPause.setOnFinished(event -> {
             if (gameEngine.getCurrentPlayer() instanceof NPC) {
                 
                 actionController.playAutomatedBet();
@@ -216,7 +232,10 @@ public class GameFlowControllerImpl implements GameFlowController {
             }
             
         });
-        pausa.play();
+
+        if(!this.isPaused){
+         this.currentPause.play();
+        }
     }
 
     @Override 
@@ -226,6 +245,7 @@ public class GameFlowControllerImpl implements GameFlowController {
             if (gameEngine.currentScore(gameEngine.getCurrentPlayer().getHand())<=21) {
                 tableView.setPlayerButtons(false);
                 tableView.setBetButton(true);
+                return;
             
             } else {
                 gameEngine.stand();
@@ -235,8 +255,8 @@ public class GameFlowControllerImpl implements GameFlowController {
             
         } 
 
-         PauseTransition pausa = new PauseTransition(Duration.seconds(1));
-         pausa.setOnFinished ( event -> {
+         this.currentPause = new PauseTransition(Duration.seconds(1));
+         this.currentPause.setOnFinished ( event -> {
 
             if (gameEngine.getCurrentPlayer() instanceof NPC) {
 
@@ -253,9 +273,10 @@ public class GameFlowControllerImpl implements GameFlowController {
 
             this.phaseOfGame();
          } );
-        
-         pausa.play();
-        
+
+        if(!this.isPaused){
+         this.currentPause.play();
+        }
     }
 
     private void setRound() {
