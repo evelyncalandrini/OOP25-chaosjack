@@ -12,7 +12,6 @@ import it.unibo.chaosjack.model.api.RoundEvaluation;
 import it.unibo.chaosjack.model.api.RoundResult;
 import it.unibo.chaosjack.model.api.SpecialRound;
 import it.unibo.chaosjack.model.api.Table;
-import it.unibo.chaosjack.model.api.Table.State;
 import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
 import it.unibo.chaosjack.model.impl.RoyalFreezeTurn;
 import it.unibo.chaosjack.model.impl.YingYung;
@@ -22,7 +21,6 @@ import it.unibo.chaosjack.view.api.ViewManager;
 import it.unibo.chaosjack.view.api.PauseMenuView;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
-
 
 public class GameFlowControllerImpl implements GameFlowController {
 
@@ -35,8 +33,6 @@ public class GameFlowControllerImpl implements GameFlowController {
     private PauseTransition currentPause;
     private boolean isPaused = false;
 
-    
-
     public GameFlowControllerImpl(final GameEngine gameEngine, final ActionController actionController, final GameTableView tableView,
         final MainMenuView mainMenuView, final ViewManager viewManager, final Table table, final PauseMenuView pause) {
         this.gameEngine = gameEngine;
@@ -45,11 +41,9 @@ public class GameFlowControllerImpl implements GameFlowController {
         this.mainMenuView = mainMenuView;
         this.viewManager = viewManager;
         this.table = table;
-        
-       
 
         this.connectButtons();
-        
+
     }
 
     private void connectButtons() {
@@ -129,17 +123,24 @@ public class GameFlowControllerImpl implements GameFlowController {
         this.reset_score();
         tableView.setDealerScore(0);
         this.tableView.updatePot(0);
-
+        
         tableView.setGameState(Table.State.FIRST_BET);
 
         this.tableView.setBetButton(false);
         this.tableView.setPlayerButtons(true);
+
+        for (final Partecipant p : gameEngine.getPlayers()){
+            if(this.humanPlayer(p)){
+                if(((Player)p).getWallet() <= 0){
+                    System.exit(0);
+                }
+            }
+        }
         gameEngine.nextTurn(); 
 
         this.setRound();
 
     }
-
 
     @Override
     public void phaseOfGame() {
@@ -149,10 +150,9 @@ public class GameFlowControllerImpl implements GameFlowController {
         this.tableView.updatePot(this.table.getPot());
 
         if ( gameEngine.isGameOver()) { 
-            
+
             RoundEvaluation evaluation = this.table.getWinner();
-            
-            
+
             this.tableView.setGameState(Table.State.RESULTS);
             String messageToShow;
             RoundResult.Outcome outcome = evaluation.result().outcome();
@@ -160,55 +160,65 @@ public class GameFlowControllerImpl implements GameFlowController {
                 messageToShow = outcome.getMessage();
             } else {
                 String winnersList = String.join("&",evaluation.winners());
-                messageToShow = winnersList.toUpperCase()+""+outcome.getMessage();
+                messageToShow = winnersList+""+outcome.getMessage();
             }
-            
+
             this.tableView.showResult(messageToShow);
         }
 
         Table.State state = this.table.getCurrentState();
+        Partecipant p = this.gameEngine.getCurrentPlayer();
 
         switch(state) {
-            case FIRST_BET:
-            case FINAL_BET:
-             this.tableView.setGameState(state);
-               
-                if (this.humanPlayer(gameEngine.getCurrentPlayer()) && (table.getCurrentState() == State.FINAL_BET) ) {
-                    if (gameEngine.currentScore(gameEngine.getCurrentPlayer().getHand()) > 21) { 
-                        this.gameEngine.stand();
-                        this.phaseOfGame();
-                    } else {
-                    this.tableView.setBetButton(false);
-                    this.tableView.setPlayerButtons(true);
-                    return;
-                    }
+            case FIRST_BET,FINAL_BET -> {
+                this.tableView.setGameState(state);
 
-                } else {
+                int singleScore = this.gameEngine.currentScore(p.getHand());
 
-                    if (gameEngine.currentScore(gameEngine.getCurrentPlayer().getHand()) > 21) {
-                        gameEngine.stand();
-                        this.phaseOfGame();
-                    } else {
-                    this.tableView.setBetButton(false); 
-                    this.tableView.setPlayerButtons(true);
-                    this.automaticBet(); 
-                    }
+                if (singleScore > 21 || (this.humanPlayer(p) && ((Player)p).getWallet()<=0) || ((p instanceof NPC) && ((NPC) p).getWallet() <=0 )){
+                  this.gameEngine.stand();
+                  this.phaseOfGame();
+                  break;
                 }
-                break;
 
-            case PLAYING:
+                if (this.humanPlayer(p)){
+                  this.tableView.setBetButton(false);
+                  this.tableView.setPlayerButtons(true);
+                  return;
+                } else {
+                  this.tableView.setBetButton(true);
+                  this.tableView.setPlayerButtons(true);
+                  this.automaticBet();
+
+                }
+             break;
+            }
+
+            case PLAYING -> {
                 tableView.setGameState(Table.State.PLAYING);
-                
+
                 if (gameEngine.getDealerHand().getCards().isEmpty()) {
                     gameEngine.initialCards();
+                    gameEngine.initialCardsDealer();
                     this.upDateView();
                 }
                 this.automaticShift(); 
                 break;
+            }
 
-            case DEALER_TURN:
+            case DEALER_TURN -> {
                 this.tableView.setBetButton(true);
                 this.tableView.setPlayerButtons(true);
+
+                boolean anyPlayerToBeat = gameEngine.getPlayers().stream()
+                .filter(player -> !(player instanceof Dealer))
+                .anyMatch(player -> gameEngine.currentScore(player.getHand()) > 0 && gameEngine.currentScore(player.getHand()) <= 21);
+
+                if (!anyPlayerToBeat) {
+                    gameEngine.stand();
+                    this.phaseOfGame();
+                    return;
+                }
 
                 gameEngine.dealerTurn();
                 this.tableView.setActiveTurn("dealer");
@@ -216,6 +226,11 @@ public class GameFlowControllerImpl implements GameFlowController {
 
                 this.automaticShift(); // faccio giocare il dealer
                 break;
+            }
+
+            default -> {
+                break;
+            }
         }
 
     }
@@ -226,11 +241,10 @@ public class GameFlowControllerImpl implements GameFlowController {
         this.currentPause = new PauseTransition(Duration.seconds(1));
         this.currentPause.setOnFinished(event -> {
             if (gameEngine.getCurrentPlayer() instanceof NPC) {
-                
                 actionController.playAutomatedBet();
                 this.phaseOfGame();
             }
-            
+
         });
 
         if(!this.isPaused){
@@ -241,8 +255,15 @@ public class GameFlowControllerImpl implements GameFlowController {
     @Override 
     public void automaticShift() {
 
-        if (this.humanPlayer(this.gameEngine.getCurrentPlayer())) {
-            if (gameEngine.currentScore(gameEngine.getCurrentPlayer().getHand())<=21) {
+        Partecipant p1 = this.gameEngine.getCurrentPlayer();
+        if(p1.getHand().getCards().isEmpty() && !(p1 instanceof Dealer)){
+            gameEngine.stand();
+            this.phaseOfGame();
+            return;
+        }
+
+        if (this.humanPlayer(p1)) {
+            if (gameEngine.currentScore(p1.getHand())<=21) {
                 tableView.setPlayerButtons(false);
                 tableView.setBetButton(true);
                 return;
@@ -251,20 +272,19 @@ public class GameFlowControllerImpl implements GameFlowController {
                 gameEngine.stand();
                 this.phaseOfGame();
                 
-            }
-            
+            }  
         } 
 
          this.currentPause = new PauseTransition(Duration.seconds(1));
          this.currentPause.setOnFinished ( event -> {
 
-            if (gameEngine.getCurrentPlayer() instanceof NPC) {
+            if (p1 instanceof NPC) {
 
                 tableView.setPlayerButtons(true);
                 tableView.setBetButton(false);
                 actionController.playAutomatedTurns();
-                
-            } else if (gameEngine.getCurrentPlayer() instanceof Dealer) {
+
+            } else if (p1 instanceof Dealer) {
 
                 tableView.setPlayerButtons(true);
                 tableView.setBetButton(false);
@@ -287,7 +307,7 @@ public class GameFlowControllerImpl implements GameFlowController {
             gameEngine.setSpecialRound(null);
             this.tableView.setSpecialRound("");
         }
-        this.tableView.setSpecialRound(gameEngine.getSpecialRound().getDescription() != null ? gameEngine.getSpecialRound().getDescription() : null);// aggiorno la view in modo da mostrare il round speciale se è presente
+        this.tableView.setSpecialRound(gameEngine.getSpecialRound().getDescription() != null ? gameEngine.getSpecialRound().getDescription() : null);
         this.phaseOfGame();
 
     }
@@ -331,7 +351,7 @@ public class GameFlowControllerImpl implements GameFlowController {
                if (p instanceof Player) {
                 tableView.setPlayer1Wallet(((Player)p).getWallet());
                }
-               
+
             } else if (i==1) {
                 tableView.updatePlayer2Cards(gameEngine.getPlayers().get(i).getHand().getCards());
                 tableView.setPlayer2Score(score);
