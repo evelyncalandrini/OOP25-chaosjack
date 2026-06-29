@@ -14,6 +14,8 @@ public class ActionControllerImpl implements ActionController{
     private final Table table;
     private final GameEngine engine;
 
+    private static final int MAX_CARDS_ALLOWED = 5;
+
     public ActionControllerImpl(final Table table , final GameEngine engine) {
         this.table = table;
         this.engine = engine;
@@ -29,13 +31,18 @@ public class ActionControllerImpl implements ActionController{
         if (human == null) {
             return;
         }
+        //aggiungo il controllo per le carte massime nei turni speciali
+        if (human.getHand().getCards().size() >= MAX_CARDS_ALLOWED) {
+            this.stand();
+            return;
+        }
         int score = engine.currentScore(human.getHand());
-        if (human.isBusted(score) || engine.currentScore(human.getHand())>= Partecipant.MAX_SCORE) {
+        if (human.isBusted(score) || score >= Partecipant.MAX_SCORE) {
             return;
         }
         engine.hit();
-
-        if(human.isBusted(score) || engine.currentScore(human.getHand())>= Partecipant.MAX_SCORE) {
+        score= engine.currentScore(human.getHand());
+        if(human.isBusted(score) || score >= Partecipant.MAX_SCORE) {
             this.stand();
         }
     }
@@ -55,7 +62,7 @@ public class ActionControllerImpl implements ActionController{
     }
 
     @Override
-    public void bet(int amount) { //devo sistemare questo
+    public void bet(int amount) {
         Player human = getCurrentHumanPlayer();
         if (human == null) {
             return;
@@ -85,7 +92,6 @@ public class ActionControllerImpl implements ActionController{
         if(human.getWallet() < currentBet) {
           return;
         }
-        table.placeBet(human.getName(), currentBet);
         human.doubleDown();
         try {
             table.placeBet(human.getName(), currentBet);
@@ -123,7 +129,14 @@ public class ActionControllerImpl implements ActionController{
             NPC bot = (NPC) engine.getCurrentPlayer();
 
             int botscore = engine.currentScore(bot.getHand());
-            if (bot.wantsToDouble(botscore)) { 
+            int cardsInHand = bot.getHand().getCards().size();
+
+            if (cardsInHand >= MAX_CARDS_ALLOWED) {
+               engine.stand();
+               return;
+            }
+
+            if (bot.wantsToDouble(botscore) && cardsInHand == 2) { 
                 bot.doubleDown();
                 engine.hit();
                 engine.stand();
@@ -141,9 +154,14 @@ public class ActionControllerImpl implements ActionController{
 
        Dealer dealer = (Dealer) engine.getCurrentPlayer();
        int dealerScore = engine.currentScore(dealer.getHand());
+       int cardsInHand = dealer.getHand().getCards().size();
+
+       if (cardsInHand >= MAX_CARDS_ALLOWED) {
+           engine.stand();
+           return;
+       }
        if (dealer.shouldHit(dealerScore)) {
            engine.hit(); 
-           //this.playDealerTurns(); 
        } else {
            engine.stand();
        }
