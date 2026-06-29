@@ -14,7 +14,7 @@ public class ActionControllerImpl implements ActionController{
     private final Table table;
     private final GameEngine engine;
 
-    private static final int SPECIAL_ROUND_MAX_CARDS = 5;
+    private static final int MAX_CARDS_ALLOWED = 5;
 
     public ActionControllerImpl(final Table table , final GameEngine engine) {
         this.table = table;
@@ -32,17 +32,17 @@ public class ActionControllerImpl implements ActionController{
             return;
         }
         //aggiungo il controllo per le carte massime nei turni speciali
-        if (engine.getSpecialRound() != null && human.getHand().getCards().size() >= SPECIAL_ROUND_MAX_CARDS) {
+        if (human.getHand().getCards().size() >= MAX_CARDS_ALLOWED) {
             this.stand();
             return;
         }
         int score = engine.currentScore(human.getHand());
-        if (human.isBusted(score) || engine.currentScore(human.getHand())>= Partecipant.MAX_SCORE) {
+        if (human.isBusted(score) || score >= Partecipant.MAX_SCORE) {
             return;
         }
         engine.hit();
-
-        if(human.isBusted(score) || engine.currentScore(human.getHand())>= Partecipant.MAX_SCORE) {
+        score= engine.currentScore(human.getHand());
+        if(human.isBusted(score) || score >= Partecipant.MAX_SCORE) {
             this.stand();
         }
     }
@@ -92,7 +92,6 @@ public class ActionControllerImpl implements ActionController{
         if(human.getWallet() < currentBet) {
           return;
         }
-        table.placeBet(human.getName(), currentBet);
         human.doubleDown();
         try {
             table.placeBet(human.getName(), currentBet);
@@ -132,7 +131,7 @@ public class ActionControllerImpl implements ActionController{
             int botscore = engine.currentScore(bot.getHand());
             int cardsInHand = bot.getHand().getCards().size();
 
-            if (engine.getSpecialRound() != null && cardsInHand >= SPECIAL_ROUND_MAX_CARDS) {
+            if (cardsInHand >= MAX_CARDS_ALLOWED) {
                engine.stand();
                return;
             }
@@ -157,7 +156,7 @@ public class ActionControllerImpl implements ActionController{
        int dealerScore = engine.currentScore(dealer.getHand());
        int cardsInHand = dealer.getHand().getCards().size();
 
-       if (engine.getSpecialRound() != null && cardsInHand >= SPECIAL_ROUND_MAX_CARDS) {
+       if (cardsInHand >= MAX_CARDS_ALLOWED) {
            engine.stand();
            return;
        }

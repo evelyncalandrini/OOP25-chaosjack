@@ -1,7 +1,7 @@
 package it.unibo.chaosjack.controller.api;
 
-public interface ActionController { //metto solo le mosse che l'interfaccia può fare dai bottoni
-    
+public interface ActionController {
+    /* */
     void hit();
 
     void stand();
