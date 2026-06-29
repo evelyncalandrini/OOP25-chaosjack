@@ -29,10 +29,10 @@ public interface Partecipant {
 
     /**
      * Checks if the player's score exceeds the maximum limit of 21.
-     * 
+     * @param currentScore
      * @return true if the partecipant is busted
      */
-    default boolean isBusted(int currentScore) {
+    default boolean isBusted(final int currentScore) {
         return currentScore > MAX_SCORE;
     }
 
