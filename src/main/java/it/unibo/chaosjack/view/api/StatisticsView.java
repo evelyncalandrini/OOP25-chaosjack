@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 /**
  * Interface of player's statistics view.
  */
+@FunctionalInterface
 public interface StatisticsView {
 
     /**

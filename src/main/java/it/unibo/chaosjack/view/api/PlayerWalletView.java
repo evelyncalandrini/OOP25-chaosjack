@@ -2,7 +2,6 @@ package it.unibo.chaosjack.view.api;
 
 import javafx.scene.Parent;
 
-
 /**
  * Visual interface for a player's wallet (chip balance) component.
  *

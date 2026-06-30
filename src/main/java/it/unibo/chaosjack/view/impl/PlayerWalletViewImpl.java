@@ -28,6 +28,9 @@ public final class PlayerWalletViewImpl extends VBox implements PlayerWalletView
 
     private final Label balanceLabel;
 
+    /**
+     * Constructs a new PlayerWalletViewImpl.
+     */
     public PlayerWalletViewImpl() {
         super();
         this.setSpacing(SPACING);
