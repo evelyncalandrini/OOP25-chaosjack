@@ -1,6 +1,5 @@
 package it.unibo.chaosjack.controller.impl;
 
-
 import it.unibo.chaosjack.controller.api.ActionController;
 import it.unibo.chaosjack.model.api.Dealer;
 import it.unibo.chaosjack.model.api.GameEngine;
@@ -9,17 +8,29 @@ import it.unibo.chaosjack.model.api.Player;
 import it.unibo.chaosjack.model.api.Table;
 import it.unibo.chaosjack.model.api.Partecipant;
 
-public class ActionControllerImpl implements ActionController{
-    
-    private final Table table;
-    private final GameEngine engine;
+/**
+ * Implementation of the ActionController interface.
+ */
+public final class ActionControllerImpl implements ActionController {
 
     private static final int SPECIAL_ROUND_MAX_CARDS = 5;
 
-    public ActionControllerImpl(final Table table , final GameEngine engine) {
+    private final Table table;
+    private final GameEngine engine;
+
+    /**
+     * Constructs a new ActionControllerImpl.
+     *
+     * @param table the game table
+     * @param engine the game engine
+     */
+    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+        value = "EI_EXPOSE_REP2",
+        justification = "The controller needs to hold references to the shared table and engine."
+    )
+    public ActionControllerImpl(final Table table, final GameEngine engine) {
         this.table = table;
         this.engine = engine;
-        
     }
 
     @Override
@@ -27,7 +38,7 @@ public class ActionControllerImpl implements ActionController{
         if (table.getCurrentState() != Table.State.PLAYING) {
             return;
         }
-        Player human = getCurrentHumanPlayer();
+        final Player human = getCurrentHumanPlayer();
         if (human == null) {
             return;
         }
@@ -36,13 +47,13 @@ public class ActionControllerImpl implements ActionController{
             this.stand();
             return;
         }
-        int score = engine.currentScore(human.getHand());
-        if (human.isBusted(score) || engine.currentScore(human.getHand())>= Partecipant.MAX_SCORE) {
+        final int score = engine.currentScore(human.getHand());
+        if (human.isBusted(score) || engine.currentScore(human.getHand()) >= Partecipant.MAX_SCORE) {
             return;
         }
         engine.hit();
 
-        if(human.isBusted(score) || engine.currentScore(human.getHand())>= Partecipant.MAX_SCORE) {
+        if (human.isBusted(score) || engine.currentScore(human.getHand()) >= Partecipant.MAX_SCORE) {
             this.stand();
         }
     }
@@ -53,43 +64,43 @@ public class ActionControllerImpl implements ActionController{
             return;
         }
 
-        Player human = getCurrentHumanPlayer();
+        final Player human = getCurrentHumanPlayer();
         if (human == null) {
             return;
         }
-        
-        engine.stand(); 
+
+        engine.stand();
     }
 
     @Override
-    public void bet(int amount) {
-        Player human = getCurrentHumanPlayer();
+    public void bet(final int amount) {
+        final Player human = getCurrentHumanPlayer();
         if (human == null) {
             return;
         }
         try {
-           table.placeBet(human.getName(),amount);
+           table.placeBet(human.getName(), amount);
            human.setBet(amount);
            engine.stand();
         } catch (IllegalStateException | IllegalArgumentException e) {
-            return;
+            java.util.logging.Logger.getLogger(this.getClass().getName()).warning(e.getMessage());
         }
     }
 
     @Override
      public void doubleDown() {
-       if(table.getCurrentState() != Table.State.PLAYING) {
+        if (table.getCurrentState() != Table.State.PLAYING) {
            return;
         }
-        Player human = getCurrentHumanPlayer();
+        final Player human = getCurrentHumanPlayer();
         if (human == null) {
             return;
         }
-        if(human.getHand().getCards().size() != 2) {
+        if (human.getHand().getCards().size() != 2) {
            return;
         }
-        int currentBet = human.getCurrentBet();
-        if(human.getWallet() < currentBet) {
+        final int currentBet = human.getCurrentBet();
+        if (human.getWallet() < currentBet) {
           return;
         }
         table.placeBet(human.getName(), currentBet);
@@ -102,78 +113,73 @@ public class ActionControllerImpl implements ActionController{
         engine.hit();
         this.stand();
     }
-    
-    private boolean isHumanPlayer(Partecipant p) { //mi serve nei vari metodi per dire sepuò usare i bottoni
+
+    private boolean isHumanPlayer(final Partecipant p) { //mi serve nei vari metodi per dire sepuò usare i bottoni
         return p instanceof Player && !(p instanceof NPC);
     }
 
-     //metodi  per NPC e Dealer
+    //metodi per NPC e Dealer
 
     @Override
-    public void playAutomatedBet() { 
-        Partecipant p = engine.getCurrentPlayer();
+    public void playAutomatedBet() {
+        final Partecipant p = engine.getCurrentPlayer();
         if (p instanceof NPC) {
-            NPC bot = (NPC) p;
+            final NPC bot = (NPC) p;
             bot.makeBet();
 
-            table.placeBet(bot.getName(),bot.getCurrentBet());
+            table.placeBet(bot.getName(), bot.getCurrentBet());
             engine.stand();
-            //this.playAutomatedBet();
-            
         }
-
     }
+
     @Override
     public void playAutomatedTurns() {
+        if (engine.getCurrentPlayer() instanceof NPC) {
+            final NPC bot = (NPC) engine.getCurrentPlayer();
 
-        if(engine.getCurrentPlayer() instanceof NPC) {
-            NPC bot = (NPC) engine.getCurrentPlayer();
-
-            int botscore = engine.currentScore(bot.getHand());
-            int cardsInHand = bot.getHand().getCards().size();
+            final int botscore = engine.currentScore(bot.getHand());
+            final int cardsInHand = bot.getHand().getCards().size();
 
             if (engine.getSpecialRound() != null && cardsInHand >= SPECIAL_ROUND_MAX_CARDS) {
                engine.stand();
                return;
             }
 
-            if (bot.wantsToDouble(botscore) && cardsInHand == 2) { 
+            if (bot.wantsToDouble(botscore) && cardsInHand == 2) {
                 bot.doubleDown();
                 engine.hit();
                 engine.stand();
-            } else if(bot.wantsToHit(botscore)) {
+            } else if (bot.wantsToHit(botscore)) {
                 engine.hit();
             } else {
                 engine.stand();
             }
-        
         }
-
     }
+
     @Override
     public void playDealerTurns() {
-
-       Dealer dealer = (Dealer) engine.getCurrentPlayer();
-       int dealerScore = engine.currentScore(dealer.getHand());
-       int cardsInHand = dealer.getHand().getCards().size();
+       final Dealer dealer = (Dealer) engine.getCurrentPlayer();
+       final int dealerScore = engine.currentScore(dealer.getHand());
+       final int cardsInHand = dealer.getHand().getCards().size();
 
        if (engine.getSpecialRound() != null && cardsInHand >= SPECIAL_ROUND_MAX_CARDS) {
            engine.stand();
            return;
        }
        if (dealer.shouldHit(dealerScore)) {
-           engine.hit(); 
+           engine.hit();
        } else {
            engine.stand();
        }
-
     }
+
     //metodo per il player umano per non fare troppe ripetizioni
     private Player getCurrentHumanPlayer() {
-        Partecipant current = engine.getCurrentPlayer();
-        if(isHumanPlayer(current)) {
+        final Partecipant current = engine.getCurrentPlayer();
+        if (isHumanPlayer(current)) {
             return (Player) current;
         }
         return null;
     }
-} 
+}

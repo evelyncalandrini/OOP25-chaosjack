@@ -3,7 +3,6 @@ package it.unibo.chaosjack;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unibo.chaosjack.controller.api.GameFlowController;
 import it.unibo.chaosjack.controller.impl.ActionControllerImpl;
 import it.unibo.chaosjack.controller.impl.GameFlowControllerImpl;
 import it.unibo.chaosjack.model.api.Dealer;
@@ -54,11 +53,10 @@ public class App extends Application {
         gameEngine.setTable(table);
 
         final ActionControllerImpl actionController = new ActionControllerImpl(table, gameEngine);
-        final GameFlowController gameFlow = new GameFlowControllerImpl(
+        new GameFlowControllerImpl(
             gameEngine, actionController, gameTableView, mainMenuView, viewManager, table, pauseMenuView
         );
 
-        gameFlow.toString();
         viewManager.showMainMenu();
     }
 }

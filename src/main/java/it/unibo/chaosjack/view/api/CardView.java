@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 /**
  * Visual interface for a playing card.
  */
+@FunctionalInterface
 public interface CardView {
 
     /**

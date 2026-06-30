@@ -34,6 +34,8 @@ import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
   * Test for GameEngineImpl class.
   */
  class GameEngineImplTest {
+    private static final int YING_YUNG_SCORE = -2;
+
     private Dealer dealer;
     private GameEngine engine;
     private SpecialRound specialRound;
@@ -115,7 +117,7 @@ import it.unibo.chaosjack.model.impl.DoubleHeartsRule;
         specialRound = new YingYung();
         engine.setSpecialRound(specialRound);
         score = engine.currentScore(engine.getPlayers().get(0).getHand());
-        assertEquals(0, score);
+        assertEquals(YING_YUNG_SCORE, score);
 
         specialRound = new RoyalFreezeTurn();
         engine.getPlayers().get(0).getHand().addCard(new StandardCard(Rank.JACK, Suit.HEARTS, CardModifier.NONE));

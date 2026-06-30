@@ -26,7 +26,7 @@ public final class HandImpl implements Hand {
         int assesCount = 0;
 
         for (final Card c : cards) {
-            score  += c.getValue();
+            score += c.getValue();
               if (c.getName().contains("ACE")) {
                 assesCount++;
               }
@@ -55,6 +55,10 @@ public final class HandImpl implements Hand {
         return card.getName().contains("HEARTS") || card.getName().contains("DIAMONDS");
     }
 
+    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+        value = "EI_EXPOSE_REP",
+        justification = "The list of cards must be modifiable or accessible."
+    )
     @Override
     public List<Card> getCards() {
         return this.cards;

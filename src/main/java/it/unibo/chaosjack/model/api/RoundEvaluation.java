@@ -8,4 +8,8 @@ import java.util.List;
  * @param result of the round (outcome, scores, payouts).
  * @param winners the list of players who won or tied.
  */
-public record RoundEvaluation(RoundResult result, List<String> winners) {}
+@edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+    value = "EI_EXPOSE_REP",
+    justification = "We trust the caller and need direct access to the list."
+)
+public record RoundEvaluation(RoundResult result, List<String> winners) { }

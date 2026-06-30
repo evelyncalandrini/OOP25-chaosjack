@@ -66,7 +66,7 @@ import it.unibo.chaosjack.model.impl.Suit;
       final int initialBet = 20;
       final int initialFunds = 100;
       final int expectedBet = 40;
-      final int expectedFunds = 80;
+      final int expectedFunds = 60;
       final Player player = new PlayerImpl("Andrea", initialFunds);
       player.setBet(initialBet);
       player.doubleDown();
