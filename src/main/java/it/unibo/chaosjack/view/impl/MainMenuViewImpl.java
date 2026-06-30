@@ -49,6 +49,10 @@ public final class MainMenuViewImpl implements MainMenuView {
         this.root.getChildren().addAll(title, playButton, statsButton, exitButton);
     }
 
+    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+        value = "EI_EXPOSE_REP",
+        justification = "Required for JavaFX node structure."
+    )
     @Override
     public Parent getRootNode() {
         return this.root;

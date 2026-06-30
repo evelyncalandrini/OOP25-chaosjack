@@ -9,7 +9,6 @@ import it.unibo.chaosjack.view.api.GameTableView;
 import it.unibo.chaosjack.view.api.PauseMenuView;
 import it.unibo.chaosjack.view.api.PlayerWalletView;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -201,6 +200,10 @@ public final class GameTableViewImpl implements GameTableView {
         this.setGameState(Table.State.FIRST_BET);
     }
 
+    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+        value = "EI_EXPOSE_REP",
+        justification = "Required for JavaFX node structure."
+    )
     @Override
     public Parent getRootNode() {
         return this.mainRoot;
@@ -265,6 +268,10 @@ public final class GameTableViewImpl implements GameTableView {
         this.doubleButton.setOnAction(e -> handler.run());
     }
 
+    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+        value = "EI_EXPOSE_REP",
+        justification = "Required for JavaFX node structure."
+    )
     @Override
     public PauseMenuView getPauseMenu() {
         return this.pauseMenu;
@@ -288,7 +295,7 @@ public final class GameTableViewImpl implements GameTableView {
             this.specialRoundLabel.setVisible(isSpecial);
 
             if (isSpecial) {
-                this.specialRoundLabel.setText("SPECIAL ROUND: " + ruleName.toUpperCase());
+                this.specialRoundLabel.setText("SPECIAL ROUND: " + ruleName.toUpperCase(java.util.Locale.ROOT));
             } else {
                 this.specialRoundLabel.setText("SPECIAL ROUND: ");
             }
@@ -307,21 +314,6 @@ public final class GameTableViewImpl implements GameTableView {
                 (activeName != null && activeName.equalsIgnoreCase(label.getText())) ? activeStyle : normalStyle
             ));
         });
-    }
-
-    @FXML
-    private HBox getDealerCardBox() {
-        return this.dealerCardsBox;
-    }
-
-    @FXML
-    private HBox getPlayer1CardBox() {
-        return this.player1CardsBox;
-    }
-
-    @FXML
-    private HBox getPlayer2CardBox() {
-        return this.player2CardsBox;
     }
 
     @Override
@@ -356,8 +348,8 @@ public final class GameTableViewImpl implements GameTableView {
 
     @Override
     public void setPlayerNames(final String name1, final String name2) {
-       this.player1Title.setText(name1.toUpperCase());
-       this.player2Title.setText(name2.toUpperCase());
+       this.player1Title.setText(name1.toUpperCase(java.util.Locale.ROOT));
+       this.player2Title.setText(name2.toUpperCase(java.util.Locale.ROOT));
     }
 
     @Override

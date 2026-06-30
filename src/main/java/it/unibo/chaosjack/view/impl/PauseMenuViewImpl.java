@@ -48,6 +48,10 @@ public final class PauseMenuViewImpl implements PauseMenuView {
         this.root.getChildren().add(this.menuBox);
     }
 
+    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+        value = "EI_EXPOSE_REP",
+        justification = "Required for JavaFX node structure."
+    )
     @Override
     public Parent getRootNode() {
         return this.root;

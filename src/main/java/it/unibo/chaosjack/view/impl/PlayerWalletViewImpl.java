@@ -28,6 +28,9 @@ public final class PlayerWalletViewImpl extends VBox implements PlayerWalletView
 
     private final Label balanceLabel;
 
+    /**
+     * Constructs a new PlayerWalletViewImpl.
+     */
     public PlayerWalletViewImpl() {
         super();
         this.setSpacing(SPACING);
@@ -58,7 +61,7 @@ public final class PlayerWalletViewImpl extends VBox implements PlayerWalletView
 
     @Override
     public void updateBalance(final int newBalance) {
-        balanceLabel.setText(CHIP_EMOJI + " " + newBalance + " fiches");
+        balanceLabel.setText(CHIP_EMOJI + " " + newBalance);
     }
 
     @Override
