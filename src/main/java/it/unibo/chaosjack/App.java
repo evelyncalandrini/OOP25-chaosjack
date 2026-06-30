@@ -16,9 +16,7 @@ import it.unibo.chaosjack.model.impl.PlayerImpl;
 import it.unibo.chaosjack.model.impl.StandardDeck;
 import it.unibo.chaosjack.model.impl.TableImpl;
 import it.unibo.chaosjack.model.api.Table;
-import it.unibo.chaosjack.view.api.GameTableView;
 import it.unibo.chaosjack.view.api.MainMenuView;
-import it.unibo.chaosjack.view.api.PauseMenuView;
 import it.unibo.chaosjack.view.api.ViewManager;
 import it.unibo.chaosjack.view.impl.ViewManagerImpl;
 import javafx.application.Application;
@@ -37,9 +35,7 @@ public class App extends Application {
     @Override
     public void start(final Stage primaryStage) {
         final ViewManager viewManager = new ViewManagerImpl(primaryStage);
-        final GameTableView gameTableView = viewManager.getGameTable();
         final MainMenuView mainMenuView = viewManager.getMainMenu();
-        final PauseMenuView pauseMenuView = gameTableView.getPauseMenu();
 
         final Deck deck = new StandardDeck();
         final Dealer dealer = new DealerImpl();
@@ -55,7 +51,7 @@ public class App extends Application {
 
         final ActionControllerImpl actionController = new ActionControllerImpl(table, gameEngine);
         final GameFlowController gameFlow = new GameFlowControllerImpl(
-            gameEngine, actionController, gameTableView, mainMenuView, viewManager, table, pauseMenuView
+            gameEngine, actionController, mainMenuView, viewManager, table
         );
 
         gameFlow.toString();

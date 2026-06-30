@@ -5,7 +5,6 @@ import it.unibo.chaosjack.model.api.Dealer;
 /**
  * Implementation of {@link Dealer} interface.
  */
-
 public final class DealerImpl extends AbstractPlayer implements Dealer {
 
    private static final int STAY_THRESHOLD = 17;

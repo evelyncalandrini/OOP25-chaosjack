@@ -16,6 +16,10 @@ import javafx.stage.Stage;
 /**
  * Implementation of ViewManger's interface.
  */
+@edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+    value = "EI_EXPOSE_REP",
+    justification = "Exposing/Storing internal views and stage is required for navigation."
+)
 public final class ViewManagerImpl implements ViewManager {
 
     private static final double BASE_WIDTH = 1280.0;
@@ -66,7 +70,7 @@ public final class ViewManagerImpl implements ViewManager {
 
     @Override
     public void showGameTable() {
-        this.gameTable.setMenuHandler(() -> this.showMainMenu());
+        this.gameTable.setMenuHandler(this::showMainMenu);
         switchView(this.gameTable.getRootNode(), "#2E8B57");
         this.rootContainer.getChildren().add(this.gameTable.getPauseMenu().getRootNode());
         this.stage.setTitle("ChaosJack - Table of Game");

@@ -8,4 +8,4 @@ import java.util.List;
  * @param result of the round (outcome, scores, payouts).
  * @param winners the list of players who won or tied.
  */
-public record RoundEvaluation(RoundResult result, List<String> winners) {}
+public record RoundEvaluation(RoundResult result, List<String> winners) { }
