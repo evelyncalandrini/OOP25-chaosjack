@@ -12,6 +12,6 @@ bin/
 
 **/.DS_Store
 
-.bloop
+./bloop
 
 .metals/
