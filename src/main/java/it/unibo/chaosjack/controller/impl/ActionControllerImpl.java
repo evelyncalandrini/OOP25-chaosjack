@@ -1,5 +1,8 @@
 package it.unibo.chaosjack.controller.impl;
 
+import java.util.Optional;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.chaosjack.controller.api.ActionController;
 import it.unibo.chaosjack.model.api.Dealer;
 import it.unibo.chaosjack.model.api.GameEngine;
@@ -14,9 +17,9 @@ import it.unibo.chaosjack.model.api.Partecipant;
  */
 public final class ActionControllerImpl implements ActionController {
 
+    private static final int MAX_CARDS_ALLOWED = 5;
     private final Table table;
     private final GameEngine engine;
-    private final static int MAX_CARDS_ALLOWED = 5;
 
     /**
      * Constructs a new ActionControllerImpl.
@@ -24,6 +27,11 @@ public final class ActionControllerImpl implements ActionController {
      * @param table the current game table
      * @param engine the game engine managing the rules
      */
+
+    @SuppressFBWarnings(
+        value = "EI_EXPOSE_REP2",
+        justification = "The MVC's controller has to share the mutable references to Table and Engine."
+    )
     public ActionControllerImpl(final Table table, final GameEngine engine) {
         this.table = table;
         this.engine = engine;
@@ -78,7 +86,6 @@ public final class ActionControllerImpl implements ActionController {
            human.setBet(amount);
            engine.stand();
         } catch (IllegalStateException | IllegalArgumentException e) {
-            return;
         }
     }
 
@@ -107,8 +114,8 @@ public final class ActionControllerImpl implements ActionController {
         engine.hit();
         this.stand();
     }
-    
-    private boolean isHumanPlayer(Partecipant p) {
+
+    private boolean isHumanPlayer(final Partecipant p) {
         return p instanceof Player && !(p instanceof NPC);
     }
 
@@ -174,9 +181,9 @@ public final class ActionControllerImpl implements ActionController {
     }
 
     private Player getCurrentHumanPlayer() {
-        return java.util.Optional.ofNullable(engine.getCurrentPlayer())
-        .filter(p->isHumanPlayer(p))
-        .map(p-> (Player) p)
+        return Optional.ofNullable(engine.getCurrentPlayer())
+        .filter(this::isHumanPlayer)
+        .map(p -> (Player) p)
         .orElse(null);
     }
 } 
