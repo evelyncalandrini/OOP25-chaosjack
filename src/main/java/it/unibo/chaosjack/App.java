@@ -55,7 +55,7 @@ public class App extends Application {
 
         final ActionControllerImpl actionController = new ActionControllerImpl(table, gameEngine);
         final GameFlowController gameFlow = new GameFlowControllerImpl(
-            gameEngine, actionController, gameTableView, mainMenuView, viewManager, table, pauseMenuView
+            gameEngine, actionController, mainMenuView, viewManager, table, pauseMenuView
         );
 
         gameFlow.toString();
