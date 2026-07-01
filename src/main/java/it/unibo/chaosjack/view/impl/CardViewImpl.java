@@ -17,8 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
- * Rappresentazione grafica di una carta da gioco in JavaFX.
- * Implementa l'interfaccia CardView ed estende StackPane.
+ * Graphic rappresentation of a card in JavaFX
  */
 public final class CardViewImpl extends StackPane implements CardView {
 
@@ -54,12 +53,10 @@ public final class CardViewImpl extends StackPane implements CardView {
      * @param card the card to render
      */
     public CardViewImpl(final Card card) {
-        // Proprietà dimensionali
         this.setPrefSize(WIDTH, HEIGHT);
         this.setMinSize(WIDTH, HEIGHT);
         this.setMaxSize(WIDTH, HEIGHT);
 
-        // Estrazione dati
         final String cardName = card.getName();
         final CardModifier modifier = card.getModifier();
 
@@ -91,7 +88,6 @@ public final class CardViewImpl extends StackPane implements CardView {
             }
         }
 
-        // 1. Sfondo Solido o Semi-trasparente (Rectangle)
         final Rectangle background = new Rectangle(WIDTH, HEIGHT);
         background.setArcWidth(CORNER_RADIUS);
         background.setArcHeight(CORNER_RADIUS);
@@ -103,23 +99,21 @@ public final class CardViewImpl extends StackPane implements CardView {
 
         switch (modifier) {
             case BUST_MAGNET:
-                bgPaint = Color.WHITE; // Sfondo bianco uguale alle altre carte
-                strokeColor = Color.web("#8e0000"); // Bordo rosso scuro
-                strokeWidth = BORDER_BUST; // Bordo ancora più spesso rispetto alle altre (4.0 contro 2.0/1.2)
-                textFillColor = suitColor; // Colore del seme (rosso o nero)
+                bgPaint = Color.WHITE;
+                strokeColor = Color.web("#8e0000");
+                strokeWidth = BORDER_BUST;
+                textFillColor = suitColor;
                 break;
             case REVERSE:
-                bgPaint = Color.WHITE; // Sfondo bianco uguale alle altre
-                strokeColor = Color.web("#1565c0"); // Bordo blu scuro elegante
-                strokeWidth = BORDER_REVERSE; // Bordo spesso (3.0 per REVERSE, 4.0 per BUST, 1.2 per standard)
-                textFillColor = suitColor; // Colore normale del seme su sfondo chiaro
+                bgPaint = Color.WHITE;
+                strokeColor = Color.web("#1565c0");
+                strokeWidth = BORDER_REVERSE;
+                textFillColor = suitColor;
                 break;
             case GHOST:
-                // Effetto Fumo: Sfondo semi-trasparente bianco/grigio (45% opacità)
                 bgPaint = Color.color(GHOST_GRAY, GHOST_GRAY, GHOST_GRAY, GHOST_ALPHA);
                 strokeColor = Color.web("#9e9e9e"); // Bordo grigio
                 strokeWidth = BORDER_GHOST;
-                // Testo del colore del seme ma semitrasparente (più opaco dello sfondo: 75% opacità)
                 textFillColor = isRed ? "rgba(211, 47, 47, 0.75)" : "rgba(33, 33, 33, 0.75)";
                 break;
             case NONE:
@@ -135,7 +129,6 @@ public final class CardViewImpl extends StackPane implements CardView {
         background.setStrokeWidth(strokeWidth);
         this.getChildren().add(background);
 
-        // Ombreggiatura (rimossa per la GHOST per dare un effetto spettrale più realistico, mantenuta per le altre)
         if (modifier != CardModifier.GHOST) {
             final DropShadow shadow = new DropShadow();
             shadow.setColor(Color.color(0, 0, 0, SHADOW_ALPHA));
@@ -145,18 +138,15 @@ public final class CardViewImpl extends StackPane implements CardView {
             this.setEffect(shadow);
         }
 
-        // 2. Costruzione del layout del contenuto
         final BorderPane cardContent = new BorderPane();
         cardContent.setPadding(new Insets(CONTENT_PADDING));
 
-        // Angolo in alto a sinistra: Rango e Seme
         final Label topLeftLabel = new Label(rankSymbol + "\n" + suitSymbol);
         topLeftLabel.setStyle(FX_TEXT_FILL + textFillColor + "; -fx-font-size: 13px;"
             + " -fx-font-weight: bold; -fx-line-spacing: -2;");
         BorderPane.setAlignment(topLeftLabel, Pos.TOP_LEFT);
         cardContent.setTop(topLeftLabel);
 
-        // Centro: Seme grande per le carte normali, calamita per Bust Magnet, o frecce per Reverse
         if (modifier == CardModifier.BUST_MAGNET) {
             final StackPane magnetPane = new StackPane();
             magnetPane.setMaxSize(BADGE_W, BADGE_H);
@@ -183,7 +173,7 @@ public final class CardViewImpl extends StackPane implements CardView {
             arrows.setContent("M 20 10 C 25 10, 35 15, 35 25 H 39 L 34 32 L 29 25 H 33 "
                 + "C 33 18, 25 14, 20 14 Z M 20 40 C 15 40, 5 35, 5 25 H 1 "
                 + "L 6 18 L 11 25 H 7 C 7 32, 15 36, 20 36 Z");
-            arrows.setFill(Color.web("#1565c0")); // Frecce blu in linea con il bordo della carta
+            arrows.setFill(Color.web("#1565c0"));
 
             final javafx.scene.Group arrowsGroup = new javafx.scene.Group(arrows);
             arrowsGroup.setScaleX(REVERSE_SCALE);
@@ -197,7 +187,6 @@ public final class CardViewImpl extends StackPane implements CardView {
             cardContent.setCenter(centerLabel);
         }
 
-        // Angolo in basso a destra (ruotato di 180 gradi)
         final Label bottomRightLabel = new Label(rankSymbol + "\n" + suitSymbol);
         bottomRightLabel.setStyle(FX_TEXT_FILL + textFillColor + "; -fx-font-size: 13px;"
             + " -fx-font-weight: bold; -fx-line-spacing: -2;");
@@ -207,7 +196,6 @@ public final class CardViewImpl extends StackPane implements CardView {
 
         this.getChildren().add(cardContent);
 
-        // 3. Badge identificativo del modificatore in alto a destra
         if (modifier != CardModifier.NONE) {
             final HBox topBadges = new HBox(HBOX_SPACING);
             topBadges.setAlignment(Pos.TOP_RIGHT);
@@ -228,7 +216,6 @@ public final class CardViewImpl extends StackPane implements CardView {
                     break;
                 case GHOST:
                     modBadge.setText("GHOST");
-                    // Badge per Ghost anch'esso leggermente semitrasparente in linea con l'effetto fumo
                     modStyle = "-fx-background-color: rgba(66, 66, 66, 0.75); -fx-text-fill: white;"
                         + " -fx-font-size: 8px; -fx-font-weight: bold; -fx-padding: 1 4; -fx-background-radius: 3;";
                     break;
